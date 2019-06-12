@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.crown.mapper.ResourceMapper">
 
-    <select id="getUserResourcePerms" resultType="ResourcePermDTO">
+    <select id="getUserResourcePerms" resultType="org.crown.model.dto.ResourcePermDTO">
         SELECT
             sr.mapping,
             sr.method
@@ -15,7 +15,7 @@
             AND sr.auth_type = 3
     </select>
 
-    <select id="getUserMenuResourcePerms" resultType="ResourcePermDTO">
+    <select id="getUserMenuResourcePerms" resultType="org.crown.model.dto.ResourcePermDTO">
         SELECT
             sr.mapping,
             sr.method
