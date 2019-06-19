@@ -1,0 +1,125 @@
+<div class="layui-card">
+    <div class="layui-card-header">
+        <h2 class="header-title">广告管理</h2>
+        <span class="layui-breadcrumb pull-right">
+          <a href="#!console">首页</a>
+          <a><cite>广告管理</cite></a>
+        </span>
+    </div>
+    <div class="layui-card-body">
+        <!-- 表格顶部操作列 -->
+        <script type="text/html" id="advert-toolbar">
+            <div class="layui-btn-container">
+                {{# if({{createShow}} == true){ }}
+                <button class="layui-btn layui-btn-normal layui-btn-sm" lay-event="create"><i
+                        class="layui-icon">&#xe654;</i>添加广告
+                </button>
+                {{# } }}
+                <button type="button" class="layui-btn" id="test1">
+                    <i class="layui-icon">&#xe67c;</i>上传图片
+                </button>
+            </div>
+        </script>
+        <table class="layui-table" id="advert-table" lay-filter="advert-table"></table>
+    </div>
+</div>
+<!-- 表格操作列 -->
+<script type="text/html" id="advert-table-bar">
+    {{#  if({{editShow}} == true){ }}
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit">修改</a>
+    {{#  } }}
+    {{#  if({{deleteShow}} == true){ }}
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    {{#  } }}
+</script>
+<script>
+    layui.use(['form', 'table', 'config', 'crown','upload'], function () {
+        var table = layui.table;
+        var config = layui.config;
+        var layer = layui.layer;
+        var crown = layui.crown;
+        var upload = layui.upload;
+        //执行实例
+        upload.render({
+            elem: '#test1' //绑定元素
+            ,url: '/upload/' //上传接口
+            ,done: function(res){
+                //上传完毕回调
+            }
+            ,error: function(){
+                //请求异常回调
+            }
+        });
+        $('#advert-toolbar').vm({
+            createShow: crown.hasPerm("wx:advert:add")
+        });
+        $('#advert-table-bar').vm({
+            editShow: crown.hasPerm("wx:advert:edit"),
+            deleteShow: crown.hasPerm("wx:advert:delete")
+        });
+        // 渲染表格
+        var tableRender = table.render({
+            elem: '#advert-table',
+            toolbar: '#advert-toolbar',
+            url: config.serverUrl + '/adverts',
+            request: config.request,
+            parseData: config.parseData,
+            response: config.response,
+            headers: {Authorization: config.getToken()},
+            page: true,
+            cols: [[
+                {field: 'id', title: 'ID'},
+                {field: 'advertName', align: 'center', sort: true, title: '广告名称'},
+                {field: 'method', align: 'center', sort: true, title: 'URL地址'},
+                {field: 'perm', align: 'center', sort: true, title: '是否启用'},
+                {field: 'updateTime', align: 'center', sort: true, title: '修改时间'},
+                {fixed: 'right', align: 'center', toolbar: '#advert-table-bar', title: '操作'}
+            ]]
+        });
+        var renderTable = function () {
+            tableRender.reload();
+        }
+        // 表格顶部操作列
+        table.on('toolbar(advert-table)', function (obj) {
+            if (obj.event === 'refresh') {
+                crown.put('/adverts', {}, function () {
+                    layer.msg('刷新成功', {icon: 1});
+                    tableRender.reload('advert-table', {});
+                });
+            }else if (obj.event === 'create') {
+                showEditModel();
+            }
+        });
+        // 工具条点击事件
+        table.on('tool(advert-table)', function (obj) {
+            var data = obj.data;
+            var layEvent = obj.event;
+            if (layEvent === 'edit') {
+                showEditModel(data);
+            } else if (obj.event === 'del') {
+                layer.confirm('确定删除该记录吗？', function () {
+                    crown.delete('/adverts/' + data.id, {}, function () {
+                        layer.closeAll('loading');
+                        layer.msg('删除成功', {icon: 1});
+                    }, false);
+                    renderTable();
+                });
+            }
+        });
+        //显示表单弹窗
+        var showEditModel = function (data) {
+            if (data) {
+                crown.get('/adverts/' + data.id, {async: false}, function (data) {
+                    crown.putTempData('t_advert', data.result);
+                });
+            }
+            crown.popupCenter({
+                title: data ? '修改广告' : '添加广告',
+                path: 'components/views/advert/form.html',
+                finish: function () {
+                    renderTable();
+                }
+            });
+        };
+    });
+</script>

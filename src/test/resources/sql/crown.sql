@@ -174,6 +174,24 @@ CREATE TABLE `sys_user_role` (
 ) ENGINE=InnoDB AUTO_INCREMENT=54 DEFAULT CHARSET=utf8mb4 COMMENT='系统用户角色关系表';
 
 -- ----------------------------
+--  Table structure for `t_advert`
+-- ----------------------------
+DROP TABLE IF EXISTS `t_advert`;
+CREATE TABLE `t_advert` (
+`id`  varchar(32) NOT NULL COMMENT '广告id' ,
+`advert_name`  varchar(32) NOT NULL COMMENT '广告名称' ,
+`status`  smallint(2) NOT NULL DEFAULT 1 COMMENT '状态 0：禁用 1：正常' ,
+`pic_url`  varchar(200) NULL COMMENT '图片地址' ,
+`link_url`  varchar(100) NULL COMMENT '广告链接' ,
+`create_time`  datetime NOT NULL COMMENT '创建时间' ,
+`update_time`  datetime NOT NULL COMMENT '更新时间' ,
+`create_uid`  int(11) NOT NULL COMMENT '创建人id' ,
+`update_uid`  int(11) NULL COMMENT '更新人id' ,
+PRIMARY KEY (`id`)
+)
+;
+
+-- ----------------------------
 --  Records of `sys_user_role`
 -- ----------------------------
 BEGIN;

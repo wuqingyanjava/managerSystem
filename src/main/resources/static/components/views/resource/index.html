@@ -72,7 +72,7 @@
             deleteShow: crown.hasPerm("sys:source:delete")
         });
         // 渲染表格
-        var resourceTable = table.render({
+        var tableRender = table.render({
             elem: '#resource-table',
             toolbar: '#resource-toolbar',
             url: config.serverUrl + '/resources',
@@ -104,47 +104,15 @@
                 {fixed: 'right', align: 'center', toolbar: '#resource-table-bar', title: '操作'}
             ]]
         });
-        // 渲染表格
         var renderTable = function () {
-            table.render({
-                elem: '#resource-table',
-                toolbar: '#resource-toolbar',
-                url: config.serverUrl + '/resources',
-                request: config.request,
-                parseData: config.parseData,
-                response: config.response,
-                headers: {Authorization: config.getToken()},
-                page: true,
-                cols: [[
-                    {field: 'id', title: 'ID'},
-                    {field: 'resourceName', align: 'center', sort: true, title: '资源名称'},
-                    {field: 'method', align: 'center', sort: true, title: '请求方式'},
-                    {field: 'mapping', align: 'center', sort: true, title: '路径映射'},
-                    {
-                        minWidth: 80, align: 'center', templet: function (d) {
-                            if (d.authType == 1) {
-                                return '<span class="layui-badge layui-bg-blue">需要登录</span>';
-                            } else if (d.authType == 2) {
-                                return '<span class="layui-badge layui-bg-green">无需鉴权</span>';
-                            } else if (d.authType == 3) {
-                                return '<span class="layui-badge layui-bg-red">需要鉴权</span>';
-                            } else {
-                                return '<span class="layui-badge layui-bg-gray">未知类型</span>';
-                            }
-                        }, title: '权限类型'
-                    },
-                    {field: 'perm', align: 'center', sort: true, title: '权限标识'},
-                    {field: 'updateTime', align: 'center', sort: true, title: '修改时间'},
-                    {fixed: 'right', align: 'center', toolbar: '#resource-table-bar', title: '操作'}
-                ]]
-            });
-        };
+            tableRender.reload();
+        }
         // 表格顶部操作列
         table.on('toolbar(resource-table)', function (obj) {
             if (obj.event === 'refresh') {
                 crown.put('/resources', {}, function () {
                     layer.msg('刷新成功', {icon: 1});
-                    resourceTable.reload('resource-table', {});
+                    tableRender.reload('resource-table', {});
                 });
             }else if (obj.event === 'create') {
                 showEditModel();
@@ -183,7 +151,7 @@
         };
         // 搜索按钮点击事件
         $('#resource-btn-search').click(function () {
-            resourceTable.reload({where: crown.getSearchForm()});
+            tableRender.reload({where: crown.getSearchForm()});
         });
     });
 </script>
