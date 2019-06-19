@@ -1,0 +1,73 @@
+<form id="resource-form" lay-filter="resource-form" class="layui-form model-form">
+    <input name="id" type="hidden"/>
+    <div class="layui-form-item">
+        <label class="layui-form-label">资源名称</label>
+        <div class="layui-input-block">
+            <input name="resourceName" placeholder="请输入资源名称" type="text" class="layui-input" maxlength="20"
+                   lay-verify="required"/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">路径映射</label>
+        <div class="layui-input-block">
+            <input name="mapping" placeholder="请输入路径映射" type="text" class="layui-input" maxlength="64"/>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">请求方式</label>
+        <div class="layui-input-block">
+            <select name="method" lay-verify="required" lay-filter="method">
+                <option value="GET" selected="selected">GET</option>
+                <option value="PUT">PUT</option>
+                <option value="DELETE">DELETE</option>
+                <option value="POST">POST</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">权限认证类型</label>
+        <div class="layui-input-block">
+            <select id="authType" name="authType" lay-filter="authType" lay-verify="required">
+                <option value="1" selected="selected">需要登陆</option>
+                <option value="2">无需鉴权</option>
+                <option value="3">需要鉴权</option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item model-form-footer">
+        <button class="layui-btn layui-btn-primary close" type="button">取消</button>
+        <button class="layui-btn" lay-filter="resource-form-submit" lay-submit>保存</button>
+    </div>
+</form>
+
+<script>
+    layui.use(['layer', 'crown', 'form', 'iconPicker', 'formSelects'], function () {
+        var layer = layui.layer;
+        var crown = layui.crown;
+        var form = layui.form;
+        var resource = crown.getTempData('t_resource');
+            // 回显menu数据
+            if (resource) {
+                crown.fromVal('resource-form', resource);
+            }
+        // 表单提交事件
+        form.on('submit(resource-form-submit)', function (data) {
+            layer.load(2);
+            if (data.field.id) {
+                crown.put('/resources/' + data.field.id, {data: data.field}, function () {
+                    layer.closeAll('loading');
+                    layer.msg('修改成功', {icon: 1});
+                    crown.finishPopupCenter();
+                });
+            } else {
+                crown.post('/resources/create', {data: data.field}, function () {
+                    layer.closeAll('loading');
+                    layer.msg('添加成功', {icon: 1});
+                    crown.finishPopupCenter();
+                });
+            }
+            return false;
+        });
+        form.render();
+    });
+</script>

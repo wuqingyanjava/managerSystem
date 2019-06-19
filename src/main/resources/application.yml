@@ -17,7 +17,7 @@ server:
     context-path: /
 spring:
   jackson:
-    time-zone: GMT+8
+    time-zone: GMT+8sys_resource
     serialization:
       WRITE_DATES_AS_TIMESTAMPS: false
       FAIL_ON_EMPTY_BEANS: false

@@ -22,22 +22,22 @@ package org.crown.controller;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.UUID;
 
 import org.crown.common.annotations.Resources;
 import org.crown.enums.AuthTypeEnum;
 import org.crown.framework.controller.SuperController;
 import org.crown.framework.responses.ApiResponses;
+import org.crown.model.dto.ResourceDTO;
 import org.crown.model.entity.Resource;
+import org.crown.model.parm.ResourcePARM;
 import org.crown.service.IResourceService;
 import org.crown.service.ScanMappings;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
@@ -102,6 +102,54 @@ public class ResourceRestController extends SuperController {
         return success();
     }
 
+    @Resources(auth = AuthTypeEnum.OPEN)
+    @ApiOperation(value = "添加资源")
+    @PostMapping("/create")
+    public ApiResponses<Void> create(@RequestBody @Validated(ResourcePARM.Create.class) ResourcePARM resourcePARM) {
+        Resource resource = resourcePARM.convert(Resource.class);
+        String id= UUID.randomUUID().toString();
+        //替换uuid中的"-"
+        id=id.replace("-", "");
+        resource.setId(id);
+        resource.setPerm(resource.getMethod()+":"+resource.getMapping());
+        resourceService.save(resource);
+        return success(HttpStatus.CREATED);
+    }
+
+    @Resources(auth = AuthTypeEnum.OPEN)
+    @ApiOperation(value = "查询单个资源")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "资源ID", required = true, paramType = "path")
+    })
+    @GetMapping("/{id}")
+    public ApiResponses<ResourceDTO> get(@PathVariable("id") String id) {
+        return success(resourceService.getById(id).convert(ResourceDTO.class));
+    }
+
+    @Resources(auth = AuthTypeEnum.OPEN)
+    @ApiOperation(value = "删除资源")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "资源ID", required = true, paramType = "path")
+    })
+    @DeleteMapping("/{id}")
+    public ApiResponses<Void> delete(@PathVariable("id") String id) {
+        resourceService.removeById(id);
+        return success(HttpStatus.NO_CONTENT);
+    }
+
+    @Resources(auth = AuthTypeEnum.OPEN)
+    @ApiOperation(value = "修改资源")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "资源ID", required = true, paramType = "path")
+    })
+    @PutMapping("/{id}")
+    public ApiResponses<Void> update(@PathVariable("id") String id, @RequestBody @Validated(ResourcePARM.Update.class) ResourcePARM resourcePARM) {
+        Resource resource = resourcePARM.convert(Resource.class);
+        resource.setId(id);
+        resource.setPerm(resource.getMethod()+":"+resource.getMapping());
+        resourceService.updateById(resource);
+        return success();
+    }
 
 }
 
