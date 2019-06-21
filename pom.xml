@@ -6,6 +6,7 @@
     <groupId>org.crown</groupId>
     <artifactId>crown</artifactId>
     <version>1.0</version>
+    <packaging>war</packaging>
 
     <name>Crown</name>
     <description>Crown</description>
@@ -51,6 +52,11 @@
                     <artifactId>spring-boot-starter-tomcat</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
