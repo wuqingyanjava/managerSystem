@@ -338,3 +338,16 @@ CREATE TABLE `t_advert` (
 -- ----------------------------
 -- Records of t_advert
 -- ----------------------------
+DROP TABLE IF EXISTS `t_music`;
+CREATE TABLE `t_music` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `music_name` varchar(32) NOT NULL COMMENT '音乐名称',
+  `status` smallint(2) NOT NULL DEFAULT '1' COMMENT '状态 0：禁用 1：正常',
+  `music_url` varchar(200) DEFAULT NULL COMMENT '音乐地址',
+  `author` varchar(100) DEFAULT NULL COMMENT '音乐作者',
+  `create_time` datetime NOT NULL COMMENT '创建时间',
+  `update_time` datetime NOT NULL COMMENT '更新时间',
+  `create_uid` int(11) NOT NULL COMMENT '创建人id',
+  `update_uid` int(11) NOT NULL COMMENT '更新人id',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

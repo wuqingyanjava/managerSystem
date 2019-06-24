@@ -1,0 +1,232 @@
+<div class="layui-card">
+    <div class="layui-card-header">
+        <h2 class="header-title">音乐管理</h2>
+        <span class="layui-breadcrumb pull-right">
+          <a href="#!console">首页</a>
+          <a><cite>音乐管理</cite></a>
+        </span>
+    </div>
+    <div class="layui-card-body">
+        <!-- 搜索条件 -->
+        <div class="layui-form toolbar">
+            <form id="searchForm" onsubmit="return false;">
+                音乐名：<input name="musicName" class="layui-input search-input" type="text" placeholder="输入音乐名"/>&emsp;
+                音乐人：<input name="author" class="layui-input search-input" type="text" placeholder="输入音乐人"/>&emsp;
+                <button id="music-btn-search" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
+            </form>
+        </div>
+        <!-- 表格顶部操作列 -->
+        <script type="text/html" id="music-toolbar">
+            <div class="layui-btn-container">
+                {{# if({{addShow}} == true){ }}
+                <button class="layui-btn layui-btn-normal layui-btn-sm" lay-event="add"><i
+                        class="layui-icon">&#xe654;</i>添加
+                </button>
+                {{# } }}
+            </div>
+        </script>
+        <!-- 数据表格 -->
+        <table class="layui-table" id="music-table" lay-filter="music-table"></table>
+    </div>
+</div>
+<!-- 表单弹窗 -->
+<script type="text/html" id="music-model">
+    <form id="music-form" lay-filter="music-form" class="layui-form model-form">
+        <input name="id" type="hidden"/>
+        <div class="layui-form-item">
+            <label class="layui-form-label">音乐名</label>
+            <div class="layui-input-block">
+                <input name="musicName" placeholder="请输入音乐名" type="text" class="layui-input" maxlength="20"
+                       lay-verify="required"/>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">作者</label>
+            <div class="layui-input-block">
+                <input name="author" placeholder="音乐人" type="text" class="layui-input" maxlength="20"
+                       lay-verify="required"/>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">链接</label>
+            <div class="layui-input-block">
+                <textarea name="musicUrl" placeholder="请录入链接" class="layui-textarea" maxlength="200"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item model-form-footer">
+            <button class="layui-btn layui-btn-primary close" type="button">取消</button>
+            <button class="layui-btn" lay-filter="music-form-submit" lay-submit>保存</button>
+        </div>
+    </form>
+</script>
+
+<!-- 表格操作列 -->
+<script type="text/html" id="music-table-bar">
+    <a class="layui-btn layui-btn-radius layui-btn-normal layui-btn-xs" lay-event="play">播放</a>
+    <a class="layui-btn layui-btn-radius layui-btn-normal layui-btn-xs" lay-event="playVideo">播放</a>
+    {{#  if({{editShow}} == true){ }}
+    <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit">修改</a>
+    {{#  } }}
+    {{#  if({{deleteShow}} == true){ }}
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="del">删除</a>
+    {{#  } }}
+</script>
+
+<!-- 表格状态列 -->
+<script type="text/html" id="music-tpl-status">
+    <input type="checkbox" lay-filter="music-tpl-status" value="{{d.id}}" lay-skin="switch"
+           lay-text="正常|禁用" {{d.status==0?'checked':''}}/>
+</script>
+<!-- 表格播放-->
+<script type="text/html" id="music-play">
+    <div align="center">
+    <audio controls="controls" autoplay="true">
+        <source src="" type="audio/mp3" id="music_url"/>
+    </audio>
+    <br>
+    <p id="play_now"></p>
+    </div>
+    <br>
+</script>
+
+
+<script>
+    layui.use(['form', 'table', 'config', 'crown'], function () {
+        var form = layui.form;
+        var table = layui.table;
+        var config = layui.config;
+        var layer = layui.layer;
+        var crown = layui.crown;
+        var $ = layui.jquery;
+
+        $('#music-toolbar').vm({
+            addShow: crown.hasPerm("source:music:add")
+        });
+        $('#music-table-bar').vm({
+            editShow: crown.hasPerm("source:music:edit"),
+            deleteShow: crown.hasPerm("source:music:delete")
+        });
+        //渲染表格
+        var musicTable = table.render({
+            elem: '#music-table',
+            toolbar: '#music-toolbar',
+            url: config.serverUrl + '/music',
+            request: config.request,
+            parseData: config.parseData,
+            response: config.response,
+            headers: {Authorization: config.getToken()},
+            page: true,
+            cols: [[
+                {field: 'id', align: 'center', width: 60, sort: true, title: 'ID'},
+                {field: 'musicName', width: 200,align: 'center', sort: true, title: '音乐名'},
+                {field: 'author', align: 'center', sort: true, title: '音乐人'},
+                {field: 'musicUrl', align: 'center', sort: true, title: '音乐链接'},
+                {field: 'status', align: 'center', sort: true, templet: '#music-tpl-status', title: '状态'},
+                {field: 'createTime', align: 'center', sort: true, title: '创建时间'},
+                {field: 'updateTime', align: 'center', sort: true, title: '修改时间'},
+                {align: 'center', toolbar: '#music-table-bar', title: '操作', width: 200}
+            ]]
+        });
+
+        // 添加
+        table.on('toolbar(music-table)', function (obj) {
+            if (obj.event === 'add') {
+                showEditModel();
+            }
+        });
+
+        // 表单提交事件
+        form.on('submit(music-form-submit)', function (data) {
+            layer.load(2);
+            if (data.field.id) {
+                crown.put('/music/' + data.field.id, {data: data.field}, function () {
+                    layer.closeAll('loading');
+                    layer.msg('修改成功', {icon: 1});
+                    musicTable.reload('music-table');
+                    layer.closeAll('page');
+                });
+            } else {
+                crown.post('/music', {data:data.field}, function () {
+                    layer.closeAll('loading');
+                    layer.msg('添加成功', {icon: 1});
+                    musicTable.reload('music-table');
+                    layer.closeAll('page');
+                });
+            }
+            return false;
+        });
+
+        // 工具条点击事件
+        table.on('tool(music-table)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'edit') { //修改
+                showEditModel(data);
+            } else if (obj.event === 'del') { //删除
+                doDelete(obj);
+            }else if (obj.event === 'play') {
+                showPlayModel(data);
+            }
+        });
+
+        // 显示编辑弹窗
+        var showEditModel = function (data) {
+            layer.open({
+                type: 1,
+                title: data ? '修改音乐' : '添加音乐',
+                area: '450px',
+                offset: '120px',
+                content: $('#music-model').html(),
+                success: function () {
+                    $('#music-form')[0].reset();
+                    if (data) {
+                        form.val('music-form', data);
+                    }
+                    $('#music-form .close').click(function () {
+                        layer.closeAll('page');
+                    });
+                }
+            });
+        };
+        // 显示编辑弹窗
+        var showPlayModel = function (data) {
+            layer.open({
+                type: 1,
+                title: '播放音乐',
+                offset: 'auto',
+                content: $('#music-play').html(),
+                success: function () {
+                    $("#music_url").attr("src",data.musicUrl);
+                    $("#play_now").html(data.musicName+"--"+data.author);
+                }
+            });
+        };
+        // 删除
+        var doDelete = function (obj) {
+            layer.confirm('确定要删除吗？', function (i) {
+                layer.close(i);
+                layer.load(2);
+                crown.delete('/music/' + obj.data.id, {}, function () {
+                    layer.closeAll('loading');
+                    layer.msg('删除成功', {icon: 1});
+                    obj.del();
+                });
+            });
+        };
+
+        // 搜索按钮点击事件
+        $('#music-btn-search').click(function () {
+            musicTable.reload({where: crown.getSearchForm()});
+        });
+
+        // 修改状态
+        form.on('switch(music-tpl-status)', function (obj) {
+            layer.load(2);
+            crown.put('/music/' + obj.elem.value + '/status',
+                {data: {status: obj.elem.checked ? 0 : 1}}, function () {
+                    layer.closeAll('loading');
+                    layer.msg('用户状态更新成功', {icon: 1});
+                });
+        });
+    });
+
+</script>
