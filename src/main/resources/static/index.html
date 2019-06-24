@@ -39,9 +39,8 @@
 
     <!-- 手机屏幕遮罩层 -->
     <div class="site-mobile-shade"></div>
+
     <div style="overflow: hidden;z-index: 9999;position: fixed;
-    width: 600px;
-    height: 100px;
     border-bottom-left-radius: 2px;
     border-bottom-right-radius: 2px;
     border-top-left-radius: 2px;
@@ -61,40 +60,40 @@
 <script type="text/javascript" src="assets/player/player.js"></script>
 <script>
     $(function(){
-        var ap = new APlayer
-        ({
-            element: document.getElementById('aplayer'),
-            narrow: false,
-            autoplay: true,
-            showlrc: false,
-            width:500,
-            fixed: true,
-            music: {
-                title: '多想在平庸的生活拥抱你',
-                author: '隔壁老樊',
-                url: 'http://m10.music.126.net/20190624183959/d4f59c1766beb79c3ef5b98e96fdb78b/ymusic/918c/1958/7d87/022d7d76c923b1caaca6e30ca47d0f69.mp3',
-                pic: 'http://p2.music.126.net/z-KH6R1-HP1lpCWSnmKy8Q==/109951163911444882.jpg?param=300x300'
-            }
-        });
-        ap.play();
-        // $.ajax({
-        //     url:"/foreground/musicList",
-        //     dataType:"json",
-        //     type:"post",
-        //     success:function(data){
-        //         if(data.success == 1){
-        //             //初始化播放器
-        //             const ap = new APlayer({
-        //                 container: document.getElementById('aplayer'),
-        //                 fixed: true,
-        //                 autoplay: true,
-        //                 audio: data.data
-        //             });
-        //         }else{
-        //             layer.msg("音乐加载失败！");
-        //         }
+        // var ap = new APlayer
+        // ({
+        //     element: document.getElementById('aplayer'),
+        //     narrow: false,
+        //     autoplay: true,
+        //     showlrc: false,
+        //     width:500,
+        //     fixed: true,
+        //     music: {
+        //         title: '多想在平庸的生活拥抱你',
+        //         author: '隔壁老樊',
+        //         url: 'http://m10.music.126.net/20190624192047/054c5ff44bff27bf3dce756307bd4036/ymusic/918c/1958/7d87/022d7d76c923b1caaca6e30ca47d0f69.mp3',
+        //         pic: 'http://p2.music.126.net/z-KH6R1-HP1lpCWSnmKy8Q==/109951163911444882.jpg?param=300x300'
         //     }
-        // })
+        // });
+        //ap.play();
+        $.ajax({
+            url:"/music/background",
+            dataType:"json",
+            type:"get",
+            success:function(data){
+                if(data.status == 200){
+                    //初始化播放器
+                    const ap = new APlayer({
+                        container: document.getElementById('aplayer'),
+                        fixed: true,
+                        autoplay: true,
+                        music: data.result
+                    });
+                }else{
+                    layer.msg("音乐加载失败！");
+                }
+            }
+        })
     }) ;
 </script>
 

@@ -37,7 +37,11 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -128,5 +132,24 @@ public class MusicRestController extends SuperController {
         return success();
     }
 
+    @Resources(auth = AuthTypeEnum.OPEN)
+    @ApiOperation(value = "查询背景音乐")
+    @GetMapping("/background")
+    public ApiResponses<List<Map<String,String>>> musicList() {
+        List<Map<String,String>> list = new ArrayList<>();
+        Map<String,String> map1 = new HashMap<>();
+        map1.put("title","倒带");
+        map1.put("author","蔡依林");
+        map1.put("pic","http://y.gtimg.cn/music/photo_new/T002R300x300M0000022ANm11dQfRY.jpg");
+        map1.put("url","http://dl.stream.qqmusic.qq.com/M500004IM0wx49gYJq.mp3?vkey=50A3B875C43DB5ACBC4CF612F2D00732AF35C17AD18491480AD5CF92C3BE3092C4C6214B8BA6AB48F501E9553DCA0D23A83441793839D761&guid=5150825362&fromtag=1");
+        Map<String,String> map2 = new HashMap<>();
+        map2.put("title","回到过去");
+        map2.put("author","周杰伦");
+        map2.put("pic","http://y.gtimg.cn/music/photo_new/T002R300x300M000004MGitN0zEHpb.jpg");
+        map2.put("url","http://dl.stream.qqmusic.qq.com/M500003rxgIM2eOFSF.mp3?vkey=06AF977883F0D805B508EA5B8B6F40EB263583638C3C7018CF29521D3618E0D4702C2414E1B07960E2F2195F6D8634AADA0F474957995DFD&guid=5150825362&fromtag=1");
+        list.add(map2);
+        list.add(map1);
+        return success(list);
+    }
 }
 

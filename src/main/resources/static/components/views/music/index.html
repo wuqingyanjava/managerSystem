@@ -12,7 +12,9 @@
             <form id="searchForm" onsubmit="return false;">
                 音乐名：<input name="musicName" class="layui-input search-input" type="text" placeholder="输入音乐名"/>&emsp;
                 音乐人：<input name="author" class="layui-input search-input" type="text" placeholder="输入音乐人"/>&emsp;
-                <button id="music-btn-search" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
+                <button id="music-btn-search" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>&emsp;
+                <button id="test-video" class="layui-btn icon-btn">看视频</button>
+
             </form>
         </div>
         <!-- 表格顶部操作列 -->
@@ -76,7 +78,7 @@
     <input type="checkbox" lay-filter="music-tpl-status" value="{{d.id}}" lay-skin="switch"
            lay-text="正常|禁用" {{d.status==0?'checked':''}}/>
 </script>
-<!-- 表格播放-->
+<!-- 音乐播放-->
 <script type="text/html" id="music-play">
     <div align="center">
     <audio controls="controls" autoplay="true">
@@ -88,6 +90,16 @@
     <br>
 </script>
 
+<script type="text/html" id="video-play">
+    <div align="center">
+        <!--<video width="825" height="460" controls>-->
+            <!--<source src="/assets/myself/waner.mp4" type="video/mp4">-->
+            <!--您的浏览器不支持 video 标签。-->
+        <!--</video>-->
+        <iframe src="http://open.iqiyi.com/developer/player_js/coopPlayerIndex.html?vid=257b6b6cd73644caa5f4f4a38c3494df&tvId=2929626300&accessToken=2.f22860a2479ad60d8da7697274de9346&appKey=3955c3425820435e86d0f4cdfe56f5e7&appId=1368&height=100%&width=100%" frameborder="0" allowfullscreen="true" width="825" height="460"></iframe>
+    </div>
+    <br>
+</script>
 
 <script>
     layui.use(['form', 'table', 'config', 'crown'], function () {
@@ -199,6 +211,20 @@
                 }
             });
         };
+        // 显示编辑弹窗
+        var showVideoModel = function (data) {
+            layer.open({
+                type: 1,
+                title: '播放视频',
+                area:['830','460'],
+                offset: 'auto',
+                content: $('#video-play').html(),
+                success: function () {
+                    // $("#music_url").attr("src",data.musicUrl);
+                    // $("#play_now").html(data.musicName+"--"+data.author);
+                }
+            });
+        };
         // 删除
         var doDelete = function (obj) {
             layer.confirm('确定要删除吗？', function (i) {
@@ -215,6 +241,10 @@
         // 搜索按钮点击事件
         $('#music-btn-search').click(function () {
             musicTable.reload({where: crown.getSearchForm()});
+        });
+        // 搜索按钮点击事件
+        $('#test-video').click(function () {
+            showVideoModel();
         });
 
         // 修改状态
