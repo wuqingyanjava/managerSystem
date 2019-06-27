@@ -27,5 +27,6 @@
                 #{item}
             </foreach>
         </if>
+        order by sm.sn_num asc
     </select>
 </mapper>

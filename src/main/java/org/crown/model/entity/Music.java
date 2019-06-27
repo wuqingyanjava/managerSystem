@@ -63,6 +63,11 @@ public class Music extends Convert {
     /**
      * 音乐地址
      */
+    private String picUrl;
+
+    /**
+     * 音乐地址
+     */
     private String musicUrl;
 
     /**

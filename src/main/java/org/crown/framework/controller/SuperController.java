@@ -57,6 +57,16 @@ public class SuperController {
     }
 
     /**
+     * 失败返回
+     *
+     * @param object
+     * @return
+     */
+    public <T> ApiResponses<T> fail(T object) {
+        return ApiResponses.fail(response, object);
+    }
+
+    /**
      * 成功返回
      *
      * @return

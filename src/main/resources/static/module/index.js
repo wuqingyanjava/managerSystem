@@ -15,7 +15,7 @@ layui.define(['config', 'crown', 'layer'], function (exports) {
         initRouter: function () {
             index.regRouter(config.getMenus());
             Q.init({
-                index: 'user'
+                index: 'console'
             });
         },
         // 使用递归循环注册

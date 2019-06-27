@@ -172,6 +172,12 @@
             <version>2.0</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+        <!-- ftp -->
+        <groupId>commons-net</groupId>
+        <artifactId>commons-net</artifactId>
+        <version>3.6</version>
+        </dependency>
     </dependencies>
 
     <build>

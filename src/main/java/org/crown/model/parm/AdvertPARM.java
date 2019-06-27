@@ -63,7 +63,7 @@ public class AdvertPARM extends Convert {
     /**
      * 状态 0：禁用 1：正常
      */
-    @NotNull(groups = {AdvertPARM.Create.class, AdvertPARM.Status.class}, message = "状态不能为空")
+    @NotNull(groups = {AdvertPARM.Status.class}, message = "状态不能为空")
     private StatusEnum status;
 
     public interface Create {

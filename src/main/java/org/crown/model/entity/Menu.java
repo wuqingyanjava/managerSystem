@@ -75,6 +75,10 @@ public class Menu extends BaseModel {
     private MenuTypeEnum menuType;
 
     /**
+     * 排序号
+     */
+    private Integer snNum;
+    /**
      * 菜单图标
      */
     private String icon;

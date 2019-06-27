@@ -67,6 +67,16 @@ public class ApiResponses<T> implements Serializable {
     /**
      * 成功返回
      *
+     * @param object
+     */
+    public static <T> ApiResponses<T> fail(HttpServletResponse response, T object) {
+        return success(response, HttpStatus.BAD_REQUEST, object);
+
+    }
+
+    /**
+     * 成功返回
+     *
      * @param status
      * @param object
      */

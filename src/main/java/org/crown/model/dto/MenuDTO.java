@@ -72,4 +72,6 @@ public class MenuDTO extends BaseModel {
     @ApiModelProperty(notes = "关联资源ID")
     private List<String> resourceIds;
 
+    @ApiModelProperty(notes = "菜单序号")
+    private Integer snNum;
 }

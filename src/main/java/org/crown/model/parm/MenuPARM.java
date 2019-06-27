@@ -79,6 +79,10 @@ public class MenuPARM extends Convert {
     @ApiModelProperty(notes = "关联资源ID")
     private List<String> resourceIds;
 
+    @NotNull(groups = {MenuPARM.Create.class,MenuPARM.Update.class}, message = "菜单序号不能为空")
+    @ApiModelProperty(notes = "菜单序号")
+    private Integer snNum;
+
     public interface Create {
 
     }

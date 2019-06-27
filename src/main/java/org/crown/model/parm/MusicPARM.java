@@ -48,6 +48,7 @@ public class MusicPARM extends Convert {
     @NotNull(groups = MusicPARM.Create.class, message = "音乐名称不能为空")
     private String musicName;
 
+    private String picUrl;
     /**
      * 音乐链接
      */

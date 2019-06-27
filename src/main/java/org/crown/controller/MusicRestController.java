@@ -20,10 +20,12 @@
  */
 package org.crown.controller;
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
 import org.crown.common.annotations.Resources;
 import org.crown.enums.AuthTypeEnum;
 import org.crown.enums.StatusEnum;
@@ -136,20 +138,39 @@ public class MusicRestController extends SuperController {
     @ApiOperation(value = "查询背景音乐")
     @GetMapping("/background")
     public ApiResponses<List<Map<String,String>>> musicList() {
+        Page<Music> page = new Page<>();
+        page.setSize(5);
+        page.setCurrent(1);
+        IPage<Music> musicIPage = musicService.pageMusic(page, "","");
+        List<Music> musicList = musicIPage.getRecords();
         List<Map<String,String>> list = new ArrayList<>();
-        Map<String,String> map1 = new HashMap<>();
-        map1.put("title","倒带");
-        map1.put("author","蔡依林");
-        map1.put("pic","http://y.gtimg.cn/music/photo_new/T002R300x300M0000022ANm11dQfRY.jpg");
-        map1.put("url","http://dl.stream.qqmusic.qq.com/M500004IM0wx49gYJq.mp3?vkey=50A3B875C43DB5ACBC4CF612F2D00732AF35C17AD18491480AD5CF92C3BE3092C4C6214B8BA6AB48F501E9553DCA0D23A83441793839D761&guid=5150825362&fromtag=1");
-        Map<String,String> map2 = new HashMap<>();
-        map2.put("title","回到过去");
-        map2.put("author","周杰伦");
-        map2.put("pic","http://y.gtimg.cn/music/photo_new/T002R300x300M000004MGitN0zEHpb.jpg");
-        map2.put("url","http://dl.stream.qqmusic.qq.com/M500003rxgIM2eOFSF.mp3?vkey=06AF977883F0D805B508EA5B8B6F40EB263583638C3C7018CF29521D3618E0D4702C2414E1B07960E2F2195F6D8634AADA0F474957995DFD&guid=5150825362&fromtag=1");
-        list.add(map2);
-        list.add(map1);
+        if(musicList!= null){
+            for(Music music:musicList){
+                Map<String,String> map = new HashMap<>();
+                map.put("title",music.getMusicName());
+                map.put("author",music.getAuthor());
+                map.put("pic", StringUtils.isEmpty(music.getPicUrl()) ? "assets/images/susu.png":music.getPicUrl());
+                map.put("url",music.getMusicUrl());
+                list.add(map);
+            }
+        }
         return success(list);
+    }
+
+    @Resources(auth = AuthTypeEnum.OPEN)
+    @ApiOperation(value = "小程序查询所有音乐(分页)")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "musicName", value = "需要查询的音乐名", paramType = "query")
+    })
+    @GetMapping("/wxAppmusic")
+    public ApiResponses<IPage<Music>> wxAppMusic(@RequestParam(value = "musicName", required = false) String musicName,
+                                           @RequestParam(value = "author", required = false) String author,
+                                           @RequestParam(value = "curpage", required = false) Integer curpage,
+                                           @RequestParam(value = "rows", required = false) Integer rows) {
+        Page<Music> page = new Page();
+        page.setSize(rows);
+        page.setCurrent(curpage);
+        return success(musicService.pageMusic(page, musicName,author));
     }
 }
 

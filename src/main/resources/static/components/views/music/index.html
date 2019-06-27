@@ -50,9 +50,15 @@
             </div>
         </div>
         <div class="layui-form-item">
-            <label class="layui-form-label">链接</label>
+            <label class="layui-form-label">图片链接</label>
             <div class="layui-input-block">
-                <textarea name="musicUrl" placeholder="请录入链接" class="layui-textarea" maxlength="200"></textarea>
+                <textarea name="picUrl" placeholder="请录入图片链接" class="layui-textarea" maxlength="1000"></textarea>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">歌曲链接</label>
+            <div class="layui-input-block">
+                <textarea name="musicUrl" placeholder="请录入歌曲链接" class="layui-textarea" maxlength="1000"></textarea>
             </div>
         </div>
         <div class="layui-form-item model-form-footer">
@@ -128,9 +134,11 @@
             headers: {Authorization: config.getToken()},
             page: true,
             cols: [[
-                {field: 'id', align: 'center', width: 60, sort: true, title: 'ID'},
+                {type: 'numbers'},
+                {field: 'id', align: 'center', width: 60, sort: true, title: 'ID',hide:"true"},
                 {field: 'musicName', width: 200,align: 'center', sort: true, title: '音乐名'},
                 {field: 'author', align: 'center', sort: true, title: '音乐人'},
+                {field: 'picUrl', align: 'center', sort: true, title: '图片链接'},
                 {field: 'musicUrl', align: 'center', sort: true, title: '音乐链接'},
                 {field: 'status', align: 'center', sort: true, templet: '#music-tpl-status', title: '状态'},
                 {field: 'createTime', align: 'center', sort: true, title: '创建时间'},
