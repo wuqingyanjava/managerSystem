@@ -1,7 +1,6 @@
 
 package org.crown.model.parm;
 
-import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -9,11 +8,10 @@ import org.crown.enums.StatusEnum;
 import org.crown.framework.model.convert.Convert;
 
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
 
 /**
  * <p>
- * 广告表
+ * 视频表
  * </p>
  *
  * @author Caratacus
@@ -21,30 +19,31 @@ import java.time.LocalDateTime;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
-public class AdvertPARM extends Convert {
+public class VideoPARM extends Convert {
 
     private static final long serialVersionUID = 1L;
 
     /**
-     * 广告名称
+     * 视频名称
      */
-    @NotNull(groups = AdvertPARM.Create.class, message = "广告名称不能为空")
-    private String advertName;
+    @NotNull(groups = VideoPARM.Create.class, message = "视频名称不能为空")
+    private String videoName;
 
     /**
-     * 广告链接
+     * 视频链接
      */
-    private String linkUrl;
+    @NotNull(groups = VideoPARM.Create.class, message = "视频链接不能为空")
+    private String videoUrl;
 
     /**
-     * 图片地址
+     * 视频来源
      */
-    private String picUrl;
+    private String source;
 
     /**
      * 状态 0：禁用 1：正常
      */
-    @NotNull(groups = {AdvertPARM.Status.class}, message = "状态不能为空")
+    @NotNull(groups = {VideoPARM.Status.class}, message = "状态不能为空")
     private StatusEnum status;
 
     public interface Create {

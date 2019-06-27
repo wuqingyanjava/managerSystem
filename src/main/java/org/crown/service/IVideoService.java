@@ -6,20 +6,20 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.crown.enums.StatusEnum;
 import org.crown.framework.service.BaseService;
-import org.crown.model.entity.Music;
+import org.crown.model.entity.Video;
 
 /**
  * <p>
- * 音乐表 服务类
+ * 视频表 服务类
  * </p>
  *
  * @author Caratacus
  */
-public interface IMusicService extends BaseService<Music> {
+public interface IVideoService extends BaseService<Video> {
     /**
-     * 分页查询音乐列表
+     * 分页查询视频列表
      */
-    IPage<Music> pageMusic(Page<Music> page, String musicName,String author);
+    IPage<Video> pageVideo(Page<Video> page, String videoName);
 
     void updateStatus(Integer id, StatusEnum status);
 }
