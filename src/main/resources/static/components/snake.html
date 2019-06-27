@@ -1,0 +1,285 @@
+
+<div class="bkgroud">
+    <canvas id="canvasId">
+    </canvas>
+
+</div>
+<div class="btnPosition">
+    <input type="button" class="btnLongClass" name="start" id="start" value="开始/继续" onclick="startGames()"/>
+    <input type="button" class="btnClass" name="slow" id="slow" value="减速" onclick="slowGames()"/>
+    <input type="button" class="btnClass" name="pause" id="pause" value="暂停" onclick="pauseGames()"/>
+    <input type="button" class="btnClass" name="fast" id="fast" value="加速" onclick="fastGames()"/>
+    <input type="button" class="btnLongClass" name="reset" id="reset" value="结束" onclick="resetGames()"/>
+</div>
+<div class="textPosition">
+    <strong style="color:#ffffff;">得分</strong>
+        <input type="text" id="score" name="score" readonly="true" style="text-align:center;" /></input>
+        <br>
+        <strong style="color:#ffffff;">速度</strong>
+            <input type="text" id="speed" name="speed" readonly="true" style="text-align:center;"  /></input>
+</div>
+
+<script type="text/javascript">
+    //定义画面的属性
+    var snakeArr;//贪吃蛇方块数组
+    var canvasObj = null;//html5 画布对象
+    var ssx ;//贪吃蛇的初始位置：x
+    var ssy ;//贪吃蛇的初始位置：y
+    var fdx ;//食物的初始位置：x
+    var fdy ;//食物的初始位置：y
+    var fwdx;//x行进的距离
+    var fwdy;//y行进的距离
+    var speed ;//贪吃蛇的前进速度
+    var miniSize = 20;//每一格的尺寸
+    var maxHeight = 800;//高度
+    var maxWidth = 600;//宽度
+    var bgnFlag = false;//游戏开始true 暂停false
+    var timer = null;//定时函数
+    var keys = null;//按下键盘的值
+    var direct = "right";//贪吃蛇行进的方向
+    var score;//得分
+
+    $(function() {
+        init();
+    });
+    function init(){
+        ssx = 201;//贪吃蛇的初始位置：x
+        ssy = 201;//贪吃蛇的初始位置：y
+        fdx = 401;//食物的初始位置：x
+        fdy = 201;//食物的初始位置：y
+        fwdx = 20;//x行进的距离
+        fwdy = 0;//y行进的距离
+        speed = 500;//贪吃蛇的前进速度
+        snakeArr = new Array();
+        score = 0;
+        // 绘制游戏画面
+        //获取canvas元素
+        var canvasId = document.getElementById("canvasId");
+        canvasId.width = maxHeight;//设置宽度
+        canvasId.height = maxWidth;//设置高度
+        //创建canvas对象
+        canvasObj = canvasId.getContext("2d");
+        canvasObj.strokeStyle = "#ffffff";//线条的颜色
+        canvasObj.lineWidth = 0.5;//线条的宽度
+        canvasObj.stroke();
+        // 绘制竖线
+        for (var i = 0; i <= 40; i++) {
+            canvasObj.beginPath();
+            canvasObj.moveTo(miniSize * i, 0);
+            canvasObj.lineTo(miniSize * i, maxWidth);
+            canvasObj.stroke();
+        }
+        // 绘制横线
+        for (var i = 0; i <= 30; i++) {
+            canvasObj.beginPath();
+            canvasObj.moveTo(0, miniSize * i);
+            canvasObj.lineTo(maxHeight, miniSize * i);
+            canvasObj.stroke();
+        }
+
+        //绘制贪吃蛇
+        var snakerHead = {
+            x: ssx,
+            y: ssy
+        };
+
+        var snaker1 = {
+            x: 181,
+            y: 201
+        };
+        var snaker2 = {
+            x: 161,
+            y: 201
+        };
+        var snaker3 = {
+            x: 141,
+            y: 201
+        };
+        snakeArr.push(snaker3);
+        snakeArr.push(snaker2);
+        snakeArr.push(snaker1);
+        snakeArr.push(snakerHead);
+
+        drawSnake(snakeArr);//context.fillRect(x,y,width,height);
+        //绘制食物
+        canvasObj.fillStyle = "#00ff00";
+        canvasObj.fillRect(fdx, fdy, miniSize - 2, miniSize - 2);
+
+        document.getElementById("score").value = score;
+        document.getElementById("speed").value = "6.0x";
+    }
+    //绘制蛇方块
+    function drawSnake(snakeArr) {
+        for (var i = 0; i < snakeArr.length; i++) {
+            var snake_ = snakeArr[i];
+            if (i == snakeArr.length - 1) {
+                canvasObj.fillStyle = "#ff3300";
+            } else {
+                canvasObj.fillStyle = "#ffffff";
+            }
+
+            canvasObj.fillRect(snake_.x, snake_.y, miniSize - 2, miniSize - 2);
+        }
+
+    }
+
+    //清除蛇方块
+    function clearSanke(snakeArr) {
+        var snake_ = snakeArr[0];
+        snakeArr.splice(0, 1);
+        canvasObj.clearRect(snake_.x, snake_.y, miniSize - 2, miniSize - 2);
+    }
+
+    //绘制食物方块
+    function drawFood() {
+        fdx = parseInt(40 * Math.random()) * miniSize + 1;
+        fdy = parseInt(30 * Math.random()) * miniSize + 1;
+
+        canvasObj.fillStyle = "#00ff00";
+        canvasObj.fillRect(fdx, fdy, miniSize - 2, miniSize - 2);
+    }
+
+    //开始游戏
+    function startGames() {
+        if (!bgnFlag) {
+            startMove();
+            bgnFlag = true;
+
+        }
+
+    }
+
+    //暂停游戏
+    function pauseGames() {
+        if (bgnFlag && timer) {
+            clearInterval(timer);
+            bgnFlag = false;
+        }
+
+    }
+
+    //加速游戏
+    function fastGames() {
+        pauseGames();
+        if (speed - 100 > 0) {
+            speed = speed - 100;
+            document.getElementById("speed").value = 11 - speed / 100 + ".0x";
+        }
+
+    }
+
+    //减速游戏
+    function slowGames() {
+        pauseGames();
+        if (speed < 1000) {
+            speed = speed + 100;
+        }
+        document.getElementById("speed").value = 11 - speed / 100 + ".0x";
+    }
+
+
+    //结束重来
+    function resetGames() {
+        location.reload();
+    }
+
+    //贪吃蛇开始运动
+    function startMove() {
+        timer = setInterval(function () {
+            if (checkFailed()) {//判断是否失败
+                pauseGames();
+                alert("You failed！");
+                init();
+                return;
+            }
+
+            if (ssx == fdx && ssy == fdy) {//判断是否碰撞食物
+
+                //重新绘制食物
+                drawFood();
+                //增加贪吃蛇的长度
+                ssx = ssx + fwdx;
+                ssy = ssy + fwdy;
+                var snake_ = {
+                    x: ssx,
+                    y: ssy
+                };
+                snakeArr.push(snake_);
+                drawSnake(snakeArr);
+
+                score = score+10;
+                document.getElementById("score").value = score;
+            } else {
+
+                //清除最后一个方块
+                clearSanke(snakeArr);
+                //重新绘制贪吃蛇
+                ssx = ssx + fwdx;
+                ssy = ssy + fwdy;
+                var snake_ = {
+                    x: ssx,
+                    y: ssy
+                };
+
+                snakeArr.push(snake_);
+                drawSnake(snakeArr);
+            }
+        }, speed);
+    }
+
+    //按键触发事件
+    document.onkeydown = function (event) {
+        //pauseGames();
+        keys = event.keyCode;
+        switch (keys) {
+            case 37://方向键(←)： VK_LEFT (37)
+                if (direct != "right") {
+                    fwdx = -20;
+                    fwdy = 0;
+                    direct = "left";
+                }
+                break;
+            case 38://方向键(↑)： VK_UP (38)
+                if (direct != "down") {
+                    fwdx = 0;
+                    fwdy = -20;
+                    direct = "up";
+                }
+                break;
+            case 39://方向键(→)： VK_RIGHT (39)
+                if (direct != "left") {
+                    fwdx = 20;
+                    fwdy = 0;
+                    direct = "right";
+                }
+                break;
+            case 40://方向键(↓)： VK_DOWN (40)
+                if (direct != "up") {
+                    fwdx = 0;
+                    fwdy = 20;
+                    direct = "down";
+                }
+                break;
+        }
+        //startGames();
+    }
+
+    function checkFailed() {
+        //判断是否碰撞墙体
+        if (ssx + 19 == 0 || ssx - 1 == maxHeight || ssy + 19 == 0 || ssy - 1 == maxWidth) {
+            return true;
+        }
+        //判断是否碰撞自身
+        var failedFlag = false;
+        var snake_0 = snakeArr[snakeArr.length - 1];
+        for (var i = snakeArr.length - 2; i > 0; i--) {
+            var snake_i = snakeArr[i];
+            if (snake_0.x == snake_i.x && snake_0.y == snake_i.y) {
+                failedFlag = true;
+                break;
+            }
+        }
+        return failedFlag;
+    }
+
+</script>
