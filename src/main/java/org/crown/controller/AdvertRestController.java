@@ -129,6 +129,8 @@ public class AdvertRestController extends SuperController {
         if (file.isEmpty()) {
             return fail("上传失败，请选择文件");
         }
+        String tempUrl = request.getScheme()+"://"+request.getServerName()+":"
+                +request.getServerPort();
         String tempName = file.getOriginalFilename();
         String suffix = tempName.substring(tempName.lastIndexOf(".") + 1);
         String fileName = System.currentTimeMillis()+"."+suffix;
@@ -143,7 +145,8 @@ public class AdvertRestController extends SuperController {
         try {
             file.transferTo(dest);
             log.info("上传成功");
-            return success("assets/upload/"+fileName);
+
+            return success(tempUrl+"/assets/upload/"+fileName);
         } catch (IOException e) {
             log.error(e.toString(), e);
             return fail(e.toString());

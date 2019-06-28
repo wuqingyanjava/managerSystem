@@ -223,7 +223,7 @@
             crown.put('/video/' + obj.elem.value + '/status',
                 {data: {status: obj.elem.checked ? 0 : 1}}, function () {
                     layer.closeAll('loading');
-                    layer.msg('用户状态更新成功', {icon: 1});
+                    layer.msg('状态更新成功', {icon: 1});
                 });
         });
     });

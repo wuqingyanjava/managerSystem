@@ -1,21 +1,21 @@
 <div class="layui-card">
     <div class="layui-card-header">
-        <h2 class="header-title">广告管理</h2>
+        <h2 class="header-title">文章管理</h2>
         <span class="layui-breadcrumb pull-right">
           <a href="#!console">首页</a>
-          <a><cite>广告管理</cite></a>
+          <a><cite>文章管理</cite></a>
         </span>
     </div>
     <div class="layui-card-body">
         <!-- 搜索条件 -->
         <div class="layui-form toolbar">
             <form id="searchForm" onsubmit="return false;">
-                广告名：<input name="advertName" class="layui-input search-input" type="text" placeholder="输入广告名"/>&emsp;
-                <button id="advert-btn-search" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
+                文章名：<input name="articleName" class="layui-input search-input" type="text" placeholder="输入文章名"/>&emsp;
+                <button id="article-btn-search" class="layui-btn icon-btn"><i class="layui-icon">&#xe615;</i>搜索</button>
             </form>
         </div>
         <!-- 表格顶部操作列 -->
-        <script type="text/html" id="advert-toolbar">
+        <script type="text/html" id="article-toolbar">
             <div class="layui-btn-container">
                 {{# if({{addShow}} == true){ }}
                 <button class="layui-btn layui-btn-normal layui-btn-sm" lay-event="add"><i
@@ -25,12 +25,12 @@
             </div>
         </script>
         <!-- 数据表格 -->
-        <table class="layui-table" id="advert-table" lay-filter="advert-table"></table>
+        <table class="layui-table" id="article-table" lay-filter="article-table"></table>
     </div>
 </div>
 <!-- 表格操作列 -->
-<script type="text/html" id="advert-table-bar">
-    <a class="layui-btn layui-btn-radius layui-btn-normal layui-btn-xs" lay-event="showImg">预览图片</a>
+<script type="text/html" id="article-table-bar">
+    <a class="layui-btn layui-btn-radius layui-btn-normal layui-btn-xs" lay-event="showArticle">预览文章</a>
     {{#  if({{editShow}} == true){ }}
     <a class="layui-btn layui-btn-primary layui-btn-xs" lay-event="edit">修改</a>
     {{#  } }}
@@ -39,13 +39,9 @@
     {{#  } }}
 </script>
 <!-- 表格状态列 -->
-<script type="text/html" id="advert-tpl-status">
-    <input type="checkbox" lay-filter="advert-tpl-status" value="{{d.id}}" lay-skin="switch"
+<script type="text/html" id="article-tpl-status">
+    <input type="checkbox" lay-filter="article-tpl-status" value="{{d.id}}" lay-skin="switch"
            lay-text="正常|禁用" {{d.status==0?'checked':''}}/>
-</script>
-<!-- 图片地址列 -->
-<script type="text/html" id="advert-tpl-picurl">
-    <a href="{{d.picUrl}}" target="_Blank">{{d.picUrl}}</a>
 </script>
 <script>
     layui.use(['form', 'table', 'config', 'crown'], function () {
@@ -56,18 +52,18 @@
         var crown = layui.crown;
         var $ = layui.jquery;
 
-        $('#advert-toolbar').vm({
-            addShow: crown.hasPerm("wx:advert:add")
+        $('#article-toolbar').vm({
+            addShow: crown.hasPerm("wx:article:add")
         });
-        $('#advert-table-bar').vm({
-            editShow: crown.hasPerm("wx:advert:edit"),
-            deleteShow: crown.hasPerm("wx:advert:delete")
+        $('#article-table-bar').vm({
+            editShow: crown.hasPerm("wx:article:edit"),
+            deleteShow: crown.hasPerm("wx:article:delete")
         });
         //渲染表格
         var tableRender = table.render({
-            elem: '#advert-table',
-            toolbar: '#advert-toolbar',
-            url: config.serverUrl + '/advert',
+            elem: '#article-table',
+            toolbar: '#article-toolbar',
+            url: config.serverUrl + '/article',
             request: config.request,
             parseData: config.parseData,
             response: config.response,
@@ -76,65 +72,70 @@
             cols: [[
                 {type: 'numbers'},
                 {field: 'id', align: 'center', width: 60, sort: true, title: 'ID',hide:"true"},
-                {field: 'advertName', align: 'center', sort: true, title: '广告名称'},
-                {field: 'picUrl', align: 'center', sort: true,templet: '#advert-tpl-picurl', title: '图片URL'},
-                {field: 'linkUrl', align: 'center', sort: true, title: '广告链接'},
-                {field: 'status', align: 'center', sort: true, templet: '#advert-tpl-status', title: '状态'},
+                {field: 'articleName', align: 'center', sort: true, title: '文章名称'},
+                {field: 'author', align: 'center', sort: true, title: '文章作者'},
+                {
+                    align: 'center', templet: function (d) {
+                        if (d.type === 0) {
+                            return '<span class="layui-badge layui-bg-gray">资讯</span>';
+                        } else if (d.type === 1) {
+                            return '<span class="layui-badge layui-bg-blue">公告</span>';
+                        }
+                    }, title: '文章类型'
+                },
+                {field: 'status', align: 'center', sort: true, templet: '#article-tpl-status', title: '状态'},
                 {field: 'createTime', align: 'center', sort: true, title: '创建时间'},
                 {field: 'updateTime', align: 'center', sort: true, title: '修改时间'},
-                {align: 'center', toolbar: '#advert-table-bar', title: '操作', width: 200}
+                {align: 'center', toolbar: '#article-table-bar', title: '操作', width: 200}
             ]]
         });
         var renderTable = function () {
             tableRender.reload();
         }        // 添加
-        table.on('toolbar(advert-table)', function (obj) {
+        table.on('toolbar(article-table)', function (obj) {
             if (obj.event === 'add') {
                 showEditModel();
             }
         });
         // 工具条点击事件
-        table.on('tool(advert-table)', function (obj) {
+        table.on('tool(article-table)', function (obj) {
             var data = obj.data;
             if (obj.event === 'edit') { //修改
                 showEditModel(data);
             } else if (obj.event === 'del') { //删除
                 doDelete(obj);
-            }else if (obj.event === 'showImg') {
-                showImgModel(data);
+            }else if (obj.event === 'showArticle') {
+                showArticleModel(data);
             }
         });
-        // 显示图片预览
-        var showImgModel = function (data) {
-                // var img = new Image();
-                // img.src = data.picUrl;
-                // var height = img.height + 50; //获取图片高度
-                // var width = img.width; //获取图片宽度
-                var imgHtml = "<img src='" + data.picUrl + "' width='960' height='540'/>";
+        // 显示文章预览
+        var showArticleModel = function (data) {
+                var articleHtml = "<p>" + data.content + "</p>";
                 //弹出层
                 layer.open({
                     type: 1,
                     shade: 0.8,
-                    area:["960","540"],
+                    area:['auto','auto'],
                     offset: 'auto',
                     shadeClose:true,//点击外围关闭弹窗
-                    scrollbar: false,//不现实滚动条
-                    content: imgHtml, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+                    scrollbar: true,//不现实滚动条
+                    title: data.articleName,
+                    content: articleHtml, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
                     cancel: function () {
-                        //layer.msg('捕获就是从页面已经存在的元素上，包裹layer的结构', { time: 5000, icon: 6 });
                     }
                 });
         };
         // 显示编辑弹窗
         var showEditModel = function (data) {
             if (data) {
-                crown.get('/advert/' + data.id, {async: false}, function (data) {
-                    crown.putTempData('advert', data.result);
+                crown.get('/article/' + data.id, {async: false}, function (data) {
+                    crown.putTempData('article', data.result);
                 });
             }
             crown.popupCenter({
-                title: data ? '修改广告' : '添加广告',
-                path: 'components/views/advert/form.html',
+                title: data ? '修改文章' : '添加文章',
+                path: 'components/views/article/form.html',
+                area: ['1000px','560px'],
                 finish: function () {
                     renderTable();
                 }
@@ -145,7 +146,7 @@
             layer.confirm('确定要删除吗？', function (i) {
                 layer.close(i);
                 layer.load(2);
-                crown.delete('/advert/' + obj.data.id, {}, function () {
+                crown.delete('/article/' + obj.data.id, {}, function () {
                     layer.closeAll('loading');
                     layer.msg('删除成功', {icon: 1});
                     obj.del();
@@ -154,14 +155,14 @@
         };
 
         // 搜索按钮点击事件
-        $('#advert-btn-search').click(function () {
+        $('#article-btn-search').click(function () {
             tableRender.reload({where: crown.getSearchForm()});
         });
 
         // 修改状态
-        form.on('switch(advert-tpl-status)', function (obj) {
+        form.on('switch(article-tpl-status)', function (obj) {
             layer.load(2);
-            crown.put('/advert/' + obj.elem.value + '/status',
+            crown.put('/article/' + obj.elem.value + '/status',
                 {data: {status: obj.elem.checked ? 0 : 1}}, function () {
                     layer.closeAll('loading');
                     layer.msg('状态更新成功', {icon: 1});
