@@ -120,7 +120,7 @@ public class MusicRestController extends SuperController {
     @GetMapping("/background")
     public ApiResponses<List<Map<String,String>>> musicList() {
         Page<Music> page = new Page<>();
-        page.setSize(5);
+        page.setSize(10);
         page.setCurrent(1);
         IPage<Music> musicIPage = musicService.pageMusic(page, "","");
         List<Music> musicList = musicIPage.getRecords();
