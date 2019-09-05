@@ -35,9 +35,9 @@ import io.swagger.annotations.ApiOperation;
  *
  * @author Caratacus
  */
-@Api(tags = {"Resource"}, description = "资源操作相关接口")
+@Api(tags = {"Resource" }, description = "资源操作相关接口")
 @RestController
-@RequestMapping(value = "/resources", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/resources" , produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Validated
 public class ResourceRestController extends SuperController {
 
@@ -50,14 +50,14 @@ public class ResourceRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.AUTH)
     @ApiOperation(value = "查询所有资源(分页)")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "resourceName", value = "需要查询的资源名", paramType = "query"),
-            @ApiImplicitParam(name = "method", value = "需要查询的请求方式", paramType = "query"),
-            @ApiImplicitParam(name = "authType", value = "权限认证类型", paramType = "query")
+            @ApiImplicitParam(name = "resourceName" , value = "需要查询的资源名" , paramType = "query"),
+            @ApiImplicitParam(name = "method" , value = "需要查询的请求方式" , paramType = "query"),
+            @ApiImplicitParam(name = "authType" , value = "权限认证类型" , paramType = "query")
     })
     @GetMapping
-    public ApiResponses<IPage<Resource>> page(@RequestParam(value = "resourceName", required = false) String resourceName,
-                                              @RequestParam(value = "method", required = false) String method,
-                                              @RequestParam(value = "authType", required = false) AuthTypeEnum authType
+    public ApiResponses<IPage<Resource>> page(@RequestParam(value = "resourceName" , required = false) String resourceName,
+                                              @RequestParam(value = "method" , required = false) String method,
+                                              @RequestParam(value = "authType" , required = false) AuthTypeEnum authType
     ) {
         return success(
                 resourceService.query()
@@ -88,11 +88,11 @@ public class ResourceRestController extends SuperController {
     @PostMapping("/create")
     public ApiResponses<Void> create(@RequestBody @Validated(ResourcePARM.Create.class) ResourcePARM resourcePARM) {
         Resource resource = resourcePARM.convert(Resource.class);
-        String id= UUID.randomUUID().toString();
+        String id = UUID.randomUUID().toString();
         //替换uuid中的"-"
-        id=id.replace("-", "");
+        id = id.replace("-" , "");
         resource.setId(id);
-        resource.setPerm(resource.getMethod()+":"+resource.getMapping());
+        resource.setPerm(resource.getMethod() + ":" + resource.getMapping());
         resourceService.save(resource);
         return success(HttpStatus.CREATED);
     }
@@ -100,7 +100,7 @@ public class ResourceRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.OPEN)
     @ApiOperation(value = "查询单个资源")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "资源ID", required = true, paramType = "path")
+            @ApiImplicitParam(name = "id" , value = "资源ID" , required = true, paramType = "path")
     })
     @GetMapping("/{id}")
     public ApiResponses<ResourceDTO> get(@PathVariable("id") String id) {
@@ -110,7 +110,7 @@ public class ResourceRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.OPEN)
     @ApiOperation(value = "删除资源")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "资源ID", required = true, paramType = "path")
+            @ApiImplicitParam(name = "id" , value = "资源ID" , required = true, paramType = "path")
     })
     @DeleteMapping("/{id}")
     public ApiResponses<Void> delete(@PathVariable("id") String id) {
@@ -121,13 +121,13 @@ public class ResourceRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.OPEN)
     @ApiOperation(value = "修改资源")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "资源ID", required = true, paramType = "path")
+            @ApiImplicitParam(name = "id" , value = "资源ID" , required = true, paramType = "path")
     })
     @PutMapping("/{id}")
     public ApiResponses<Void> update(@PathVariable("id") String id, @RequestBody @Validated(ResourcePARM.Update.class) ResourcePARM resourcePARM) {
         Resource resource = resourcePARM.convert(Resource.class);
         resource.setId(id);
-        resource.setPerm(resource.getMethod()+":"+resource.getMapping());
+        resource.setPerm(resource.getMethod() + ":" + resource.getMapping());
         resourceService.updateById(resource);
         return success();
     }

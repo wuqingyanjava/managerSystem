@@ -127,10 +127,10 @@ public class SuperGenerator {
     protected List<TableFill> getTableFills() {
         // 自定义需要填充的字段
         List<TableFill> tableFillList = new ArrayList<>();
-        tableFillList.add(new TableFill("createTime", FieldFill.INSERT));
-        tableFillList.add(new TableFill("updateTime", FieldFill.INSERT_UPDATE));
-        tableFillList.add(new TableFill("createUid", FieldFill.INSERT));
-        tableFillList.add(new TableFill("updateUid", FieldFill.INSERT_UPDATE));
+        tableFillList.add(new TableFill("createTime" , FieldFill.INSERT));
+        tableFillList.add(new TableFill("updateTime" , FieldFill.INSERT_UPDATE));
+        tableFillList.add(new TableFill("createUid" , FieldFill.INSERT));
+        tableFillList.add(new TableFill("updateUid" , FieldFill.INSERT_UPDATE));
         return tableFillList;
     }
 

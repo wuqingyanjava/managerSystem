@@ -227,7 +227,7 @@ public abstract class TypeUtils {
             }
 
             if (strVal.indexOf(',') != 0) {
-                strVal = strVal.replaceAll(",", "");
+                strVal = strVal.replaceAll("," , "");
             }
 
             return Float.parseFloat(strVal);
@@ -260,7 +260,7 @@ public abstract class TypeUtils {
             }
 
             if (strVal.indexOf(',') != 0) {
-                strVal = strVal.replaceAll(",", "");
+                strVal = strVal.replaceAll("," , "");
             }
 
             return Double.parseDouble(strVal);
@@ -346,7 +346,7 @@ public abstract class TypeUtils {
                     assert oracleTimestampMethod != null;
                     result = oracleTimestampMethod.invoke(value);
                 } catch (Exception e) {
-                    throw new CrownException("can not cast oracle.sql.TIMESTAMP to Date", e);
+                    throw new CrownException("can not cast oracle.sql.TIMESTAMP to Date" , e);
                 }
                 return (Date) result;
             }
@@ -367,7 +367,7 @@ public abstract class TypeUtils {
                     assert oracleDateMethod != null;
                     result = oracleDateMethod.invoke(value);
                 } catch (Exception e) {
-                    throw new CrownException("can not cast oracle.sql.DATE to Date", e);
+                    throw new CrownException("can not cast oracle.sql.DATE to Date" , e);
                 }
                 return (Date) result;
             }
@@ -499,7 +499,7 @@ public abstract class TypeUtils {
             }
 
             if (strVal.indexOf(',') != 0) {
-                strVal = strVal.replaceAll(",", "");
+                strVal = strVal.replaceAll("," , "");
             }
 
             try {
@@ -542,7 +542,7 @@ public abstract class TypeUtils {
             }
 
             if (strVal.indexOf(',') != 0) {
-                strVal = strVal.replaceAll(",", "");
+                strVal = strVal.replaceAll("," , "");
             }
 
             return Integer.parseInt(strVal);
@@ -688,7 +688,7 @@ public abstract class TypeUtils {
 
     }
 
-    @SuppressWarnings({"unchecked", "rawtypes"})
+    @SuppressWarnings({"unchecked" , "rawtypes" })
     public static <T> T castToEnum(Object obj, Class<T> clazz) {
         try {
             if (obj instanceof String) {

@@ -200,7 +200,7 @@
                     layer.closeAll('page');
                 });
             } else {
-                crown.post('/roles', {data:data.field}, function () {
+                crown.post('/roles', {data: data.field}, function () {
                     layer.closeAll('loading');
                     layer.msg('添加成功', {icon: 1});
                     roleTable.reload('role-table');

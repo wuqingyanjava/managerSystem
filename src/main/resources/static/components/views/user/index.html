@@ -114,7 +114,7 @@
         //显示表单弹窗
         var showEditModel = function (data) {
             if (data) {
-                crown.get('/users/' + data.id, {async:false}, function (data) {
+                crown.get('/users/' + data.id, {async: false}, function (data) {
                     crown.putTempData('t_user', data.result);
                 });
             }

@@ -67,33 +67,33 @@ public class AccountRestControllerTest extends SuperRestControllerTest implement
         LoginPARM loginPARM = new LoginPARM();
         loginPARM.setLoginName("crown");
         loginPARM.setPassword("crown");
-        TokenDTO tokenDTO = getResult(mockMvc, post("/account/token", null, loginPARM), new TypeReference<SuccessResponses<TokenDTO>>() {
+        TokenDTO tokenDTO = getResult(mockMvc, post("/account/token" , null, loginPARM), new TypeReference<SuccessResponses<TokenDTO>>() {
         });
         //updatePassword
         PasswordPARM passwordPARM = new PasswordPARM();
         passwordPARM.setOldPassword("crown");
         passwordPARM.setNewPassword("crown");
-        isOk(mockMvc, put("/account/password", tokenDTO.getToken(), passwordPARM));
+        isOk(mockMvc, put("/account/password" , tokenDTO.getToken(), passwordPARM));
     }
 
     @Test
     public void removeToken() throws Exception {
-        isNoContent(mockMvc, delete("/account/token", null));
+        isNoContent(mockMvc, delete("/account/token" , null));
     }
 
     @Test
     public void getAccountInfo() throws Exception {
-        isOk(mockMvc, get("/account/info", token.getToken()));
+        isOk(mockMvc, get("/account/info" , token.getToken()));
     }
 
     @Test
     public void menus() throws Exception {
-        isOk(mockMvc, get("/account/menus", token.getToken()));
+        isOk(mockMvc, get("/account/menus" , token.getToken()));
     }
 
     @Test
     public void buttonsAliases() throws Exception {
-        isOk(mockMvc, get("/account/buttons/aliases", token.getToken()));
+        isOk(mockMvc, get("/account/buttons/aliases" , token.getToken()));
     }
 
     @Test
@@ -102,7 +102,7 @@ public class AccountRestControllerTest extends SuperRestControllerTest implement
         userInfoPARM.setNickname("Crown");
         userInfoPARM.setEmail("caratacus@qq.com");
         userInfoPARM.setPhone("13712345678");
-        isOk(mockMvc, put("/account/info", token.getToken(), userInfoPARM));
+        isOk(mockMvc, put("/account/info" , token.getToken(), userInfoPARM));
     }
 
 }

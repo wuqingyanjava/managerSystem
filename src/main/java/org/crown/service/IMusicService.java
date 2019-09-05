@@ -19,7 +19,7 @@ public interface IMusicService extends BaseService<Music> {
     /**
      * 分页查询音乐列表
      */
-    IPage<Music> pageMusic(Page<Music> page, String musicName,String author);
+    IPage<Music> pageMusic(Page<Music> page, String musicName, String author);
 
     void updateStatus(Integer id, StatusEnum status);
 }

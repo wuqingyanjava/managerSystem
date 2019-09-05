@@ -71,7 +71,7 @@
             page: true,
             cols: [[
                 {type: 'numbers'},
-                {field: 'id', align: 'center', width: 60, sort: true, title: 'ID',hide:"true"},
+                {field: 'id', align: 'center', width: 60, sort: true, title: 'ID', hide: "true"},
                 {field: 'articleName', align: 'center', sort: true, title: '文章名称'},
                 {field: 'author', align: 'center', sort: true, title: '文章作者'},
                 {
@@ -104,26 +104,26 @@
                 showEditModel(data);
             } else if (obj.event === 'del') { //删除
                 doDelete(obj);
-            }else if (obj.event === 'showArticle') {
+            } else if (obj.event === 'showArticle') {
                 showArticleModel(data);
             }
         });
         // 显示文章预览
         var showArticleModel = function (data) {
-                var articleHtml = "<div style=' width: 775px;height: 630px;'><div style='margin: 10px'>" + data.content + "</div></div>";
-                //弹出层
-                layer.open({
-                    type: 1,
-                    shade: 0.8,
-                    area:['auto','auto'],
-                    offset: 'auto',
-                    shadeClose:true,//点击外围关闭弹窗
-                    scrollbar: true,//不现实滚动条
-                    title: data.articleName,
-                    content: articleHtml, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
-                    cancel: function () {
-                    }
-                });
+            var articleHtml = "<div style=' width: 775px;height: 630px;'><div style='margin: 10px'>" + data.content + "</div></div>";
+            //弹出层
+            layer.open({
+                type: 1,
+                shade: 0.8,
+                area: ['auto', 'auto'],
+                offset: 'auto',
+                shadeClose: true,//点击外围关闭弹窗
+                scrollbar: true,//不现实滚动条
+                title: data.articleName,
+                content: articleHtml, //捕获的元素，注意：最好该指定的元素要存放在body最外层，否则可能被其它的相对元素所影响
+                cancel: function () {
+                }
+            });
         };
         // 显示编辑弹窗
         var showEditModel = function (data) {
@@ -135,7 +135,7 @@
             crown.popupCenter({
                 title: data ? '修改文章' : '添加文章',
                 path: 'components/views/article/form.html',
-                area: ['1000px','560px'],
+                area: ['1000px', '560px'],
                 finish: function () {
                     renderTable();
                 }

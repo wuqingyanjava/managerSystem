@@ -38,9 +38,9 @@ import java.util.List;
  *
  * @author Caratacus
  */
-@Api(tags = {"advert"}, description = "广告相关接口")
+@Api(tags = {"advert" }, description = "广告相关接口")
 @RestController
-@RequestMapping(value = "/advert", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/advert" , produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Validated
 @Slf4j
 public class AdvertRestController extends SuperController {
@@ -51,11 +51,11 @@ public class AdvertRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.AUTH)
     @ApiOperation(value = "查询所有音乐(分页)")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "advertName", value = "需要查询的广告名", paramType = "query")
+            @ApiImplicitParam(name = "advertName" , value = "需要查询的广告名" , paramType = "query")
     })
     @GetMapping
-    public ApiResponses<IPage<Advert>> page(@RequestParam(value = "advertName", required = false) String advertName
-                                            ) {
+    public ApiResponses<IPage<Advert>> page(@RequestParam(value = "advertName" , required = false) String advertName
+    ) {
         return success(advertService.pageAdvert(this.<Advert>getPage(), advertName));
     }
 
@@ -70,7 +70,7 @@ public class AdvertRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.AUTH)
     @ApiOperation(value = "查询单个广告")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "广告ID", required = true, paramType = "path")
+            @ApiImplicitParam(name = "id" , value = "广告ID" , required = true, paramType = "path")
     })
     @GetMapping("/{id}")
     public ApiResponses<Advert> get(@PathVariable("id") String id) {
@@ -90,7 +90,7 @@ public class AdvertRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.AUTH)
     @ApiOperation(value = "修改广告")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "广告ID", required = true, paramType = "path")
+            @ApiImplicitParam(name = "id" , value = "广告ID" , required = true, paramType = "path")
     })
     @PutMapping("/{id}")
     public ApiResponses<Void> update(@PathVariable("id") String id, @RequestBody @Validated(AdvertPARM.Update.class) AdvertPARM advertPARM) {
@@ -103,7 +103,7 @@ public class AdvertRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.AUTH)
     @ApiOperation(value = "删除广告")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "广告ID", required = true, paramType = "path")
+            @ApiImplicitParam(name = "id" , value = "广告ID" , required = true, paramType = "path")
     })
     @DeleteMapping("/{id}")
     public ApiResponses<Void> delete(@PathVariable("id") String id) {
@@ -114,7 +114,7 @@ public class AdvertRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.AUTH)
     @ApiOperation("设置广告状态")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "广告ID", required = true, paramType = "path")
+            @ApiImplicitParam(name = "id" , value = "广告ID" , required = true, paramType = "path")
     })
     @PutMapping("/{id}/status")
     public ApiResponses<Void> updateStatus(@PathVariable("id") Integer id, @RequestBody @Validated(AdvertPARM.Status.class) AdvertPARM advertPARM) {
@@ -129,16 +129,16 @@ public class AdvertRestController extends SuperController {
         if (file.isEmpty()) {
             return fail("上传失败，请选择文件");
         }
-        String tempUrl = request.getScheme()+"://"+request.getServerName()+":"
-                +request.getServerPort();
+        String tempUrl = request.getScheme() + "://" + request.getServerName() + ":"
+                + request.getServerPort();
         String tempName = file.getOriginalFilename();
         String suffix = tempName.substring(tempName.lastIndexOf(".") + 1);
-        String fileName = System.currentTimeMillis()+"."+suffix;
+        String fileName = System.currentTimeMillis() + "." + suffix;
         String os = System.getProperty("os.name");
         String filePath = "";
-        if(os.toLowerCase().startsWith("win")){
+        if (os.toLowerCase().startsWith("win")) {
             filePath = "D:/ideaspace/Crown/src/main/resources/static/assets/upload/";
-        }else{
+        } else {
             filePath = "/usr/local/apache-tomcat-8.5.42/webapps/crown/WEB-INF/classes/static/assets/upload/";
         }
         File dest = new File(filePath + fileName);
@@ -146,12 +146,13 @@ public class AdvertRestController extends SuperController {
             file.transferTo(dest);
             log.info("上传成功");
 
-            return success(tempUrl+"/assets/upload/"+fileName);
+            return success(tempUrl + "/assets/upload/" + fileName);
         } catch (IOException e) {
             log.error(e.toString(), e);
             return fail(e.toString());
         }
     }
+
     @Resources(auth = AuthTypeEnum.OPEN)
     @ApiOperation(value = "上传图片")
     @PostMapping("/uploadFtp")
@@ -161,7 +162,7 @@ public class AdvertRestController extends SuperController {
         }
         String tempName = file.getOriginalFilename();
         String suffix = tempName.substring(tempName.lastIndexOf(".") + 1);
-        String fileName = System.currentTimeMillis()+"."+suffix;
+        String fileName = System.currentTimeMillis() + "." + suffix;
 
         //服务器ip地址
         String url = "148.70.237.248";
@@ -186,10 +187,10 @@ public class AdvertRestController extends SuperController {
             reply = ftp.getReplyCode();
             System.out.println(reply);
 
-            String path="/srv/upload";
+            String path = "/srv/upload";
             //检查上传路径是否存在 如果不存在返回false
             boolean flag = ftp.changeWorkingDirectory(path);
-            if(!flag){
+            if (!flag) {
                 //创建上传的路径  该方法只能创建一级目录，在这里如果/home/ftpuser存在则可创建image
                 ftp.makeDirectory(path);
             }

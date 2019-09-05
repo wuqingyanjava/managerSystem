@@ -42,7 +42,7 @@ public class ScanMappings {
     @Autowired
     private RequestMappingHandlerMapping handlerMapping;
 
-    private String[] emptyArray = new String[]{""};
+    private String[] emptyArray = new String[]{"" };
 
     /**
      * 扫描资源插入数据库

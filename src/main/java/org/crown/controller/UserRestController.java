@@ -44,9 +44,9 @@ import io.swagger.annotations.ApiOperation;
  *
  * @author Caratacus
  */
-@Api(tags = {"User"}, description = "用户操作相关接口")
+@Api(tags = {"User" }, description = "用户操作相关接口")
 @RestController
-@RequestMapping(value = "/users", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/users" , produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Validated
 public class UserRestController extends SuperController {
 
@@ -56,14 +56,14 @@ public class UserRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.AUTH)
     @ApiOperation("查询所有用户")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "loginName", value = "需要检查的账号", paramType = "query"),
-            @ApiImplicitParam(name = "nickname", value = "需要检查的账号", paramType = "query"),
-            @ApiImplicitParam(name = "status", value = "需要检查的账号", paramType = "query")
+            @ApiImplicitParam(name = "loginName" , value = "需要检查的账号" , paramType = "query"),
+            @ApiImplicitParam(name = "nickname" , value = "需要检查的账号" , paramType = "query"),
+            @ApiImplicitParam(name = "status" , value = "需要检查的账号" , paramType = "query")
     })
     @GetMapping
-    public ApiResponses<IPage<UserDTO>> page(@RequestParam(value = "loginName", required = false) String loginName,
-                                             @RequestParam(value = "nickname", required = false) String nickname,
-                                             @RequestParam(value = "status", required = false) StatusEnum status) {
+    public ApiResponses<IPage<UserDTO>> page(@RequestParam(value = "loginName" , required = false) String loginName,
+                                             @RequestParam(value = "nickname" , required = false) String nickname,
+                                             @RequestParam(value = "status" , required = false) StatusEnum status) {
         ;
         return success(
                 userService.query().likeRight(StringUtils.isNotEmpty(loginName), User::getLoginName, loginName)
@@ -77,7 +77,7 @@ public class UserRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.AUTH)
     @ApiOperation("查询单个用户")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "用户ID", required = true, paramType = "path")
+            @ApiImplicitParam(name = "id" , value = "用户ID" , required = true, paramType = "path")
     })
     @GetMapping("/{id}")
     public ApiResponses<UserDTO> get(@PathVariable("id") Integer id) {
@@ -92,7 +92,7 @@ public class UserRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.AUTH)
     @ApiOperation("重置用户密码")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "用户ID", required = true, paramType = "path")
+            @ApiImplicitParam(name = "id" , value = "用户ID" , required = true, paramType = "path")
     })
     @PutMapping("/{id}/password")
     public ApiResponses<Void> resetPwd(@PathVariable("id") Integer id) {
@@ -103,7 +103,7 @@ public class UserRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.AUTH)
     @ApiOperation("设置用户状态")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "用户ID", required = true, paramType = "path")
+            @ApiImplicitParam(name = "id" , value = "用户ID" , required = true, paramType = "path")
     })
     @PutMapping("/{id}/status")
     public ApiResponses<Void> updateStatus(@PathVariable("id") Integer id, @RequestBody @Validated(UserPARM.Status.class) UserPARM userPARM) {
@@ -132,7 +132,7 @@ public class UserRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.AUTH)
     @ApiOperation("修改用户")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "用户ID", required = true, paramType = "path")
+            @ApiImplicitParam(name = "id" , value = "用户ID" , required = true, paramType = "path")
     })
     @PutMapping("/{id}")
     public ApiResponses<Void> update(@PathVariable("id") Integer id, @RequestBody @Validated(UserPARM.Update.class) UserPARM userPARM) {

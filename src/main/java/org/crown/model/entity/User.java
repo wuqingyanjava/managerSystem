@@ -31,7 +31,7 @@ public class User extends Convert {
 
     private static final long serialVersionUID = 1L;
 
-    @TableId(value = "uid", type = IdType.AUTO)
+    @TableId(value = "uid" , type = IdType.AUTO)
     private Integer id;
 
     /**

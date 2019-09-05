@@ -73,7 +73,7 @@ public class LambdaQueryWrapperChain<T> extends AbstractChainWrapper<T, SFunctio
 
     @Override
     public String getSqlSelect() {
-        throw ExceptionUtils.mpe("can not use this method for \"%s\"", "getSqlSelect");
+        throw ExceptionUtils.mpe("can not use this method for \"%s\"" , "getSqlSelect");
     }
 
     public List<T> list() {

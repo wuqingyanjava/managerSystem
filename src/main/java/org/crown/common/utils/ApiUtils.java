@@ -50,7 +50,7 @@ public abstract class ApiUtils {
         if (Objects.isNull(uid)) {
             String token = ApplicationUtils.getRequest().getHeader("Authorization");
             ApiAssert.notNull(ErrorCodeEnum.UNAUTHORIZED, token);
-            token = token.replaceFirst("Bearer ", "");
+            token = token.replaceFirst("Bearer " , "");
             Claims claims = JWTUtils.getClaim(token);
             ApiAssert.notNull(ErrorCodeEnum.UNAUTHORIZED, claims);
             return claims.get(JWTUtils.UID, Integer.class);

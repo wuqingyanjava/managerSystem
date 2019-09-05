@@ -42,9 +42,9 @@ import io.swagger.annotations.ApiOperation;
  *
  * @author Caratacus
  */
-@Api(tags = {"Role"}, description = "角色相关接口")
+@Api(tags = {"Role" }, description = "角色相关接口")
 @RestController
-@RequestMapping(value = "/roles", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/roles" , produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Validated
 public class RoleRestController extends SuperController {
 
@@ -56,10 +56,10 @@ public class RoleRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.AUTH)
     @ApiOperation(value = "查询所有角色(分页)")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "roleName", value = "需要查询的角色名", paramType = "query")
+            @ApiImplicitParam(name = "roleName" , value = "需要查询的角色名" , paramType = "query")
     })
     @GetMapping
-    public ApiResponses<IPage<RoleDTO>> page(@RequestParam(value = "roleName", required = false) String roleName) {
+    public ApiResponses<IPage<RoleDTO>> page(@RequestParam(value = "roleName" , required = false) String roleName) {
         return success(roleService.pageRoleDTO(this.<Role>getPage(), roleName));
     }
 
@@ -73,7 +73,7 @@ public class RoleRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.AUTH)
     @ApiOperation(value = "查询单个角色")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "角色ID", required = true, paramType = "path")
+            @ApiImplicitParam(name = "id" , value = "角色ID" , required = true, paramType = "path")
     })
     @GetMapping("/{id}")
     public ApiResponses<Role> get(@PathVariable("id") Integer id) {
@@ -92,7 +92,7 @@ public class RoleRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.AUTH)
     @ApiOperation(value = "修改角色")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "角色ID", required = true, paramType = "path")
+            @ApiImplicitParam(name = "id" , value = "角色ID" , required = true, paramType = "path")
     })
     @PutMapping("/{id}")
     public ApiResponses<Void> update(@PathVariable("id") Integer id, @RequestBody @Validated(RolePARM.Update.class) RolePARM rolePARM) {
@@ -105,7 +105,7 @@ public class RoleRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.AUTH)
     @ApiOperation(value = "删除角色")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "角色ID", required = true, paramType = "path")
+            @ApiImplicitParam(name = "id" , value = "角色ID" , required = true, paramType = "path")
     })
     @DeleteMapping("/{id}")
     public ApiResponses<Void> delete(@PathVariable("id") Integer id) {
@@ -116,7 +116,7 @@ public class RoleRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.AUTH)
     @ApiOperation(value = "修改角色菜单")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "角色ID", required = true, paramType = "path")
+            @ApiImplicitParam(name = "id" , value = "角色ID" , required = true, paramType = "path")
     })
     @PutMapping("/{id}/menus")
     public ApiResponses<Void> menus(@PathVariable("id") Integer id, @RequestBody @NotEmpty(message = "菜单ID不能为空") List<Integer> menuIds) {

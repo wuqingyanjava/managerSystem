@@ -173,10 +173,10 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-        <!-- ftp -->
-        <groupId>commons-net</groupId>
-        <artifactId>commons-net</artifactId>
-        <version>3.6</version>
+            <!-- ftp -->
+            <groupId>commons-net</groupId>
+            <artifactId>commons-net</artifactId>
+            <version>3.6</version>
         </dependency>
     </dependencies>
 

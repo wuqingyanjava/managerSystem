@@ -38,9 +38,9 @@ import io.swagger.annotations.ApiOperation;
  *
  * @author Caratacus
  */
-@Api(tags = {"Menu"}, description = "菜单相关接口")
+@Api(tags = {"Menu" }, description = "菜单相关接口")
 @RestController
-@RequestMapping(value = "/menus", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/menus" , produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Validated
 public class MenuRestController extends SuperController {
 
@@ -73,7 +73,7 @@ public class MenuRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.AUTH)
     @ApiOperation(value = "查询单个菜单")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "菜单ID", required = true, paramType = "path")
+            @ApiImplicitParam(name = "id" , value = "菜单ID" , required = true, paramType = "path")
     })
     @GetMapping("/{id}")
     public ApiResponses<MenuDTO> get(@PathVariable("id") Integer id) {
@@ -92,7 +92,7 @@ public class MenuRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.AUTH)
     @ApiOperation(value = "修改菜单")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "菜单ID", required = true, paramType = "path")
+            @ApiImplicitParam(name = "id" , value = "菜单ID" , required = true, paramType = "path")
     })
     @PutMapping("/{id}")
     public ApiResponses<Void> update(@PathVariable("id") Integer id, @RequestBody @Validated(MenuPARM.Update.class) MenuPARM menuPARM) {
@@ -105,7 +105,7 @@ public class MenuRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.AUTH)
     @ApiOperation(value = "删除菜单")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "菜单ID", required = true, paramType = "path")
+            @ApiImplicitParam(name = "id" , value = "菜单ID" , required = true, paramType = "path")
     })
     @DeleteMapping("/{id}")
     public ApiResponses<Void> delete(@PathVariable("id") Integer id) {
@@ -116,7 +116,7 @@ public class MenuRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.AUTH)
     @ApiOperation("设置菜单状态")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "菜单ID", required = true, paramType = "path")
+            @ApiImplicitParam(name = "id" , value = "菜单ID" , required = true, paramType = "path")
     })
     @PutMapping("/{id}/status")
     public ApiResponses<Void> updateStatus(@PathVariable("id") Integer id, @RequestBody @Validated(MenuPARM.Status.class) MenuPARM menuPARM) {

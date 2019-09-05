@@ -25,7 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class MusicServiceImpl extends BaseServiceImpl<MusicMapper, Music> implements IMusicService {
 
     @Override
-    public IPage<Music> pageMusic(Page<Music> page, String musicName,String author) {
+    public IPage<Music> pageMusic(Page<Music> page, String musicName, String author) {
         IPage<Music> musicPage = query().like(StringUtils.isNotEmpty(musicName), Music::getMusicName, musicName)
                 .like(StringUtils.isNotEmpty(author), Music::getAuthor, author).page(page);
         return musicPage;

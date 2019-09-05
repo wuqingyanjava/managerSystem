@@ -65,20 +65,20 @@ public class RoleRestControllerTest extends SuperRestControllerTest implements C
     @Test
     public void menus() throws Exception {
         //修改角色菜单
-        isOk(mockMvc, put("/roles/1/menus", token.getToken(), Arrays.asList(1, 2, 3)));
+        isOk(mockMvc, put("/roles/1/menus" , token.getToken(), Arrays.asList(1, 2, 3)));
     }
 
     @Test
     public void tests() throws Exception {
         //测试获取所有(分页)
-        isOk(mockMvc, get("/roles", token.getToken()));
+        isOk(mockMvc, get("/roles" , token.getToken()));
         //添加测试
         RolePARM rolePARM = new RolePARM();
         rolePARM.setRoleName("角色测试");
         rolePARM.setRemark("角色测试");
-        isCreated(mockMvc, post("/roles", token.getToken(), rolePARM));
+        isCreated(mockMvc, post("/roles" , token.getToken(), rolePARM));
         //测试获取所有
-        List<Role> records = getResult(mockMvc, get("/roles/roles", token.getToken()), new TypeReference<SuccessResponses<List<Role>>>() {
+        List<Role> records = getResult(mockMvc, get("/roles/roles" , token.getToken()), new TypeReference<SuccessResponses<List<Role>>>() {
         });
         for (Role record : records) {
             //测试获取单个

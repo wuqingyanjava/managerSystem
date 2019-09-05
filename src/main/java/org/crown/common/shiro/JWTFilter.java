@@ -124,7 +124,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
     protected String getToken(HttpServletRequest request) {
         //从header中获取token
         String token = request.getHeader(AUTHORIZATION_HEADER);
-        return StringUtils.isBlank(token) ? null : token.replaceFirst("Bearer ", "");
+        return StringUtils.isBlank(token) ? null : token.replaceFirst("Bearer " , "");
     }
 
     /**

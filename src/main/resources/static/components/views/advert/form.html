@@ -10,7 +10,7 @@
     <div class="layui-form-item">
         <label class="layui-form-label"></label>
         <div class="layui-upload">
-        <button type="button" class="layui-btn" id="uploadfile">上传图片</button>
+            <button type="button" class="layui-btn" id="uploadfile">上传图片</button>
             <img id="upload-img" style="width: 92px;height: 92px;margin: 0 10px 10px 0;border:0">
         </div>
     </div>
@@ -47,25 +47,25 @@
         //普通图片上传
         var uploadInst = upload.render({
             elem: '#uploadfile'
-            ,url: '/advert/upload'
-            ,before: function(obj){
+            , url: '/advert/upload'
+            , before: function (obj) {
                 //预读本地文件示例，不支持ie8
-                obj.preview(function(index, file, result){
+                obj.preview(function (index, file, result) {
                     $('#upload-img').attr('src', result); //图片链接（base64）
                 });
             }
-            ,done: function(res){
+            , done: function (res) {
                 //如果上传成功
-                if(res.status == 200){
+                if (res.status == 200) {
                     $("#parentPicUrl").empty();
                     var urlTarget = '<input name="picUrl" id="picUrl" ' +
                         'type="text" class="layui-input" maxlength="100" readonly="true"\n' +
-                        'value="'+res.result+'" lay-verify="required"/> ';
+                        'value="' + res.result + '" lay-verify="required"/> ';
                     $('#parentPicUrl').append(urlTarget)
-                        //.attr("value",res.result);
-                  //  console.log($('#picUrl').attr("value"));
+                    //.attr("value",res.result);
+                    //  console.log($('#picUrl').attr("value"));
                     return layer.msg('上传成功');
-                }else{
+                } else {
                     return layer.msg('上传失败请重试！');
                     //演示失败状态，并实现重传
                     // var demoText = $('#uploadText');

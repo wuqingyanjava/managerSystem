@@ -42,9 +42,9 @@ import io.swagger.annotations.ApiOperation;
  *
  * @author Caratacus
  */
-@Api(tags = {"Account"}, description = "账号操作相关接口")
+@Api(tags = {"Account" }, description = "账号操作相关接口")
 @RestController
-@RequestMapping(value = "/account", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/account" , produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Validated
 public class AccountRestController extends SuperController {
 
@@ -73,8 +73,8 @@ public class AccountRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.LOGIN)
     @ApiOperation("修改密码")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "oldPassword", value = "原密码", required = true, dataType = "String"),
-            @ApiImplicitParam(name = "newPassword", value = "新密码", required = true, dataType = "String"),
+            @ApiImplicitParam(name = "oldPassword" , value = "原密码" , required = true, dataType = "String"),
+            @ApiImplicitParam(name = "newPassword" , value = "新密码" , required = true, dataType = "String"),
     })
     @PutMapping("/password")
     public ApiResponses<Void> updatePassword(@RequestBody @Validated PasswordPARM passwordPARM) {

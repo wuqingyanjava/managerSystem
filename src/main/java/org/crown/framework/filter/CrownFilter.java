@@ -40,7 +40,7 @@ import org.springframework.stereotype.Component;
  * @author Caratacus
  */
 @Component
-@WebFilter(filterName = "crownFilter", urlPatterns = "/*")
+@WebFilter(filterName = "crownFilter" , urlPatterns = "/*")
 public class CrownFilter implements Filter {
 
     @Override

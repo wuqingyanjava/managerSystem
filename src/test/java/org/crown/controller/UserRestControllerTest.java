@@ -70,29 +70,29 @@ public class UserRestControllerTest extends SuperRestControllerTest implements C
         User user = new User();
         user.setId(2);
         user.setIp("2222");
-        userService.update(user, Wrappers.<User>update().set("uid", 22).eq("uid", 1));
+        userService.update(user, Wrappers.<User>update().set("uid" , 22).eq("uid" , 1));
     }
 
     @Test
     public void page() throws Exception {
-        isOk(mockMvc, get("/users", token.getToken()));
+        isOk(mockMvc, get("/users" , token.getToken()));
     }
 
     @Test
     public void get() throws Exception {
-        isOk(mockMvc, get("/users/1", token.getToken()));
+        isOk(mockMvc, get("/users/1" , token.getToken()));
     }
 
     @Test
     public void resetPwd() throws Exception {
-        isOk(mockMvc, put("/users/" + token.getUid() + "/password", token.getToken()));
+        isOk(mockMvc, put("/users/" + token.getUid() + "/password" , token.getToken()));
     }
 
     @Test
     public void updateStatus() throws Exception {
         UserPARM userPARM = new UserPARM();
         userPARM.setStatus(StatusEnum.NORMAL);
-        isOk(mockMvc, put("/users/" + token.getUid() + "/status", token.getToken(), userPARM));
+        isOk(mockMvc, put("/users/" + token.getUid() + "/status" , token.getToken(), userPARM));
     }
 
     @Test
@@ -104,7 +104,7 @@ public class UserRestControllerTest extends SuperRestControllerTest implements C
         userPARM.setPhone("13617828937");
         userPARM.setStatus(StatusEnum.DISABLE);
         userPARM.setRoleIds(Collections.singletonList(1));
-        isCreated(mockMvc, post("/users", token.getToken(), userPARM));
+        isCreated(mockMvc, post("/users" , token.getToken(), userPARM));
     }
 
     @Test

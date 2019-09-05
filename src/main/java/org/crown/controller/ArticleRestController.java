@@ -1,5 +1,6 @@
 
 package org.crown.controller;
+
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
@@ -38,9 +39,9 @@ import java.util.Map;
  *
  * @author Caratacus
  */
-@Api(tags = {"article"}, description = "文章相关接口")
+@Api(tags = {"article" }, description = "文章相关接口")
 @RestController
-@RequestMapping(value = "/article", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/article" , produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Validated
 @Slf4j
 public class ArticleRestController extends SuperController {
@@ -53,11 +54,11 @@ public class ArticleRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.AUTH)
     @ApiOperation(value = "查询所有文章(分页)")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "articleName", value = "需要查询的文章名", paramType = "query")
+            @ApiImplicitParam(name = "articleName" , value = "需要查询的文章名" , paramType = "query")
     })
     @GetMapping
-    public ApiResponses<IPage<Article>> page(@RequestParam(value = "articleName", required = false) String articleName
-                                           ) {
+    public ApiResponses<IPage<Article>> page(@RequestParam(value = "articleName" , required = false) String articleName
+    ) {
         return success(articleService.pageArticle(this.<Article>getPage(), articleName));
     }
 
@@ -71,7 +72,7 @@ public class ArticleRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.AUTH)
     @ApiOperation(value = "查询单个文章")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "文章ID", required = true, paramType = "path")
+            @ApiImplicitParam(name = "id" , value = "文章ID" , required = true, paramType = "path")
     })
     @GetMapping("/{id}")
     public ApiResponses<Article> get(@PathVariable("id") Integer id) {
@@ -94,7 +95,7 @@ public class ArticleRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.AUTH)
     @ApiOperation(value = "修改文章")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "文章ID", required = true, paramType = "path")
+            @ApiImplicitParam(name = "id" , value = "文章ID" , required = true, paramType = "path")
     })
     @PutMapping("/{id}")
     public ApiResponses<Void> update(@PathVariable("id") Integer id, @RequestBody @Validated(ArticlePARM.Update.class) ArticlePARM articlePARM) {
@@ -107,7 +108,7 @@ public class ArticleRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.AUTH)
     @ApiOperation(value = "删除文章")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "文章ID", required = true, paramType = "path")
+            @ApiImplicitParam(name = "id" , value = "文章ID" , required = true, paramType = "path")
     })
     @DeleteMapping("/{id}")
     public ApiResponses<Void> delete(@PathVariable("id") Integer id) {
@@ -118,7 +119,7 @@ public class ArticleRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.AUTH)
     @ApiOperation("设置文章状态")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "文章id", required = true, paramType = "path")
+            @ApiImplicitParam(name = "id" , value = "文章id" , required = true, paramType = "path")
     })
     @PutMapping("/{id}/status")
     public ApiResponses<Void> updateStatus(@PathVariable("id") Integer id, @RequestBody @Validated(ArticlePARM.Status.class) ArticlePARM articlePARM) {
@@ -130,40 +131,40 @@ public class ArticleRestController extends SuperController {
     @ApiOperation(value = "上传图片")
     @PostMapping("/upload")
     public Map<String, Object> upload(@RequestParam("file") MultipartFile file) {
-        Map<String,Object> bakcMap = new HashMap<>();
+        Map<String, Object> bakcMap = new HashMap<>();
         if (file.isEmpty()) {
-            bakcMap.put("code",-1);
-            bakcMap.put("msg","上传失败，文件为空");
+            bakcMap.put("code" , -1);
+            bakcMap.put("msg" , "上传失败，文件为空");
             return bakcMap;
         }
-        String tempUrl = request.getScheme()+"://"+request.getServerName()+":"
-                +request.getServerPort();
+        String tempUrl = request.getScheme() + "://" + request.getServerName() + ":"
+                + request.getServerPort();
 //        request.getScheme() = "http";
 //        request.getServerName() = "127.0.0.1";
 //        request.getServerPort() = "8080";
         String tempName = file.getOriginalFilename();
         String suffix = tempName.substring(tempName.lastIndexOf(".") + 1);
-        String fileName = System.currentTimeMillis()+"."+suffix;
+        String fileName = System.currentTimeMillis() + "." + suffix;
         String os = System.getProperty("os.name");
         String filePath = "";
-        if(os.toLowerCase().startsWith("win")){
+        if (os.toLowerCase().startsWith("win")) {
             filePath = "D:/ideaspace/Crown/src/main/resources/static/assets/upload/";
-        }else{
+        } else {
             filePath = "/usr/local/apache-tomcat-8.5.42/webapps/crown/WEB-INF/classes/static/assets/upload/";
         }
         File dest = new File(filePath + fileName);
         try {
             file.transferTo(dest);
             log.info("上传成功");
-            bakcMap.put("code",0);
-            Map<String,String> datamap = new HashMap<>();
-            datamap.put("src",tempUrl+"/assets/upload/"+fileName);
-            bakcMap.put("data",datamap);
+            bakcMap.put("code" , 0);
+            Map<String, String> datamap = new HashMap<>();
+            datamap.put("src" , tempUrl + "/assets/upload/" + fileName);
+            bakcMap.put("data" , datamap);
             return bakcMap;
         } catch (IOException e) {
             log.error(e.toString(), e);
-            bakcMap.put("code",-1);
-            bakcMap.put("msg","上传失败，出现异常");
+            bakcMap.put("code" , -1);
+            bakcMap.put("msg" , "上传失败，出现异常");
             return bakcMap;
         }
     }
@@ -171,13 +172,13 @@ public class ArticleRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.OPEN)
     @ApiOperation(value = "小程序查询所有文章(分页)")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "articleName", value = "需要查询的文章名", paramType = "query")
+            @ApiImplicitParam(name = "articleName" , value = "需要查询的文章名" , paramType = "query")
     })
     @GetMapping("/wxAppArticle")
-    public ApiResponses<IPage<Article>> wxApparticle(@RequestParam(value = "articleName", required = false) String articleName,
-                                           @RequestParam(value = "author", required = false) String author,
-                                           @RequestParam(value = "curpage", required = false) Integer curpage,
-                                           @RequestParam(value = "rows", required = false) Integer rows) {
+    public ApiResponses<IPage<Article>> wxApparticle(@RequestParam(value = "articleName" , required = false) String articleName,
+                                                     @RequestParam(value = "author" , required = false) String author,
+                                                     @RequestParam(value = "curpage" , required = false) Integer curpage,
+                                                     @RequestParam(value = "rows" , required = false) Integer rows) {
         Page<Article> page = new Page();
         page.setSize(rows);
         page.setCurrent(curpage);

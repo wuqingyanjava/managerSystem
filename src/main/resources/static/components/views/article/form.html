@@ -29,11 +29,11 @@
 </form>
 
 <script>
-    layui.use(['layer', 'crown', 'form', 'upload','layedit'], function () {
+    layui.use(['layer', 'crown', 'form', 'upload', 'layedit'], function () {
         var layer = layui.layer;
         var crown = layui.crown;
         var form = layui.form;
-        var layedit = layui.layedit,$ = layui.jquery;
+        var layedit = layui.layedit, $ = layui.jquery;
         var article = crown.getTempData('article');
         // 回显数据
         if (article) {
@@ -42,12 +42,12 @@
         layedit.set({
             uploadImage: {
                 url: '/article/upload' //接口url
-                ,type: 'post' //默认post
-                ,done: function(res){
+                , type: 'post' //默认post
+                , done: function (res) {
                     //如果上传成功
-                    if(res.status == 200){
+                    if (res.status == 200) {
                         return layer.msg('上传成功');
-                    }else{
+                    } else {
                         return layer.msg('上传失败请重试！');
                     }
                 }

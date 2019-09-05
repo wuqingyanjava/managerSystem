@@ -29,7 +29,7 @@ public class Music extends Convert {
     /**
      * 主键
      */
-    @TableId(value = "id", type = IdType.AUTO)
+    @TableId(value = "id" , type = IdType.AUTO)
     private Integer id;
     /**
      * 音乐名称

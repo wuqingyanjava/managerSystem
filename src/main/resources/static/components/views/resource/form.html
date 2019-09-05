@@ -46,10 +46,10 @@
         var crown = layui.crown;
         var form = layui.form;
         var resource = crown.getTempData('t_resource');
-            // 回显menu数据
-            if (resource) {
-                crown.fromVal('resource-form', resource);
-            }
+        // 回显menu数据
+        if (resource) {
+            crown.fromVal('resource-form', resource);
+        }
         // 表单提交事件
         form.on('submit(resource-form-submit)', function (data) {
             layer.load(2);

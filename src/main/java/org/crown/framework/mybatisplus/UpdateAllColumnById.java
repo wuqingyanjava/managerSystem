@@ -54,7 +54,7 @@ public class UpdateAllColumnById extends AbstractMethod {
                         .append(" AND ${et.MP_OPTLOCK_VERSION_COLUMN}=#{et.MP_OPTLOCK_VERSION_ORIGINAL}")
                         .append("</if></if>"));
         SqlSource sqlSource = languageDriver.createSqlSource(configuration, sql, modelClass);
-        return addUpdateMappedStatement(mapperClass, modelClass, "updateAllColumnById", sqlSource);
+        return addUpdateMappedStatement(mapperClass, modelClass, "updateAllColumnById" , sqlSource);
     }
 
     /**

@@ -57,7 +57,7 @@ public class LambdaUpdateWrapperChain<T> extends AbstractChainWrapper<T, SFuncti
 
     @Override
     public String getSqlSet() {
-        throw ExceptionUtils.mpe("can not use this method for \"%s\"", "getSqlSet");
+        throw ExceptionUtils.mpe("can not use this method for \"%s\"" , "getSqlSet");
     }
 
     public boolean execute(T entity) {

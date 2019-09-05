@@ -59,14 +59,14 @@ public class ShiroAutoConfiguration {
         filter.setResourceService(resourceService);
         filter.setPathMatcher(new AntPathMatcher());
         filter.setContextPath(cleanContextPath(contextPath));
-        filters.put("jwt", filter);
+        filters.put("jwt" , filter);
         shiroFilter.setFilters(filters);
         Map<String, String> filterMap = new LinkedHashMap<>();
-        filterMap.put("/**/**.*", "anon");
-        filterMap.put("/v2/api-docs", "anon");
-        filterMap.put("/swagger-resources/**", "anon");
-        filterMap.put("/", "anon");
-        filterMap.put("/**", "jwt");
+        filterMap.put("/**/**.*" , "anon");
+        filterMap.put("/v2/api-docs" , "anon");
+        filterMap.put("/swagger-resources/**" , "anon");
+        filterMap.put("/" , "anon");
+        filterMap.put("/**" , "jwt");
         shiroFilter.setFilterChainDefinitionMap(filterMap);
         return shiroFilter;
     }

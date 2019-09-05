@@ -72,7 +72,7 @@ public class SwaggerAutoConfiguration {
                 .description("Crown Swagger API 文档")
                 .termsOfServiceUrl("https://github.com/Caratacus/Crown")
                 .version("1.0")
-                .contact(new Contact("Crown", "https://github.com/Caratacus", "caratacus@qq.cn"))
+                .contact(new Contact("Crown" , "https://github.com/Caratacus" , "caratacus@qq.cn"))
                 .build();
     }
 

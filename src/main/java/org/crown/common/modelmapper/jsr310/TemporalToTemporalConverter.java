@@ -47,7 +47,7 @@ public class TemporalToTemporalConverter implements ConditionalConverter<Tempora
         else if (mappingContext.getSourceType().equals(mappingContext.getDestinationType()))
             return mappingContext.getSource();
         else
-            throw new Errors().addMessage("Unsupported mapping types[%s->%s]",
+            throw new Errors().addMessage("Unsupported mapping types[%s->%s]" ,
                     mappingContext.getSourceType().getName(), mappingContext.getDestinationType())
                     .toMappingException();
     }

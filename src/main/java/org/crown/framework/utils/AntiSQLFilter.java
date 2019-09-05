@@ -54,9 +54,9 @@ import com.baomidou.mybatisplus.core.toolkit.ArrayUtils;
  */
 public class AntiSQLFilter {
 
-    private static final String[] keyWords = {";", "\"", "\'", "/*", "*/", "--", "exec",
-            "select", "update", "delete", "insert",
-            "alter", "drop", "create", "shutdown"};
+    private static final String[] keyWords = {";" , "\"" , "\'" , "/*" , "*/" , "--" , "exec" ,
+            "select" , "update" , "delete" , "insert" ,
+            "alter" , "drop" , "create" , "shutdown" };
 
     public static Map<String, String[]> getSafeParameterMap(Map<String, String[]> parameterMap) {
         Maps.MapBuilder<String, String[]> builder = Maps.builder(HashMap<String, String[]>::new);

@@ -122,7 +122,7 @@ public class SuperRestControllerTest {
 
         }
         if (!StringUtils.isEmpty(authorization)) {
-            requestBuilder.header("Authorization", "Bearer " + authorization);
+            requestBuilder.header("Authorization" , "Bearer " + authorization);
         }
         return requestBuilder;
     }

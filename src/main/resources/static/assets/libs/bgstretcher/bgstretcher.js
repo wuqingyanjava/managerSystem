@@ -25,7 +25,7 @@
     $.fn.bgStretcher = function (settings) {
 
         if ($('.bgstretcher-page').length || $('.bgstretcher-area').length) {
-            if (typeof(console) !== 'undefined' && console != null) console.log('More than one bgStretcher');
+            if (typeof (console) !== 'undefined' && console != null) console.log('More than one bgStretcher');
             return false;
         }
         settings = $.extend({}, $.fn.bgStretcher.defaults, settings);
@@ -56,7 +56,7 @@
             /*  Rebuild images for simpleSlide  */
             if (settings.transitionEffect == 'simpleSlide') {
                 if (settings.sequenceMode == 'random') {
-                    if (typeof(console) !== 'undefined' && console != null) {
+                    if (typeof (console) !== 'undefined' && console != null) {
                         console.log('Effect \'simpleSlide\' don\'t be to use with mode random.');
                         console.log('Mode was automaticly set in normal.');
                     }
@@ -99,7 +99,7 @@
 
             if ($(settings.buttonNext).length || $(settings.buttonPrev).length || $(settings.pagination).length) {
                 if (settings.sequenceMode == 'random') {
-                    if (typeof(console) !== 'undefined' && console != null) {
+                    if (typeof (console) !== 'undefined' && console != null) {
                         console.log('Don\'t use random mode width prev-button, next-button and pagination.');
                     }
                 } else {
@@ -336,7 +336,13 @@
                 cur_bgstretcher = $(this).children('.bgstretcher-area');
                 $(code).prependTo(cur_bgstretcher);
                 cur_bgstretcher.css({position: 'relative'});
-                cur_bgstretcher.children('.bgstretcher-page').css({'position': 'relative', 'z-index': 3,'top':0,'width':body_content.width(),'height':body_content.height()});
+                cur_bgstretcher.children('.bgstretcher-page').css({
+                    'position': 'relative',
+                    'z-index': 3,
+                    'top': 0,
+                    'width': body_content.width(),
+                    'height': body_content.height()
+                });
             });
 
         };

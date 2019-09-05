@@ -1,5 +1,6 @@
 
 package org.crown.controller;
+
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
@@ -33,9 +34,9 @@ import java.util.Map;
  *
  * @author Caratacus
  */
-@Api(tags = {"music"}, description = "音乐相关接口")
+@Api(tags = {"music" }, description = "音乐相关接口")
 @RestController
-@RequestMapping(value = "/music", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/music" , produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Validated
 public class MusicRestController extends SuperController {
 
@@ -45,12 +46,12 @@ public class MusicRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.AUTH)
     @ApiOperation(value = "查询所有音乐(分页)")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "MusicName", value = "需要查询的音乐名", paramType = "query")
+            @ApiImplicitParam(name = "MusicName" , value = "需要查询的音乐名" , paramType = "query")
     })
     @GetMapping
-    public ApiResponses<IPage<Music>> page(@RequestParam(value = "musicName", required = false) String musicName,
-                                           @RequestParam(value = "author", required = false) String author) {
-        return success(musicService.pageMusic(this.<Music>getPage(), musicName,author));
+    public ApiResponses<IPage<Music>> page(@RequestParam(value = "musicName" , required = false) String musicName,
+                                           @RequestParam(value = "author" , required = false) String author) {
+        return success(musicService.pageMusic(this.<Music>getPage(), musicName, author));
     }
 
     @Resources(auth = AuthTypeEnum.AUTH)
@@ -63,7 +64,7 @@ public class MusicRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.AUTH)
     @ApiOperation(value = "查询单个音乐")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "音乐ID", required = true, paramType = "path")
+            @ApiImplicitParam(name = "id" , value = "音乐ID" , required = true, paramType = "path")
     })
     @GetMapping("/{id}")
     public ApiResponses<Music> get(@PathVariable("id") Integer id) {
@@ -83,7 +84,7 @@ public class MusicRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.AUTH)
     @ApiOperation(value = "修改音乐")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "音乐ID", required = true, paramType = "path")
+            @ApiImplicitParam(name = "id" , value = "音乐ID" , required = true, paramType = "path")
     })
     @PutMapping("/{id}")
     public ApiResponses<Void> update(@PathVariable("id") Integer id, @RequestBody @Validated(MusicPARM.Update.class) MusicPARM musicPARM) {
@@ -96,7 +97,7 @@ public class MusicRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.AUTH)
     @ApiOperation(value = "删除音乐")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "音乐ID", required = true, paramType = "path")
+            @ApiImplicitParam(name = "id" , value = "音乐ID" , required = true, paramType = "path")
     })
     @DeleteMapping("/{id}")
     public ApiResponses<Void> delete(@PathVariable("id") Integer id) {
@@ -107,7 +108,7 @@ public class MusicRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.AUTH)
     @ApiOperation("设置音乐状态")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "音乐id", required = true, paramType = "path")
+            @ApiImplicitParam(name = "id" , value = "音乐id" , required = true, paramType = "path")
     })
     @PutMapping("/{id}/status")
     public ApiResponses<Void> updateStatus(@PathVariable("id") Integer id, @RequestBody @Validated(MusicPARM.Status.class) MusicPARM musicPARM) {
@@ -118,20 +119,20 @@ public class MusicRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.OPEN)
     @ApiOperation(value = "查询背景音乐")
     @GetMapping("/background")
-    public ApiResponses<List<Map<String,String>>> musicList() {
+    public ApiResponses<List<Map<String, String>>> musicList() {
         Page<Music> page = new Page<>();
         page.setSize(10);
         page.setCurrent(1);
-        IPage<Music> musicIPage = musicService.pageMusic(page, "","");
+        IPage<Music> musicIPage = musicService.pageMusic(page, "" , "");
         List<Music> musicList = musicIPage.getRecords();
-        List<Map<String,String>> list = new ArrayList<>();
-        if(musicList!= null){
-            for(Music music:musicList){
-                Map<String,String> map = new HashMap<>();
-                map.put("title",music.getMusicName());
-                map.put("author",music.getAuthor());
-                map.put("pic", StringUtils.isEmpty(music.getPicUrl()) ? "assets/images/susu.png":music.getPicUrl());
-                map.put("url",music.getMusicUrl());
+        List<Map<String, String>> list = new ArrayList<>();
+        if (musicList != null) {
+            for (Music music : musicList) {
+                Map<String, String> map = new HashMap<>();
+                map.put("title" , music.getMusicName());
+                map.put("author" , music.getAuthor());
+                map.put("pic" , StringUtils.isEmpty(music.getPicUrl()) ? "assets/images/susu.png" : music.getPicUrl());
+                map.put("url" , music.getMusicUrl());
                 list.add(map);
             }
         }
@@ -141,17 +142,17 @@ public class MusicRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.OPEN)
     @ApiOperation(value = "小程序查询所有音乐(分页)")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "musicName", value = "需要查询的音乐名", paramType = "query")
+            @ApiImplicitParam(name = "musicName" , value = "需要查询的音乐名" , paramType = "query")
     })
     @GetMapping("/wxAppmusic")
-    public ApiResponses<IPage<Music>> wxAppMusic(@RequestParam(value = "musicName", required = false) String musicName,
-                                           @RequestParam(value = "author", required = false) String author,
-                                           @RequestParam(value = "curpage", required = false) Integer curpage,
-                                           @RequestParam(value = "rows", required = false) Integer rows) {
+    public ApiResponses<IPage<Music>> wxAppMusic(@RequestParam(value = "musicName" , required = false) String musicName,
+                                                 @RequestParam(value = "author" , required = false) String author,
+                                                 @RequestParam(value = "curpage" , required = false) Integer curpage,
+                                                 @RequestParam(value = "rows" , required = false) Integer rows) {
         Page<Music> page = new Page();
         page.setSize(rows);
         page.setCurrent(curpage);
-        return success(musicService.pageMusic(page, musicName,author));
+        return success(musicService.pageMusic(page, musicName, author));
     }
 }
 

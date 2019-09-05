@@ -40,7 +40,7 @@ public class P6spyLogger extends FormattedLogger {
 
     @Override
     public void logException(Exception e) {
-        log.info("", e);
+        log.info("" , e);
     }
 
     @Override

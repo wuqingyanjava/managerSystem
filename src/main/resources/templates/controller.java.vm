@@ -41,13 +41,13 @@ import ${superControllerClassPackage};
  *
  * @author ${author}
  */
-@Api(tags = {"${entity}"}, description = "${table.comment}相关接口")
+@Api(tags = {"${entity}" }, description = "${table.comment}相关接口")
 #if(${restControllerStyle})
 @RestController
 #else
 @Controller
 #end
-@RequestMapping(value = "#if(${package.ModuleName})/${package.ModuleName}#end/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "#if(${package.ModuleName})/${package.ModuleName}#end/#if(${controllerMappingHyphenStyle})${controllerMappingHyphen}#else${table.entityPath}#end" , produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 #if(${superControllerClass})
 @Validated
 public class ${table.controllerName} extends ${superControllerClass} {

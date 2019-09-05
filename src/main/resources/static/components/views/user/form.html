@@ -4,7 +4,8 @@
     <div class="layui-form-item">
         <label class="layui-form-label">账号</label>
         <div class="layui-input-block">
-            <input id="loginName" name="loginName" placeholder="请输入账号" type="text" class="layui-input" maxlength="20" lay-verify="required"/>
+            <input id="loginName" name="loginName" placeholder="请输入账号" type="text" class="layui-input" maxlength="20"
+                   lay-verify="required"/>
         </div>
     </div>
     <div class="layui-form-item">
@@ -85,7 +86,7 @@
                     crown.finishPopupCenter();
                 });
             } else {
-                crown.post('/users', {data:data.field}, function () {
+                crown.post('/users', {data: data.field}, function () {
                     layer.closeAll('loading');
                     layer.msg('添加成功', {icon: 1});
                     crown.finishPopupCenter();

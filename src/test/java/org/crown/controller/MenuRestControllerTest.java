@@ -66,7 +66,7 @@ public class MenuRestControllerTest extends SuperRestControllerTest implements C
     @Test
     public void list() throws Exception {
         //测试获取所有
-        List<Menu> result = getResult(mockMvc, get("/menus", token.getToken()),
+        List<Menu> result = getResult(mockMvc, get("/menus" , token.getToken()),
                 new TypeReference<SuccessResponses<List<Menu>>>() {
                 });
         for (Menu menu : result) {
@@ -77,14 +77,14 @@ public class MenuRestControllerTest extends SuperRestControllerTest implements C
             //修改状态
             MenuPARM menuPARM = new MenuPARM();
             menuPARM.setStatus(StatusEnum.NORMAL);
-            isOk(mockMvc, put("/menus/" + menu.getId() + "/status", token.getToken(), menuPARM));
+            isOk(mockMvc, put("/menus/" + menu.getId() + "/status" , token.getToken(), menuPARM));
         }
 
     }
 
     @Test
     public void combos() throws Exception {
-        isOk(mockMvc, get("/menus/combos", token.getToken()));
+        isOk(mockMvc, get("/menus/combos" , token.getToken()));
     }
 
 
@@ -97,9 +97,9 @@ public class MenuRestControllerTest extends SuperRestControllerTest implements C
         menuPARM.setMenuType(MenuTypeEnum.MENU);
         menuPARM.setIcon("icon");
         menuPARM.setStatus(StatusEnum.NORMAL);
-        isCreated(mockMvc, post("/menus", token.getToken(), menuPARM));
+        isCreated(mockMvc, post("/menus" , token.getToken(), menuPARM));
         //测试获取所有
-        List<Menu> result = getResult(mockMvc, get("/menus", token.getToken()),
+        List<Menu> result = getResult(mockMvc, get("/menus" , token.getToken()),
                 new TypeReference<SuccessResponses<List<Menu>>>() {
                 });
         for (Menu menu : result) {

@@ -36,7 +36,7 @@ public class LogRecordAspect {
     public void pointCut() {
     }
 
-    @AfterReturning(returning = "ret", pointcut = "pointCut()")
+    @AfterReturning(returning = "ret" , pointcut = "pointCut()")
     public void doAfterReturning(Object ret) {
         LogUtils.doAfterReturning(ret);
     }

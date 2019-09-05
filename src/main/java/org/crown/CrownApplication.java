@@ -13,8 +13,9 @@ public class CrownApplication extends SpringBootServletInitializer {
 
         SpringApplication.run(CrownApplication.class, args);
     }
+
     @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder app){
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder app) {
         return app.sources(CrownApplication.class);
     }
 }

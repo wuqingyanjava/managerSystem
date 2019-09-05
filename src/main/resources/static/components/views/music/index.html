@@ -85,11 +85,11 @@
 <!-- 音乐播放-->
 <script type="text/html" id="music-play">
     <div align="center">
-    <audio controls="controls" autoplay="true">
-        <source src="" type="audio/mp3" id="music_url"/>
-    </audio>
-    <br>
-    <p id="play_now"></p>
+        <audio controls="controls" autoplay="true">
+            <source src="" type="audio/mp3" id="music_url"/>
+        </audio>
+        <br>
+        <p id="play_now"></p>
     </div>
     <br>
 </script>
@@ -97,10 +97,11 @@
 <script type="text/html" id="video-play">
     <div align="center">
         <!--<video width="825" height="460" controls>-->
-            <!--<source src="/assets/myself/waner.mp4" type="video/mp4">-->
-            <!--您的浏览器不支持 video 标签。-->
+        <!--<source src="/assets/myself/waner.mp4" type="video/mp4">-->
+        <!--您的浏览器不支持 video 标签。-->
         <!--</video>-->
-        <iframe src="http://open.iqiyi.com/developer/player_js/coopPlayerIndex.html?vid=257b6b6cd73644caa5f4f4a38c3494df&tvId=2929626300&accessToken=2.f22860a2479ad60d8da7697274de9346&appKey=3955c3425820435e86d0f4cdfe56f5e7&appId=1368&height=100%&width=100%" frameborder="0" allowfullscreen="true" width="825" height="460"></iframe>
+        <iframe src="http://open.iqiyi.com/developer/player_js/coopPlayerIndex.html?vid=257b6b6cd73644caa5f4f4a38c3494df&tvId=2929626300&accessToken=2.f22860a2479ad60d8da7697274de9346&appKey=3955c3425820435e86d0f4cdfe56f5e7&appId=1368&height=100%&width=100%"
+                frameborder="0" allowfullscreen="true" width="825" height="460"></iframe>
     </div>
     <br>
 </script>
@@ -133,8 +134,8 @@
             page: true,
             cols: [[
                 {type: 'numbers'},
-                {field: 'id', align: 'center', width: 60, sort: true, title: 'ID',hide:"true"},
-                {field: 'musicName', width: 200,align: 'center', sort: true, title: '音乐名'},
+                {field: 'id', align: 'center', width: 60, sort: true, title: 'ID', hide: "true"},
+                {field: 'musicName', width: 200, align: 'center', sort: true, title: '音乐名'},
                 {field: 'author', align: 'center', sort: true, title: '音乐人'},
                 {field: 'picUrl', align: 'center', sort: true, title: '图片链接'},
                 {field: 'musicUrl', align: 'center', sort: true, title: '音乐链接'},
@@ -163,7 +164,7 @@
                     layer.closeAll('page');
                 });
             } else {
-                crown.post('/music', {data:data.field}, function () {
+                crown.post('/music', {data: data.field}, function () {
                     layer.closeAll('loading');
                     layer.msg('添加成功', {icon: 1});
                     musicTable.reload('music-table');
@@ -180,7 +181,7 @@
                 showEditModel(data);
             } else if (obj.event === 'del') { //删除
                 doDelete(obj);
-            }else if (obj.event === 'play') {
+            } else if (obj.event === 'play') {
                 showPlayModel(data);
             }
         });
@@ -212,8 +213,8 @@
                 offset: 'auto',
                 content: $('#music-play').html(),
                 success: function () {
-                    $("#music_url").attr("src",data.musicUrl);
-                    $("#play_now").html(data.musicName+"--"+data.author);
+                    $("#music_url").attr("src", data.musicUrl);
+                    $("#play_now").html(data.musicName + "--" + data.author);
                 }
             });
         };
@@ -222,7 +223,7 @@
             layer.open({
                 type: 1,
                 title: '播放视频',
-                area:['830','460'],
+                area: ['830', '460'],
                 offset: 'auto',
                 content: $('#video-play').html(),
                 success: function () {

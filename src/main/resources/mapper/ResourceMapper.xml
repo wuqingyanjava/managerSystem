@@ -4,27 +4,27 @@
 
     <select id="getUserResourcePerms" resultType="org.crown.model.dto.ResourcePermDTO">
         SELECT
-            sr.mapping,
-            sr.method
+        sr.mapping,
+        sr.method
         FROM
-            sys_resource sr
+        sys_resource sr
         LEFT JOIN sys_role_resource srr ON srr.resource_id = sr.id
         LEFT JOIN sys_user_role sur ON sur.role_id = srr.role_id
         WHERE
-            sur.uid = #{uid}
-            AND sr.auth_type = 3
+        sur.uid = #{uid}
+        AND sr.auth_type = 3
     </select>
 
     <select id="getUserMenuResourcePerms" resultType="org.crown.model.dto.ResourcePermDTO">
         SELECT
-            sr.mapping,
-            sr.method
+        sr.mapping,
+        sr.method
         FROM
-            sys_resource sr
+        sys_resource sr
         LEFT JOIN sys_menu_resource smr ON smr.resource_id = sr.id
         LEFT JOIN sys_role_menu srm ON smr.menu_id = srm.menu_id
         LEFT JOIN sys_user_role sur ON sur.role_id = srm.role_id
         WHERE
-            sur.uid = 1
+        sur.uid = 1
     </select>
 </mapper>

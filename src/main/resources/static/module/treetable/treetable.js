@@ -21,10 +21,10 @@ layui.define(['layer', 'table', 'laytpl'], function (exports) {
                     data: param.where,
                     dataType: "json",
                     headers: param.headers || {},
-                    success: function(res) {
+                    success: function (res) {
                         treetable.init(param, res.result);
                     },
-                    error: function(e, t) {
+                    error: function (e, t) {
                         laytpl.layMain.html('<div class="' + laytpl + '">数据接口请求异常：' + t + "</div>"), laytpl.renderForm(), laytpl.setColsWidth();
                     }
                 });

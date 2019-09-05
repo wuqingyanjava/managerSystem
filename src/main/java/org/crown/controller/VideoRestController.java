@@ -1,5 +1,6 @@
 
 package org.crown.controller;
+
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
@@ -19,6 +20,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 /**
@@ -28,9 +30,9 @@ import java.util.List;
  *
  * @author Caratacus
  */
-@Api(tags = {"video"}, description = "视频相关接口")
+@Api(tags = {"video" }, description = "视频相关接口")
 @RestController
-@RequestMapping(value = "/video", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+@RequestMapping(value = "/video" , produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Validated
 public class VideoRestController extends SuperController {
 
@@ -40,11 +42,11 @@ public class VideoRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.AUTH)
     @ApiOperation(value = "查询所有视频(分页)")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "videoName", value = "需要查询的视频名", paramType = "query")
+            @ApiImplicitParam(name = "videoName" , value = "需要查询的视频名" , paramType = "query")
     })
     @GetMapping
-    public ApiResponses<IPage<Video>> page(@RequestParam(value = "videoName", required = false) String videoName
-                                          ) {
+    public ApiResponses<IPage<Video>> page(@RequestParam(value = "videoName" , required = false) String videoName
+    ) {
         return success(videoService.pageVideo(this.<Video>getPage(), videoName));
     }
 
@@ -58,7 +60,7 @@ public class VideoRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.AUTH)
     @ApiOperation(value = "查询单个视频")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "视频ID", required = true, paramType = "path")
+            @ApiImplicitParam(name = "id" , value = "视频ID" , required = true, paramType = "path")
     })
     @GetMapping("/{id}")
     public ApiResponses<Video> get(@PathVariable("id") Integer id) {
@@ -78,7 +80,7 @@ public class VideoRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.AUTH)
     @ApiOperation(value = "修改视频")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "视频ID", required = true, paramType = "path")
+            @ApiImplicitParam(name = "id" , value = "视频ID" , required = true, paramType = "path")
     })
     @PutMapping("/{id}")
     public ApiResponses<Void> update(@PathVariable("id") Integer id, @RequestBody @Validated(VideoPARM.Update.class) VideoPARM videoPARM) {
@@ -91,7 +93,7 @@ public class VideoRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.AUTH)
     @ApiOperation(value = "删除视频")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "视频ID", required = true, paramType = "path")
+            @ApiImplicitParam(name = "id" , value = "视频ID" , required = true, paramType = "path")
     })
     @DeleteMapping("/{id}")
     public ApiResponses<Void> delete(@PathVariable("id") Integer id) {
@@ -102,7 +104,7 @@ public class VideoRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.AUTH)
     @ApiOperation("设置视频状态")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "id", value = "视频id", required = true, paramType = "path")
+            @ApiImplicitParam(name = "id" , value = "视频id" , required = true, paramType = "path")
     })
     @PutMapping("/{id}/status")
     public ApiResponses<Void> updateStatus(@PathVariable("id") Integer id, @RequestBody @Validated(VideoPARM.Status.class) VideoPARM videoPARM) {
@@ -113,12 +115,12 @@ public class VideoRestController extends SuperController {
     @Resources(auth = AuthTypeEnum.OPEN)
     @ApiOperation(value = "小程序查询所有视频(分页)")
     @ApiImplicitParams({
-            @ApiImplicitParam(name = "videoName", value = "需要查询的视频名", paramType = "query")
+            @ApiImplicitParam(name = "videoName" , value = "需要查询的视频名" , paramType = "query")
     })
     @GetMapping("/wxAppVideo")
-    public ApiResponses<IPage<Video>> wxAppVideo(@RequestParam(value = "VideoName", required = false) String videoName,
-                                           @RequestParam(value = "curpage", required = false) Integer curpage,
-                                           @RequestParam(value = "rows", required = false) Integer rows) {
+    public ApiResponses<IPage<Video>> wxAppVideo(@RequestParam(value = "VideoName" , required = false) String videoName,
+                                                 @RequestParam(value = "curpage" , required = false) Integer curpage,
+                                                 @RequestParam(value = "rows" , required = false) Integer rows) {
         Page<Video> page = new Page();
         page.setSize(rows);
         page.setCurrent(curpage);

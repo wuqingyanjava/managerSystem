@@ -123,7 +123,7 @@ public class ResponseWrapper extends HttpServletResponseWrapper {
             writer.print(JacksonUtils.toJson(obj));
             writer.flush();
         } catch (IOException e) {
-            log.warn("Error: Response printJson faild, stackTrace: {}", Throwables.getStackTraceAsString(e));
+            log.warn("Error: Response printJson faild, stackTrace: {}" , Throwables.getStackTraceAsString(e));
         }
     }
 

@@ -79,8 +79,8 @@
 <script type="text/html" id="video-play">
     <div align="center">
         <!--<video width="825" height="460" controls>-->
-            <!--<source src="/assets/myself/waner.mp4" type="video/mp4">-->
-            <!--您的浏览器不支持 video 标签。-->
+        <!--<source src="/assets/myself/waner.mp4" type="video/mp4">-->
+        <!--您的浏览器不支持 video 标签。-->
         <!--</video>-->
         <iframe id="video_url" src="" frameborder="0" allowfullscreen="true" width="825" height="460"></iframe>
     </div>
@@ -115,8 +115,8 @@
             page: true,
             cols: [[
                 {type: 'numbers'},
-                {field: 'id', align: 'center', width: 60, sort: true, title: 'ID',hide:"true"},
-                {field: 'videoName', width: 200,align: 'center', sort: true, title: '视频名'},
+                {field: 'id', align: 'center', width: 60, sort: true, title: 'ID', hide: "true"},
+                {field: 'videoName', width: 200, align: 'center', sort: true, title: '视频名'},
                 {field: 'source', align: 'center', sort: true, title: '视频来源'},
                 {field: 'videoUrl', align: 'center', sort: true, title: '视频链接'},
                 {field: 'status', align: 'center', sort: true, templet: '#video-tpl-status', title: '状态'},
@@ -144,7 +144,7 @@
                     layer.closeAll('page');
                 });
             } else {
-                crown.post('/video', {data:data.field}, function () {
+                crown.post('/video', {data: data.field}, function () {
                     layer.closeAll('loading');
                     layer.msg('添加成功', {icon: 1});
                     videoTable.reload('video-table');
@@ -161,7 +161,7 @@
                 showEditModel(data);
             } else if (obj.event === 'del') { //删除
                 doDelete(obj);
-            }else if (obj.event === 'play') {
+            } else if (obj.event === 'play') {
                 showPlayModel(data);
             }
         });
@@ -190,11 +190,11 @@
             layer.open({
                 type: 1,
                 title: '播放视频',
-                area:['830','460'],
+                area: ['830', '460'],
                 offset: 'auto',
                 content: $('#video-play').html(),
                 success: function () {
-                    $("#video_url").attr("src",data.videoUrl);
+                    $("#video_url").attr("src", data.videoUrl);
                 }
             });
         };
