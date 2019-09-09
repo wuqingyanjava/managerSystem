@@ -64,7 +64,6 @@
 .gameBox {
     margin-top: 30px;
     text-align: center;
-
 }
 
 .img-flag {
@@ -80,7 +79,7 @@
 }
 
 .boom {
-    background: url('boom.svg') no-repeat 2.5px 2px;
+    background: url('lei.jpg') no-repeat 2.5px 2px;
     background-size: 18px 18px;
 }
 
