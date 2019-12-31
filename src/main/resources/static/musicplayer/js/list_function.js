@@ -307,7 +307,7 @@ function searchSong(keywords){
 	$.ajax({
 		url: '/music/wxAppmusic',
 		type: 'GET',curpage: 1,
-		data: {"curpage":1,"rows":20},
+		data: {"curpage":1,"rows":20,"musicName":keywords},
 		success:function(data){
 			var NECsongs = data.result.records; //是个数组对象，存放多个json数据
 			// var length = NECsongs.length;
