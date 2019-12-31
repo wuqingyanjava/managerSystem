@@ -150,7 +150,7 @@ public class ArticleRestController extends SuperController {
         if (os.toLowerCase().startsWith("win")) {
             filePath = "D:/ideaspace/Crown/src/main/resources/static/assets/upload/";
         } else {
-            filePath = "/usr/local/apache-tomcat-8.5.42/webapps/crown/WEB-INF/classes/static/assets/upload/";
+            filePath = "/usr/local/apache-tomcat-8.5.42/webapps/upload";
         }
         File dest = new File(filePath + fileName);
         try {
@@ -158,7 +158,7 @@ public class ArticleRestController extends SuperController {
             log.info("上传成功");
             bakcMap.put("code" , 0);
             Map<String, String> datamap = new HashMap<>();
-            datamap.put("src" , tempUrl + "/assets/upload/" + fileName);
+            datamap.put("src" , tempUrl + "/upload/" + fileName);
             bakcMap.put("data" , datamap);
             return bakcMap;
         } catch (IOException e) {
