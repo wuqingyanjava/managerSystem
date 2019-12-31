@@ -202,10 +202,11 @@ function initblurImgs(){
 function blurImages(img){
 	var animate = false;
 	var imgload = false;
-	if(isMobile){    
-        $("#music-cover").load(function(){
-            $("#mobile-blur").css('background-image', 'url("' + img + '")');
-        });
+	if(isMobile){
+		//暂时隐藏
+        // $("#music-cover").load(function(){
+        //     $("#mobile-blur").css('background-image', 'url("' + img + '")');
+        // });
     }  //PC端封面
     else if(!isMobile){ 
         $("#music-cover").load(function(){
