@@ -40,6 +40,10 @@ public class MusicPARM extends Convert {
      * 作者
      */
     private String author;
+    /**
+     * 歌词
+     */
+//    private String lrc;
 
     /**
      * 状态 0：禁用 1：正常

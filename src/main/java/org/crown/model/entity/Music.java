@@ -76,4 +76,9 @@ public class Music extends Convert {
      */
     @TableField(fill = FieldFill.INSERT_UPDATE)
     private LocalDateTime updateTime;
+
+    /**
+     * 歌词
+     */
+//    private String lrc;
 }
