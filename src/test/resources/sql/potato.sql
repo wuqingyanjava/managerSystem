@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50644
 File Encoding         : 65001
 
-Date: 2019-06-28 16:52:36
+Date: 2020-01-02 15:37:36
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -65,7 +65,7 @@ INSERT INTO `sys_menu` VALUES ('54', '53', '添加广告', null, '3', null, '1',
 INSERT INTO `sys_menu` VALUES ('55', '52', '文章管理', 'views/article/index.html', '2', null, '1', '1', '2019-06-20 20:46:21', '2019-06-28 09:59:07', '0', 'article', 'wxapp:article:list', '2');
 INSERT INTO `sys_menu` VALUES ('56', '0', '资源管理', null, '1', 'layui-icon-404', '1', '1', '2019-06-20 20:52:50', '2019-06-27 14:00:11', '0', null, null, '3');
 INSERT INTO `sys_menu` VALUES ('57', '52', '用户管理', null, '2', null, '1', '1', '2019-06-20 20:54:48', '2019-06-27 10:57:14', '0', null, 'wxapp:user:list', '3');
-INSERT INTO `sys_menu` VALUES ('58', '56', '音乐管理', 'views/music/index.html', '2', null, '1', '1', '2019-06-26 09:54:59', '2019-06-27 10:07:51', '0', 'music', 'source:music:list', '0');
+INSERT INTO `sys_menu` VALUES ('58', '56', '音乐管理', 'views/music/index.html', '2', null, '1', '1', '2019-06-26 09:54:59', '2020-01-02 11:21:21', '0', 'music', 'source:music:list', '0');
 INSERT INTO `sys_menu` VALUES ('59', '58', '添加', null, '3', null, '1', '1', '2019-06-26 10:05:09', '2019-06-26 10:09:37', '0', null, 'source:music:add', '0');
 INSERT INTO `sys_menu` VALUES ('60', '58', '修改', null, '3', null, '1', '1', '2019-06-26 10:11:13', '2019-06-26 10:11:13', '0', null, 'source:music:edit', '0');
 INSERT INTO `sys_menu` VALUES ('61', '58', '删除', null, '3', null, '1', '1', '2019-06-26 10:11:54', '2019-06-26 10:12:40', '0', null, 'source:music:delete', '0');
@@ -91,7 +91,7 @@ CREATE TABLE `sys_menu_resource` (
   `menu_id` int(11) DEFAULT NULL COMMENT '菜单ID',
   `resource_id` varchar(32) DEFAULT NULL COMMENT '资源ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=150 DEFAULT CHARSET=utf8 COMMENT='菜单资源关系表';
+) ENGINE=InnoDB AUTO_INCREMENT=153 DEFAULT CHARSET=utf8 COMMENT='菜单资源关系表';
 
 -- ----------------------------
 -- Records of sys_menu_resource
@@ -128,8 +128,6 @@ INSERT INTO `sys_menu_resource` VALUES ('123', '60', '19d52bf39c9023d0fe99c6d3aa
 INSERT INTO `sys_menu_resource` VALUES ('125', '61', 'bd133fd7ecbe05441f86986d7e24c16d');
 INSERT INTO `sys_menu_resource` VALUES ('126', '62', 'cb434c4502a4da8dc6ef803e3a6b7a8a');
 INSERT INTO `sys_menu_resource` VALUES ('127', '63', '01f3ff4caca9b1651b738b7225f6371f');
-INSERT INTO `sys_menu_resource` VALUES ('128', '58', 'c16967faeaa63e096a51d996290df77c');
-INSERT INTO `sys_menu_resource` VALUES ('129', '58', 'c3b8630c9e730c29ba30f3cebaddde39');
 INSERT INTO `sys_menu_resource` VALUES ('130', '24', '04972e9f8e65b0364d9862687666da36');
 INSERT INTO `sys_menu_resource` VALUES ('131', '25', '6d1170346960aa8922b9b4d08a5bf71b');
 INSERT INTO `sys_menu_resource` VALUES ('132', '25', '30218613e987e464b13e0c0b8721aec5');
@@ -147,6 +145,9 @@ INSERT INTO `sys_menu_resource` VALUES ('146', '73', '988e7b4f7d121469b9414fc473
 INSERT INTO `sys_menu_resource` VALUES ('147', '74', 'f113609cdbb1016cf9da3115facb03cf');
 INSERT INTO `sys_menu_resource` VALUES ('148', '55', '14998ea4e3052fd946de65fd27e2f2b8');
 INSERT INTO `sys_menu_resource` VALUES ('149', '55', 'f306d17534a7175ed51a4e66e9361413');
+INSERT INTO `sys_menu_resource` VALUES ('150', '58', 'c16967faeaa63e096a51d996290df77c');
+INSERT INTO `sys_menu_resource` VALUES ('151', '58', 'c3b8630c9e730c29ba30f3cebaddde39');
+INSERT INTO `sys_menu_resource` VALUES ('152', '58', '2f52a3f5e6f2af11174d197da9ade6ab');
 
 -- ----------------------------
 -- Table structure for sys_resource
@@ -166,76 +167,77 @@ CREATE TABLE `sys_resource` (
 -- ----------------------------
 -- Records of sys_resource
 -- ----------------------------
-INSERT INTO `sys_resource` VALUES ('01e7421934220817e42d4fae6a8a4ce3', '小程序查询所有文章(分页)', '/article/wxAppArticle', 'GET', '2', '2019-06-28 16:46:01', 'GET:/article/wxAppArticle');
-INSERT INTO `sys_resource` VALUES ('01f3ff4caca9b1651b738b7225f6371f', '删除广告', '/advert/{id}', 'DELETE', '3', '2019-06-28 16:46:01', 'DELETE:/advert/{id}');
-INSERT INTO `sys_resource` VALUES ('04972e9f8e65b0364d9862687666da36', '查询所有角色(分页)', '/roles', 'GET', '3', '2019-06-28 16:46:01', 'GET:/roles');
-INSERT INTO `sys_resource` VALUES ('0a90a197804d3af7b54cb9e0cd5e3379', '添加文章', '/article', 'POST', '3', '2019-06-28 16:46:01', 'POST:/article');
-INSERT INTO `sys_resource` VALUES ('0c7f18138705b67b83773f60295a4ca1', '添加广告', '/advert', 'POST', '3', '2019-06-28 16:46:01', 'POST:/advert');
-INSERT INTO `sys_resource` VALUES ('14998ea4e3052fd946de65fd27e2f2b8', '设置文章状态', '/article/{id}/status', 'PUT', '3', '2019-06-28 16:46:01', 'PUT:/article/{id}/status');
-INSERT INTO `sys_resource` VALUES ('14a1c1e610301988e07aa0bcdc6cf508', '查询单个资源', '/resources/{id}', 'GET', '2', '2019-06-28 16:46:01', 'GET:/resources/{id}');
-INSERT INTO `sys_resource` VALUES ('167f96bfe1d9d2325ccc3b35fde0363d', '删除视频', '/video/{id}', 'DELETE', '3', '2019-06-28 16:46:01', 'DELETE:/video/{id}');
-INSERT INTO `sys_resource` VALUES ('19d52bf39c9023d0fe99c6d3aa80bf05', '修改音乐', '/music/{id}', 'PUT', '3', '2019-06-28 16:46:01', 'PUT:/music/{id}');
-INSERT INTO `sys_resource` VALUES ('1e49cd39037ccb69d7d4fe5a556772fe', '设置视频状态', '/video/{id}/status', 'PUT', '3', '2019-06-28 16:46:01', 'PUT:/video/{id}/status');
-INSERT INTO `sys_resource` VALUES ('29c4c75326ecf3a82f815c43b0085b2f', '修改账户信息', '/account/info', 'PUT', '1', '2019-06-28 16:46:01', 'PUT:/account/info');
-INSERT INTO `sys_resource` VALUES ('2c654f1264fc85ac80516245672f3c47', '查询父级菜单(下拉框)', '/menus/combos', 'GET', '3', '2019-06-28 16:46:01', 'GET:/menus/combos');
-INSERT INTO `sys_resource` VALUES ('2f52a3f5e6f2af11174d197da9ade6ab', '查询单个音乐', '/music/{id}', 'GET', '3', '2019-06-28 16:46:01', 'GET:/music/{id}');
-INSERT INTO `sys_resource` VALUES ('30218613e987e464b13e0c0b8721aec5', '查询所有菜单', '/menus', 'GET', '3', '2019-06-28 16:46:01', 'GET:/menus');
-INSERT INTO `sys_resource` VALUES ('30386fd7b8a4feb9c59861e63537acde', '修改用户', '/users/{id}', 'PUT', '3', '2019-06-28 16:46:01', 'PUT:/users/{id}');
+INSERT INTO `sys_resource` VALUES ('01e7421934220817e42d4fae6a8a4ce3', '小程序查询所有文章(分页)', '/article/wxAppArticle', 'GET', '2', '2020-01-02 15:27:55', 'GET:/article/wxAppArticle');
+INSERT INTO `sys_resource` VALUES ('01f3ff4caca9b1651b738b7225f6371f', '删除广告', '/advert/{id}', 'DELETE', '3', '2020-01-02 15:27:55', 'DELETE:/advert/{id}');
+INSERT INTO `sys_resource` VALUES ('04972e9f8e65b0364d9862687666da36', '查询所有角色(分页)', '/roles', 'GET', '3', '2020-01-02 15:27:55', 'GET:/roles');
+INSERT INTO `sys_resource` VALUES ('0a90a197804d3af7b54cb9e0cd5e3379', '添加文章', '/article', 'POST', '3', '2020-01-02 15:27:55', 'POST:/article');
+INSERT INTO `sys_resource` VALUES ('0c7f18138705b67b83773f60295a4ca1', '添加广告', '/advert', 'POST', '3', '2020-01-02 15:27:55', 'POST:/advert');
+INSERT INTO `sys_resource` VALUES ('14998ea4e3052fd946de65fd27e2f2b8', '设置文章状态', '/article/{id}/status', 'PUT', '3', '2020-01-02 15:27:55', 'PUT:/article/{id}/status');
+INSERT INTO `sys_resource` VALUES ('14a1c1e610301988e07aa0bcdc6cf508', '查询单个资源', '/resources/{id}', 'GET', '2', '2020-01-02 15:27:55', 'GET:/resources/{id}');
+INSERT INTO `sys_resource` VALUES ('167f96bfe1d9d2325ccc3b35fde0363d', '删除视频', '/video/{id}', 'DELETE', '3', '2020-01-02 15:27:55', 'DELETE:/video/{id}');
+INSERT INTO `sys_resource` VALUES ('19d52bf39c9023d0fe99c6d3aa80bf05', '修改音乐', '/music/{id}', 'PUT', '3', '2020-01-02 15:27:55', 'PUT:/music/{id}');
+INSERT INTO `sys_resource` VALUES ('1e49cd39037ccb69d7d4fe5a556772fe', '设置视频状态', '/video/{id}/status', 'PUT', '3', '2020-01-02 15:27:55', 'PUT:/video/{id}/status');
+INSERT INTO `sys_resource` VALUES ('29c4c75326ecf3a82f815c43b0085b2f', '修改账户信息', '/account/info', 'PUT', '1', '2020-01-02 15:27:55', 'PUT:/account/info');
+INSERT INTO `sys_resource` VALUES ('2c654f1264fc85ac80516245672f3c47', '查询父级菜单(下拉框)', '/menus/combos', 'GET', '3', '2020-01-02 15:27:55', 'GET:/menus/combos');
+INSERT INTO `sys_resource` VALUES ('2f52a3f5e6f2af11174d197da9ade6ab', '查询单个音乐', '/music/{id}', 'GET', '3', '2020-01-02 15:27:55', 'GET:/music/{id}');
+INSERT INTO `sys_resource` VALUES ('30218613e987e464b13e0c0b8721aec5', '查询所有菜单', '/menus', 'GET', '3', '2020-01-02 15:27:55', 'GET:/menus');
+INSERT INTO `sys_resource` VALUES ('30386fd7b8a4feb9c59861e63537acde', '修改用户', '/users/{id}', 'PUT', '3', '2020-01-02 15:27:55', 'PUT:/users/{id}');
 INSERT INTO `sys_resource` VALUES ('342791ff851a4167af8abdd9e36b861d', '添加广告', '/advert', 'POST', '1', '2019-06-19 17:51:30', 'POST:/advert');
-INSERT INTO `sys_resource` VALUES ('3ae42391ca3abe20c5cca35f4427cf9c', '获取账户按钮', '/account/buttons/aliases', 'GET', '1', '2019-06-28 16:46:01', 'GET:/account/buttons/aliases');
-INSERT INTO `sys_resource` VALUES ('3f0c8ecb9431dcd547dae8428c1ab13d', '修改资源', '/resources/{id}', 'PUT', '2', '2019-06-28 16:46:01', 'PUT:/resources/{id}');
-INSERT INTO `sys_resource` VALUES ('579e469e8ac850de1ca0adc54d01acba', '查询所有用户', '/users', 'GET', '3', '2019-06-28 16:46:01', 'GET:/users');
-INSERT INTO `sys_resource` VALUES ('59111b730e52b336439b55cd56da620b', '修改文章', '/article/{id}', 'PUT', '3', '2019-06-28 16:46:01', 'PUT:/article/{id}');
-INSERT INTO `sys_resource` VALUES ('5a0b97283a202763af4cfc4c3e3ba652', '查询所有视频(分页)', '/video', 'GET', '3', '2019-06-28 16:46:01', 'GET:/video');
-INSERT INTO `sys_resource` VALUES ('6577904643f0253b54070559179829be', '查询单个广告', '/advert/{id}', 'GET', '3', '2019-06-28 16:46:01', 'GET:/advert/{id}');
-INSERT INTO `sys_resource` VALUES ('6692d9d95184977f82d3252de2f5eac7', '删除角色', '/roles/{id}', 'DELETE', '3', '2019-06-28 16:46:01', 'DELETE:/roles/{id}');
-INSERT INTO `sys_resource` VALUES ('67190dc75f02a44c99fbce5d5224ea17', '小程序查询所有视频(分页)', '/video/wxAppVideo', 'GET', '2', '2019-06-28 16:46:01', 'GET:/video/wxAppVideo');
-INSERT INTO `sys_resource` VALUES ('6ab0f8a49671e489f11a1bef2fcaf102', '清除Token', '/account/token', 'DELETE', '1', '2019-06-28 16:46:01', 'DELETE:/account/token');
-INSERT INTO `sys_resource` VALUES ('6d1170346960aa8922b9b4d08a5bf71b', '设置菜单状态', '/menus/{id}/status', 'PUT', '3', '2019-06-28 16:46:01', 'PUT:/menus/{id}/status');
-INSERT INTO `sys_resource` VALUES ('6fd51f02b724c137a08c28587f48d7f3', '查询单个菜单', '/menus/{id}', 'GET', '3', '2019-06-28 16:46:01', 'GET:/menus/{id}');
-INSERT INTO `sys_resource` VALUES ('740b8b20a13e3833286a25151c12966e', '添加资源', '/resources/create', 'POST', '2', '2019-06-28 16:46:01', 'POST:/resources/create');
-INSERT INTO `sys_resource` VALUES ('7961c441a0bec1dc7bc449920d7d2946', '添加音乐', '/music', 'POST', '3', '2019-06-28 16:46:01', 'POST:/music');
-INSERT INTO `sys_resource` VALUES ('7baa5b852bc92715d7aa503c0a0d8925', '重置用户密码', '/users/{id}/password', 'PUT', '3', '2019-06-28 16:46:01', 'PUT:/users/{id}/password');
-INSERT INTO `sys_resource` VALUES ('829a851334028a6e47b59f8dea0cf7cb', '查询所有资源(分页)', '/resources', 'GET', '3', '2019-06-28 16:46:01', 'GET:/resources');
-INSERT INTO `sys_resource` VALUES ('839ba732cd105a891226b2af1349d1aa', '小程序查询所有音乐(分页)', '/music/wxAppmusic', 'GET', '2', '2019-06-28 16:46:01', 'GET:/music/wxAppmusic');
-INSERT INTO `sys_resource` VALUES ('8423cdb39460750de4d5585328550cc3', '查询所有文章', '/article/articles', 'GET', '3', '2019-06-28 16:46:01', 'GET:/article/articles');
-INSERT INTO `sys_resource` VALUES ('842e33410b5a97b6c797e4782c97a90e', '获取Token', '/account/token', 'POST', '2', '2019-06-28 16:46:01', 'POST:/account/token');
-INSERT INTO `sys_resource` VALUES ('8a3b4dc05867f5946235ba5fbc492b76', '查询单个用户', '/users/{id}', 'GET', '3', '2019-06-28 16:46:01', 'GET:/users/{id}');
-INSERT INTO `sys_resource` VALUES ('8cb1442c7814f65ce0d796e1ef93c715', '添加菜单', '/menus', 'POST', '3', '2019-06-28 16:46:01', 'POST:/menus');
-INSERT INTO `sys_resource` VALUES ('982803fc834e82cbb2ac1b93f2a47690', '查询单个角色', '/roles/{id}', 'GET', '3', '2019-06-28 16:46:01', 'GET:/roles/{id}');
-INSERT INTO `sys_resource` VALUES ('988e7b4f7d121469b9414fc4734f731f', '查询单个文章', '/article/{id}', 'GET', '3', '2019-06-28 16:46:01', 'GET:/article/{id}');
-INSERT INTO `sys_resource` VALUES ('a11e2191656cb199bea1defb17758411', '修改菜单', '/menus/{id}', 'PUT', '3', '2019-06-28 16:46:01', 'PUT:/menus/{id}');
-INSERT INTO `sys_resource` VALUES ('a3dfc0a8a2a202e0ee029a733c1e7e16', '查询背景音乐', '/music/background', 'GET', '2', '2019-06-28 16:46:01', 'GET:/music/background');
-INSERT INTO `sys_resource` VALUES ('a5529264d2645996c83bba2e961d0ec3', '查询所有资源', '/resources/resources', 'GET', '3', '2019-06-28 16:46:01', 'GET:/resources/resources');
-INSERT INTO `sys_resource` VALUES ('a71cb59835c613f39bd936deb20cdd27', '创建用户', '/users', 'POST', '3', '2019-06-28 16:46:01', 'POST:/users');
-INSERT INTO `sys_resource` VALUES ('a826bca352908155da4ca6702edfa2ed', '修改角色菜单', '/roles/{id}/menus', 'PUT', '3', '2019-06-28 16:46:01', 'PUT:/roles/{id}/menus');
-INSERT INTO `sys_resource` VALUES ('aa2ad32bf65347564e57a383ee1cd15b', '设置广告状态', '/advert/{id}/status', 'PUT', '3', '2019-06-28 16:46:01', 'PUT:/advert/{id}/status');
-INSERT INTO `sys_resource` VALUES ('abc748a558055052262454cc3bb4e38c', '上传图片', '/advert/uploadFtp', 'POST', '2', '2019-06-28 16:46:01', 'POST:/advert/uploadFtp');
-INSERT INTO `sys_resource` VALUES ('b4770c0fe93fce7e829463328c800f20', '设置用户状态', '/users/{id}/status', 'PUT', '3', '2019-06-28 16:46:01', 'PUT:/users/{id}/status');
-INSERT INTO `sys_resource` VALUES ('bc25fab36d4004828bf75339fe90a881', '修改视频', '/video/{id}', 'PUT', '3', '2019-06-28 16:46:01', 'PUT:/video/{id}');
-INSERT INTO `sys_resource` VALUES ('bd133fd7ecbe05441f86986d7e24c16d', '删除音乐', '/music/{id}', 'DELETE', '3', '2019-06-28 16:46:01', 'DELETE:/music/{id}');
-INSERT INTO `sys_resource` VALUES ('c16967faeaa63e096a51d996290df77c', '查询所有音乐(分页)', '/music', 'GET', '3', '2019-06-28 16:46:01', 'GET:/music');
-INSERT INTO `sys_resource` VALUES ('c2db9729dcd4a7d703e45411bb445dfd', '修改密码', '/account/password', 'PUT', '1', '2019-06-28 16:46:01', 'PUT:/account/password');
-INSERT INTO `sys_resource` VALUES ('c3b8630c9e730c29ba30f3cebaddde39', '设置音乐状态', '/music/{id}/status', 'PUT', '3', '2019-06-28 16:46:01', 'PUT:/music/{id}/status');
-INSERT INTO `sys_resource` VALUES ('c92c23866f4a14dca8506d93a2fe5877', '上传图片', '/advert/upload', 'POST', '2', '2019-06-28 16:46:01', 'POST:/advert/upload');
-INSERT INTO `sys_resource` VALUES ('cb434c4502a4da8dc6ef803e3a6b7a8a', '修改广告', '/advert/{id}', 'PUT', '3', '2019-06-28 16:46:01', 'PUT:/advert/{id}');
-INSERT INTO `sys_resource` VALUES ('d329e999a56d4d6e71c7de1de474459c', '删除资源', '/resources/{id}', 'DELETE', '2', '2019-06-28 16:46:01', 'DELETE:/resources/{id}');
-INSERT INTO `sys_resource` VALUES ('d81bffa6ffd70cc443703820b5a95e8d', '获取账户菜单', '/account/menus', 'GET', '1', '2019-06-28 16:46:01', 'GET:/account/menus');
-INSERT INTO `sys_resource` VALUES ('d82de0a17f2c63106f98eb2f88d166e9', '添加角色', '/roles', 'POST', '3', '2019-06-28 16:46:01', 'POST:/roles');
-INSERT INTO `sys_resource` VALUES ('d9d6f7163b313b950710a637682354d1', '查询所有角色', '/roles/roles', 'GET', '3', '2019-06-28 16:46:01', 'GET:/roles/roles');
-INSERT INTO `sys_resource` VALUES ('da3205d35f0297745168013c0a32ba5e', '查询所有音乐', '/music/musics', 'GET', '3', '2019-06-28 16:46:01', 'GET:/music/musics');
-INSERT INTO `sys_resource` VALUES ('e05da313ac6a1e7e0cedadc758163358', '添加视频', '/video', 'POST', '3', '2019-06-28 16:46:01', 'POST:/video');
-INSERT INTO `sys_resource` VALUES ('e32deab6d556ac95202d78f07a74c244', '查询所有广告', '/advert/adverts', 'GET', '2', '2019-06-28 16:46:01', 'GET:/advert/adverts');
-INSERT INTO `sys_resource` VALUES ('e78940daf86b9ac5563d539e8802429c', '获取账户详情', '/account/info', 'GET', '1', '2019-06-28 16:46:01', 'GET:/account/info');
-INSERT INTO `sys_resource` VALUES ('e94de6a4e9da84e2e0c62c3211d9eaa1', '查询单个视频', '/video/{id}', 'GET', '3', '2019-06-28 16:46:01', 'GET:/video/{id}');
-INSERT INTO `sys_resource` VALUES ('eaee955f405f6b96beab5136bfa3e29b', '修改角色', '/roles/{id}', 'PUT', '3', '2019-06-28 16:46:01', 'PUT:/roles/{id}');
-INSERT INTO `sys_resource` VALUES ('f113609cdbb1016cf9da3115facb03cf', '删除文章', '/article/{id}', 'DELETE', '3', '2019-06-28 16:46:01', 'DELETE:/article/{id}');
-INSERT INTO `sys_resource` VALUES ('f15f7b01ffe7166b05c3984c9b967837', '删除菜单', '/menus/{id}', 'DELETE', '3', '2019-06-28 16:46:01', 'DELETE:/menus/{id}');
-INSERT INTO `sys_resource` VALUES ('f306d17534a7175ed51a4e66e9361413', '查询所有文章(分页)', '/article', 'GET', '3', '2019-06-28 16:46:01', 'GET:/article');
-INSERT INTO `sys_resource` VALUES ('f45f1b577d72dcd86b84c6f033682b53', '刷新资源', '/resources', 'PUT', '3', '2019-06-28 16:46:01', 'PUT:/resources');
-INSERT INTO `sys_resource` VALUES ('f98df9f072f58e6ac742b0290afb4da5', '上传图片', '/article/upload', 'POST', '2', '2019-06-28 16:46:01', 'POST:/article/upload');
-INSERT INTO `sys_resource` VALUES ('faa8eefdec51055ffd95b817b41fe11a', '查询所有音乐(分页)', '/advert', 'GET', '3', '2019-06-28 16:46:01', 'GET:/advert');
-INSERT INTO `sys_resource` VALUES ('fb8eb1e33ddd79b59cc29f326c65fa29', '查询所有视频', '/video/videos', 'GET', '3', '2019-06-28 16:46:01', 'GET:/video/videos');
+INSERT INTO `sys_resource` VALUES ('3ae42391ca3abe20c5cca35f4427cf9c', '获取账户按钮', '/account/buttons/aliases', 'GET', '1', '2020-01-02 15:27:55', 'GET:/account/buttons/aliases');
+INSERT INTO `sys_resource` VALUES ('3f0c8ecb9431dcd547dae8428c1ab13d', '修改资源', '/resources/{id}', 'PUT', '2', '2020-01-02 15:27:55', 'PUT:/resources/{id}');
+INSERT INTO `sys_resource` VALUES ('579e469e8ac850de1ca0adc54d01acba', '查询所有用户', '/users', 'GET', '3', '2020-01-02 15:27:55', 'GET:/users');
+INSERT INTO `sys_resource` VALUES ('59111b730e52b336439b55cd56da620b', '修改文章', '/article/{id}', 'PUT', '3', '2020-01-02 15:27:55', 'PUT:/article/{id}');
+INSERT INTO `sys_resource` VALUES ('5a0b97283a202763af4cfc4c3e3ba652', '查询所有视频(分页)', '/video', 'GET', '3', '2020-01-02 15:27:55', 'GET:/video');
+INSERT INTO `sys_resource` VALUES ('61a337c7c1b57c98717737ec871bc284', '上传音频', '/music/upload', 'POST', '2', '2020-01-02 15:27:55', 'POST:/music/upload');
+INSERT INTO `sys_resource` VALUES ('6577904643f0253b54070559179829be', '查询单个广告', '/advert/{id}', 'GET', '3', '2020-01-02 15:27:55', 'GET:/advert/{id}');
+INSERT INTO `sys_resource` VALUES ('6692d9d95184977f82d3252de2f5eac7', '删除角色', '/roles/{id}', 'DELETE', '3', '2020-01-02 15:27:55', 'DELETE:/roles/{id}');
+INSERT INTO `sys_resource` VALUES ('67190dc75f02a44c99fbce5d5224ea17', '小程序查询所有视频(分页)', '/video/wxAppVideo', 'GET', '2', '2020-01-02 15:27:55', 'GET:/video/wxAppVideo');
+INSERT INTO `sys_resource` VALUES ('6ab0f8a49671e489f11a1bef2fcaf102', '清除Token', '/account/token', 'DELETE', '1', '2020-01-02 15:27:55', 'DELETE:/account/token');
+INSERT INTO `sys_resource` VALUES ('6d1170346960aa8922b9b4d08a5bf71b', '设置菜单状态', '/menus/{id}/status', 'PUT', '3', '2020-01-02 15:27:55', 'PUT:/menus/{id}/status');
+INSERT INTO `sys_resource` VALUES ('6fd51f02b724c137a08c28587f48d7f3', '查询单个菜单', '/menus/{id}', 'GET', '3', '2020-01-02 15:27:55', 'GET:/menus/{id}');
+INSERT INTO `sys_resource` VALUES ('740b8b20a13e3833286a25151c12966e', '添加资源', '/resources/create', 'POST', '2', '2020-01-02 15:27:55', 'POST:/resources/create');
+INSERT INTO `sys_resource` VALUES ('7961c441a0bec1dc7bc449920d7d2946', '添加音乐', '/music', 'POST', '3', '2020-01-02 15:27:55', 'POST:/music');
+INSERT INTO `sys_resource` VALUES ('7baa5b852bc92715d7aa503c0a0d8925', '重置用户密码', '/users/{id}/password', 'PUT', '3', '2020-01-02 15:27:55', 'PUT:/users/{id}/password');
+INSERT INTO `sys_resource` VALUES ('829a851334028a6e47b59f8dea0cf7cb', '查询所有资源(分页)', '/resources', 'GET', '3', '2020-01-02 15:27:55', 'GET:/resources');
+INSERT INTO `sys_resource` VALUES ('839ba732cd105a891226b2af1349d1aa', '小程序查询所有音乐(分页)', '/music/wxAppmusic', 'GET', '2', '2020-01-02 15:27:55', 'GET:/music/wxAppmusic');
+INSERT INTO `sys_resource` VALUES ('8423cdb39460750de4d5585328550cc3', '查询所有文章', '/article/articles', 'GET', '3', '2020-01-02 15:27:55', 'GET:/article/articles');
+INSERT INTO `sys_resource` VALUES ('842e33410b5a97b6c797e4782c97a90e', '获取Token', '/account/token', 'POST', '2', '2020-01-02 15:27:55', 'POST:/account/token');
+INSERT INTO `sys_resource` VALUES ('8a3b4dc05867f5946235ba5fbc492b76', '查询单个用户', '/users/{id}', 'GET', '3', '2020-01-02 15:27:55', 'GET:/users/{id}');
+INSERT INTO `sys_resource` VALUES ('8cb1442c7814f65ce0d796e1ef93c715', '添加菜单', '/menus', 'POST', '3', '2020-01-02 15:27:55', 'POST:/menus');
+INSERT INTO `sys_resource` VALUES ('982803fc834e82cbb2ac1b93f2a47690', '查询单个角色', '/roles/{id}', 'GET', '3', '2020-01-02 15:27:55', 'GET:/roles/{id}');
+INSERT INTO `sys_resource` VALUES ('988e7b4f7d121469b9414fc4734f731f', '查询单个文章', '/article/{id}', 'GET', '3', '2020-01-02 15:27:55', 'GET:/article/{id}');
+INSERT INTO `sys_resource` VALUES ('a11e2191656cb199bea1defb17758411', '修改菜单', '/menus/{id}', 'PUT', '3', '2020-01-02 15:27:55', 'PUT:/menus/{id}');
+INSERT INTO `sys_resource` VALUES ('a3dfc0a8a2a202e0ee029a733c1e7e16', '查询背景音乐', '/music/background', 'GET', '2', '2020-01-02 15:27:55', 'GET:/music/background');
+INSERT INTO `sys_resource` VALUES ('a5529264d2645996c83bba2e961d0ec3', '查询所有资源', '/resources/resources', 'GET', '3', '2020-01-02 15:27:55', 'GET:/resources/resources');
+INSERT INTO `sys_resource` VALUES ('a71cb59835c613f39bd936deb20cdd27', '创建用户', '/users', 'POST', '3', '2020-01-02 15:27:55', 'POST:/users');
+INSERT INTO `sys_resource` VALUES ('a826bca352908155da4ca6702edfa2ed', '修改角色菜单', '/roles/{id}/menus', 'PUT', '3', '2020-01-02 15:27:55', 'PUT:/roles/{id}/menus');
+INSERT INTO `sys_resource` VALUES ('aa2ad32bf65347564e57a383ee1cd15b', '设置广告状态', '/advert/{id}/status', 'PUT', '3', '2020-01-02 15:27:55', 'PUT:/advert/{id}/status');
+INSERT INTO `sys_resource` VALUES ('abc748a558055052262454cc3bb4e38c', '上传图片', '/advert/uploadFtp', 'POST', '2', '2020-01-02 15:27:55', 'POST:/advert/uploadFtp');
+INSERT INTO `sys_resource` VALUES ('b4770c0fe93fce7e829463328c800f20', '设置用户状态', '/users/{id}/status', 'PUT', '3', '2020-01-02 15:27:55', 'PUT:/users/{id}/status');
+INSERT INTO `sys_resource` VALUES ('bc25fab36d4004828bf75339fe90a881', '修改视频', '/video/{id}', 'PUT', '3', '2020-01-02 15:27:55', 'PUT:/video/{id}');
+INSERT INTO `sys_resource` VALUES ('bd133fd7ecbe05441f86986d7e24c16d', '删除音乐', '/music/{id}', 'DELETE', '3', '2020-01-02 15:27:55', 'DELETE:/music/{id}');
+INSERT INTO `sys_resource` VALUES ('c16967faeaa63e096a51d996290df77c', '查询所有音乐(分页)', '/music', 'GET', '3', '2020-01-02 15:27:55', 'GET:/music');
+INSERT INTO `sys_resource` VALUES ('c2db9729dcd4a7d703e45411bb445dfd', '修改密码', '/account/password', 'PUT', '1', '2020-01-02 15:27:55', 'PUT:/account/password');
+INSERT INTO `sys_resource` VALUES ('c3b8630c9e730c29ba30f3cebaddde39', '设置音乐状态', '/music/{id}/status', 'PUT', '3', '2020-01-02 15:27:55', 'PUT:/music/{id}/status');
+INSERT INTO `sys_resource` VALUES ('c92c23866f4a14dca8506d93a2fe5877', '上传图片', '/advert/upload', 'POST', '2', '2020-01-02 15:27:55', 'POST:/advert/upload');
+INSERT INTO `sys_resource` VALUES ('cb434c4502a4da8dc6ef803e3a6b7a8a', '修改广告', '/advert/{id}', 'PUT', '3', '2020-01-02 15:27:55', 'PUT:/advert/{id}');
+INSERT INTO `sys_resource` VALUES ('d329e999a56d4d6e71c7de1de474459c', '删除资源', '/resources/{id}', 'DELETE', '2', '2020-01-02 15:27:55', 'DELETE:/resources/{id}');
+INSERT INTO `sys_resource` VALUES ('d81bffa6ffd70cc443703820b5a95e8d', '获取账户菜单', '/account/menus', 'GET', '1', '2020-01-02 15:27:55', 'GET:/account/menus');
+INSERT INTO `sys_resource` VALUES ('d82de0a17f2c63106f98eb2f88d166e9', '添加角色', '/roles', 'POST', '3', '2020-01-02 15:27:55', 'POST:/roles');
+INSERT INTO `sys_resource` VALUES ('d9d6f7163b313b950710a637682354d1', '查询所有角色', '/roles/roles', 'GET', '3', '2020-01-02 15:27:55', 'GET:/roles/roles');
+INSERT INTO `sys_resource` VALUES ('da3205d35f0297745168013c0a32ba5e', '查询所有音乐', '/music/musics', 'GET', '3', '2020-01-02 15:27:55', 'GET:/music/musics');
+INSERT INTO `sys_resource` VALUES ('e05da313ac6a1e7e0cedadc758163358', '添加视频', '/video', 'POST', '3', '2020-01-02 15:27:55', 'POST:/video');
+INSERT INTO `sys_resource` VALUES ('e32deab6d556ac95202d78f07a74c244', '查询所有广告', '/advert/adverts', 'GET', '2', '2020-01-02 15:27:55', 'GET:/advert/adverts');
+INSERT INTO `sys_resource` VALUES ('e78940daf86b9ac5563d539e8802429c', '获取账户详情', '/account/info', 'GET', '1', '2020-01-02 15:27:55', 'GET:/account/info');
+INSERT INTO `sys_resource` VALUES ('e94de6a4e9da84e2e0c62c3211d9eaa1', '查询单个视频', '/video/{id}', 'GET', '3', '2020-01-02 15:27:55', 'GET:/video/{id}');
+INSERT INTO `sys_resource` VALUES ('eaee955f405f6b96beab5136bfa3e29b', '修改角色', '/roles/{id}', 'PUT', '3', '2020-01-02 15:27:55', 'PUT:/roles/{id}');
+INSERT INTO `sys_resource` VALUES ('f113609cdbb1016cf9da3115facb03cf', '删除文章', '/article/{id}', 'DELETE', '3', '2020-01-02 15:27:55', 'DELETE:/article/{id}');
+INSERT INTO `sys_resource` VALUES ('f15f7b01ffe7166b05c3984c9b967837', '删除菜单', '/menus/{id}', 'DELETE', '3', '2020-01-02 15:27:55', 'DELETE:/menus/{id}');
+INSERT INTO `sys_resource` VALUES ('f306d17534a7175ed51a4e66e9361413', '查询所有文章(分页)', '/article', 'GET', '3', '2020-01-02 15:27:55', 'GET:/article');
+INSERT INTO `sys_resource` VALUES ('f45f1b577d72dcd86b84c6f033682b53', '刷新资源', '/resources', 'PUT', '3', '2020-01-02 15:27:55', 'PUT:/resources');
+INSERT INTO `sys_resource` VALUES ('f98df9f072f58e6ac742b0290afb4da5', '上传图片', '/article/upload', 'POST', '2', '2020-01-02 15:27:55', 'POST:/article/upload');
+INSERT INTO `sys_resource` VALUES ('faa8eefdec51055ffd95b817b41fe11a', '查询所有音乐(分页)', '/advert', 'GET', '3', '2020-01-02 15:27:55', 'GET:/advert');
+INSERT INTO `sys_resource` VALUES ('fb8eb1e33ddd79b59cc29f326c65fa29', '查询所有视频', '/video/videos', 'GET', '3', '2020-01-02 15:27:55', 'GET:/video/videos');
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -250,7 +252,7 @@ CREATE TABLE `sys_role` (
   `update_time` datetime NOT NULL COMMENT '修改时间',
   `remark` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='角色表';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='角色表';
 
 -- ----------------------------
 -- Records of sys_role
@@ -373,12 +375,12 @@ CREATE TABLE `sys_user` (
   `password` varchar(64) NOT NULL COMMENT '密码',
   `ip` varchar(32) DEFAULT NULL COMMENT 'IP地址',
   PRIMARY KEY (`uid`)
-) ENGINE=InnoDB AUTO_INCREMENT=30 DEFAULT CHARSET=utf8 COMMENT='系统用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COMMENT='系统用户表';
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', 'Crown', 'caratacus@qq.com', '13712345678', '0', '1', '2018-11-05 17:19:05', '2019-06-28 09:57:07', 'crown', '$apr1$crown$WQ2TEXVPUJ8l6N6gm0CGv.', '0:0:0:0:0:0:0:1');
+INSERT INTO `sys_user` VALUES ('1', 'Crown', 'caratacus@qq.com', '13712345678', '0', '1', '2018-11-05 17:19:05', '2020-01-02 14:46:48', 'crown', '$apr1$crown$WQ2TEXVPUJ8l6N6gm0CGv.', '0:0:0:0:0:0:0:1');
 INSERT INTO `sys_user` VALUES ('24', '土豆叔叔', '1406188535@qq.com', '18871469960', '0', '1', '2019-06-20 21:02:27', '2019-06-21 17:11:15', 'wuqingyan', '$apr1$wuqingya$AS4hH0QRmY8ftaULLozgA/', '113.57.174.18');
 INSERT INTO `sys_user` VALUES ('25', '小可爱', '1406188535@qq.com', '18871469960', '0', '24', '2019-06-20 21:05:06', '2019-06-20 21:05:09', 'xiaokeai', '$apr1$xiaokeai$gI8sqsWbtYFT8G9jQCD/z.', null);
 INSERT INTO `sys_user` VALUES ('26', 'visitor', '14061835@qq.com', '13872199875', '0', '1', '2019-06-21 16:54:41', '2019-06-21 17:10:49', 'visitor', '$apr1$visitor$BFQFrdPAgYoTaEM/wWwdh1', '113.57.174.18');
@@ -392,7 +394,7 @@ CREATE TABLE `sys_user_role` (
   `uid` int(11) DEFAULT NULL COMMENT '用户ID',
   `role_id` int(11) DEFAULT NULL COMMENT '角色ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8 COMMENT='系统用户角色关系表';
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8 COMMENT='系统用户角色关系表';
 
 -- ----------------------------
 -- Records of sys_user_role
@@ -425,7 +427,7 @@ CREATE TABLE `t_advert` (
 -- ----------------------------
 -- Records of t_advert
 -- ----------------------------
-INSERT INTO `t_advert` VALUES ('087e8c46746fe046a68b39769c078efd', '露娜呀', '0', 'assets/upload/1561597958467.jpg', null, '2019-06-27 09:12:41', '2019-06-27 09:14:35', '1', '1');
+INSERT INTO `t_advert` VALUES ('087e8c46746fe046a68b39769c078efd', '露娜呀', '0', 'assets/upload/1561597958467.jpg', null, '2019-06-27 09:12:41', '2019-12-31 16:48:46', '1', '1');
 INSERT INTO `t_advert` VALUES ('56084fc42c83003b7aff19bc0dc33c9b', '仙女', '0', 'assets/upload/1561618322162.png', null, '2019-06-27 14:52:56', '2019-06-27 14:52:56', '1', '1');
 INSERT INTO `t_advert` VALUES ('92dda3fdf7b9bf97162972f1ca23a197', '刘亦菲', '0', 'assets/upload/1561617392514.jpg', null, '2019-06-27 14:36:45', '2019-06-27 14:36:45', '1', '1');
 INSERT INTO `t_advert` VALUES ('e6aa3066355de00ab809c29eda307dfc', '上官婉儿呀', '0', 'assets/upload/1561597930356.jpg', 'http://www.baidu.com', '2019-06-26 15:12:35', '2019-06-27 09:14:23', '1', '1');
@@ -469,28 +471,33 @@ CREATE TABLE `t_music` (
   `update_time` datetime NOT NULL COMMENT '更新时间',
   `create_uid` int(11) NOT NULL COMMENT '创建人id',
   `update_uid` int(11) NOT NULL COMMENT '更新人id',
+  `lrc` varchar(200) DEFAULT NULL COMMENT '歌词url',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_music
 -- ----------------------------
-INSERT INTO `t_music` VALUES ('5', 'You(=I)', '0', null, 'http://148.70.237.248:8888/assets/myself/You(=I).mp3', '脸红的思春期', '2019-06-27 11:20:03', '2019-06-27 11:20:03', '1', '1');
-INSERT INTO `t_music` VALUES ('6', '给你宇宙', '0', null, 'http://148.70.237.248:8888/assets/myself/gnyz.mp3', '脸红的思春期', '2019-06-27 11:20:56', '2019-06-27 11:20:56', '1', '1');
-INSERT INTO `t_music` VALUES ('7', '玩暧昧', '0', null, 'http://antiserver.kuwo.cn/anti.s?useless=/resource/&format=mp3&rid=MUSIC_28805058&response=res&type=convert_url&', '脸红的思春期', '2019-06-27 11:37:51', '2019-06-27 11:37:51', '1', '1');
-INSERT INTO `t_music` VALUES ('8', 'bad date', '0', null, 'http://antiserver.kuwo.cn/anti.s?useless=/resource/&format=mp3&rid=MUSIC_27982907&response=res&type=convert_url&', '脸红的思春期', '2019-06-27 11:38:25', '2019-06-27 11:38:25', '1', '1');
-INSERT INTO `t_music` VALUES ('9', '飞云之下', '0', null, 'http://antiserver.kuwo.cn/anti.s?useless=/resource/&format=mp3&rid=MUSIC_41212233&response=res&type=convert_url&', '林俊杰，韩红', '2019-06-27 11:40:26', '2019-06-27 11:40:26', '1', '1');
-INSERT INTO `t_music` VALUES ('10', '突然好想你', '0', null, 'http://antiserver.kuwo.cn/anti.s?useless=/resource/&format=mp3&rid=MUSIC_5007292&response=res&type=convert_url&', '林俊杰', '2019-06-27 11:41:37', '2019-06-27 11:41:37', '1', '1');
-INSERT INTO `t_music` VALUES ('11', '后来的我们', '0', null, 'http://gss0.bdstatic.com/y0s1hSulBw92lNKgpU_Z2jR7b2w6buu/data2/music/abc40dc344379fbaa4d98e717e5b73a9/594687275/589660737118800128.mp3?xcode=28f52fe6304cb589bdfb5657fcf2438e', '五月天', '2019-06-27 11:44:19', '2019-06-27 11:44:19', '1', '1');
-INSERT INTO `t_music` VALUES ('12', '拥抱', '0', null, 'http://gss0.bdstatic.com/y0s1hSulBw92lNKgpU_Z2jR7b2w6buu/data2/music/fe23f8ef1aed2245846492704b978545/599634448/242979183600128.mp3?xcode=28f52fe6304cb589bdfb5657fcf2438e', '五月天', '2019-06-27 11:44:42', '2019-06-27 11:44:42', '1', '1');
-INSERT INTO `t_music` VALUES ('13', '豆浆油条', '0', null, 'http://gss0.bdstatic.com/y0s1hSulBw92lNKgpU_Z2jR7b2w6buu/data2/music/5f0c26d269767edef71a9c50ea639acc/599502396/106733421600128.mp3?xcode=1c00efc75591e41a25903e2d9e216d08', '林俊杰', '2019-06-27 11:45:42', '2019-06-27 11:45:42', '1', '1');
-INSERT INTO `t_music` VALUES ('14', '美人鱼', '0', null, 'http://gss0.bdstatic.com/y0s1hSulBw92lNKgpU_Z2jR7b2w6buu/data2/music/a9d065243463f3cdaad8dc66b214d150/599483246/1263058122400128.mp3?xcode=1c00efc75591e41a25903e2d9e216d08', '林俊杰', '2019-06-27 11:46:04', '2019-06-27 11:46:04', '1', '1');
-INSERT INTO `t_music` VALUES ('15', '贫民百万歌星', '0', null, 'http://gss0.bdstatic.com/y0s1hSulBw92lNKgpU_Z2jR7b2w6buu/data2/music/34a3d2d5b2850e49e815e168ad00130e/599263665/149695920128.mp3?xcode=0059933855734fb5aca186416cbdae39', 'Mc Hotdog', '2019-06-27 11:47:31', '2019-06-27 11:47:31', '1', '1');
-INSERT INTO `t_music` VALUES ('16', '易燃易爆炸', '0', null, 'http://antiserver.kuwo.cn/anti.s?useless=/resource/&format=mp3&rid=MUSIC_6274619&response=res&type=convert_url&', '陈粒', '2019-06-27 13:40:16', '2019-06-28 13:40:27', '1', '1');
-INSERT INTO `t_music` VALUES ('17', '小半', '0', null, 'http://antiserver.kuwo.cn/anti.s?useless=/resource/&format=mp3&rid=MUSIC_7214800&response=res&type=convert_url&', '陈粒', '2019-06-28 13:40:54', '2019-06-28 13:41:04', '1', '1');
-INSERT INTO `t_music` VALUES ('18', '走马', '0', null, 'http://antiserver.kuwo.cn/anti.s?useless=/resource/&format=mp3&rid=MUSIC_11498125&response=res&type=convert_url&', '陈粒', '2019-06-28 13:41:23', '2019-06-28 13:41:23', '1', '1');
-INSERT INTO `t_music` VALUES ('19', '光', '0', null, 'http://antiserver.kuwo.cn/anti.s?useless=/resource/&format=mp3&rid=MUSIC_6274617&response=res&type=convert_url&', '陈粒', '2019-06-28 13:41:59', '2019-06-28 13:41:59', '1', '1');
-INSERT INTO `t_music` VALUES ('20', '出山', '0', null, 'http://antiserver.kuwo.cn/anti.s?useless=/resource/&format=mp3&rid=MUSIC_69080819&response=res&type=convert_url&', '潘卉琦', '2019-06-28 13:43:03', '2019-06-28 13:43:03', '1', '1');
+INSERT INTO `t_music` VALUES ('26', '好想爱这个世界啊', '0', 'http://p1.music.126.net/3-y4J1CayZI0k2NkNkTmDw==/109951164525748216.jpg?param=300x300', 'http://148.70.237.248:8888/upload/loveworld.mp3', '华晨宇', '2019-12-31 16:55:40', '2020-01-02 15:34:29', '1', '1', 'http://148.70.237.248:8888/upload/lovelrc.lrc');
+INSERT INTO `t_music` VALUES ('27', '我是如此相信', '0', 'http://y.gtimg.cn/music/photo_new/T002R300x300M000001hGx1Z0so1YX.jpg', 'http://148.70.237.248:8888/upload/jaybeilve.mp3', '周杰伦', '2019-12-31 20:32:57', '2020-01-02 15:36:38', '1', '1', 'http://148.70.237.248:8888/upload/xiangxin.lrc');
+INSERT INTO `t_music` VALUES ('28', '华生', '0', null, 'http://148.70.237.248:8888/upload/hs.mp3', '陈绮贞', '2019-12-31 20:35:57', '2019-12-31 20:35:57', '1', '1', null);
+INSERT INTO `t_music` VALUES ('29', '爱如潮水live', '0', null, 'http://148.70.237.248:8888/upload/arcs.mp3', '张学友', '2019-12-31 20:36:23', '2019-12-31 20:36:23', '1', '1', null);
+INSERT INTO `t_music` VALUES ('30', '像风一样', '0', null, 'http://148.70.237.248:8888/upload/xfyy.mp3', 'Seiwen', '2019-12-31 20:37:12', '2019-12-31 20:37:12', '1', '1', null);
+INSERT INTO `t_music` VALUES ('31', '半岛铁盒', '0', null, 'http://148.70.237.248:8888/upload/bdth.mp3', '刘瑞琦', '2019-12-31 20:38:16', '2019-12-31 20:38:16', '1', '1', null);
+INSERT INTO `t_music` VALUES ('32', '说好不哭', '0', null, 'http://148.70.237.248:8888/upload/bk.mp3', '周杰伦', '2019-12-31 20:39:33', '2019-12-31 20:39:33', '1', '1', null);
+INSERT INTO `t_music` VALUES ('33', '水星记', '0', null, 'http://148.70.237.248:8888/upload/sxj.mp3', '郭顶', '2019-12-31 20:47:04', '2019-12-31 20:47:04', '1', '1', null);
+INSERT INTO `t_music` VALUES ('34', '句号', '0', null, 'http://148.70.237.248:8888/upload/jh.mp3', '邓紫棋', '2019-12-31 20:47:24', '2019-12-31 20:47:24', '1', '1', null);
+INSERT INTO `t_music` VALUES ('35', '蜜蜂', '0', null, 'http://148.70.237.248:8888/upload/mf.mp3', '万岁爷', '2019-12-31 20:47:50', '2019-12-31 20:47:50', '1', '1', null);
+INSERT INTO `t_music` VALUES ('36', '将故事写成我们', '0', null, 'http://148.70.237.248:8888/upload/jgs.mp3', '林俊杰', '2019-12-31 20:52:48', '2019-12-31 20:52:48', '1', '1', null);
+INSERT INTO `t_music` VALUES ('37', '倒带', '0', null, 'http://148.70.237.248:8888/upload/daodai.mp3', '蔡依林', '2019-12-31 21:02:57', '2019-12-31 21:02:57', '1', '1', null);
+INSERT INTO `t_music` VALUES ('38', '聊表心意', '0', null, 'http://148.70.237.248:8888/upload/lbxy.mp3', '薛子谦/刘惜君', '2019-12-31 21:03:30', '2019-12-31 21:03:30', '1', '1', null);
+INSERT INTO `t_music` VALUES ('39', '恋爱的犀牛', '0', null, 'http://148.70.237.248:8888/upload/lianai.mp3', '黄雨篱', '2019-12-31 21:04:16', '2019-12-31 21:04:16', '1', '1', null);
+INSERT INTO `t_music` VALUES ('40', '云烟成雨', '0', null, 'http://148.70.237.248:8888/upload/yycy.mp3', '房东的猫', '2019-12-31 21:04:52', '2019-12-31 21:04:52', '1', '1', null);
+INSERT INTO `t_music` VALUES ('41', '知足', '0', 'http://p1.music.126.net/_B1Fn_Z1WxHzqGLzLZDf-w==/109951163263882447.jpg?param=300x300', 'http://148.70.237.248:8888/upload/zz.mp3', '五月天', '2019-12-31 21:09:05', '2020-01-02 15:31:21', '1', '1', 'http://148.70.237.248:8888/upload/zjax.lrc');
+INSERT INTO `t_music` VALUES ('42', '如约而至', '0', null, 'http://148.70.237.248:8888/upload/ryez.mp3', '许嵩', '2019-12-31 21:09:34', '2019-12-31 21:09:34', '1', '1', null);
+INSERT INTO `t_music` VALUES ('43', '可以了', '0', null, 'http://148.70.237.248:8888/upload/kyl.mp3', '陈奕迅', '2019-12-31 21:09:50', '2019-12-31 21:12:32', '1', '1', null);
+INSERT INTO `t_music` VALUES ('44', '年少有为', '0', null, 'http://148.70.237.248:8888/upload/nsyw.mp3', '李荣浩', '2019-12-31 21:14:31', '2019-12-31 21:14:31', '1', '1', null);
+INSERT INTO `t_music` VALUES ('45', '杰迷', '0', null, 'http://148.70.237.248:8888/upload/jm.mp3', '诌念慈', '2019-12-31 21:15:01', '2019-12-31 21:15:01', '1', '1', null);
 
 -- ----------------------------
 -- Table structure for t_video
@@ -514,3 +521,18 @@ CREATE TABLE `t_video` (
 -- ----------------------------
 INSERT INTO `t_video` VALUES ('17', '娜可露露五杀', '0', 'http://148.70.237.248:8888/assets/myself/waner.mp4', '服务器', '2019-06-27 15:48:37', '2019-06-27 16:39:00', '1', '1');
 INSERT INTO `t_video` VALUES ('18', '刺客伍六七第二季-PV', '0', '//player.bilibili.com/player.html?aid=54684112&cid=95657502&page=1', '哔哩哔哩', '2019-06-27 16:42:10', '2019-06-27 19:20:06', '1', '1');
+
+-- ----------------------------
+-- Table structure for WARNING
+-- ----------------------------
+DROP TABLE IF EXISTS `WARNING`;
+CREATE TABLE `WARNING` (
+  `id` int(11) NOT NULL,
+  `warning` text COLLATE utf8_unicode_ci,
+  `Bitcoin_Address` text COLLATE utf8_unicode_ci,
+  `Email` text COLLATE utf8_unicode_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- ----------------------------
+-- Records of WARNING
+-- ----------------------------
