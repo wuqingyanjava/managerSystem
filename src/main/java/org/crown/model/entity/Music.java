@@ -78,7 +78,7 @@ public class Music extends Convert {
     private LocalDateTime updateTime;
 
     /**
-     * 歌词
+     * 歌词url
      */
-//    private String lrc;
+    private String lrc;
 }

@@ -18,14 +18,14 @@ function lyricCallback(url) {
         success:function(data){
 
             if(data == '暂无歌词') {
-                lyricTip('乐诗、悦动你的生活');
+                lyricTip('爱音乐，爱在西元前');
                 return false;
             }
 
             lyricText = parseLyric(data);    // 解析获取到的歌词
 
             if(lyricText === '') {
-                lyricTip('乐诗、悦动你的生活');
+                lyricTip('爱音乐，爱在西元前');
                 return false;
             }
             
@@ -39,7 +39,7 @@ function lyricCallback(url) {
             for(var k in lyricText){
                 var txt = lyricText[k];
                 if(txt.indexOf('纯音乐') != -1 || txt.indexOf('暂无歌词') != -1){
-                    lyricTip('乐诗、悦动你的生活');
+                    lyricTip('爱音乐，爱在西元前');
                     return false;
                 }
                 if(!txt) txt = "&nbsp;";

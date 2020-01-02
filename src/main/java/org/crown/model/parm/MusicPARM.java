@@ -41,9 +41,9 @@ public class MusicPARM extends Convert {
      */
     private String author;
     /**
-     * 歌词
+     * 歌词url
      */
-//    private String lrc;
+    private String lrc;
 
     /**
      * 状态 0：禁用 1：正常
