@@ -13,10 +13,11 @@ function lyricTip(str) {
 // 歌曲加载完后的回调函数
 // 参数：歌词源文件
 function lyricCallback(url) {
+    console.log("歌词源文件");
     
     $.ajax({  //异步请求获取歌词
         url:url,
-        type:"post",
+        type:"get",
         success:function(data){
 
             if(data == '暂无歌词') {

@@ -368,7 +368,25 @@ window.onload = function(){
 
 	//下一首
 	$(".btn-next").click(function(){
-		krAudio.next();
+		//1:列表循环   2:单曲循环  3:随机播放
+		switch(krAudio.orderModes) {
+			case 2:
+				//不做任何事，已经设置了loop属性
+				break;
+
+			case 3:
+				search = false;  //搜索标志结束
+				//随机获取播放序号
+				var indexRan = Math.floor(Math.random() * krAudio.allItem)+1;
+				krAudio.Currentplay = indexRan; //设置当前播放的序号
+				listMenuStyleChange(krAudio.Currentplay);//列表菜单的播放暂停按钮的变换
+				krAudio.seturl();
+				krAudio.play();
+				break;
+			// case 1:
+			default:
+				krAudio.next();  //直接下一首
+		}
 	});
 	//上一首
 	$(".btn-prev").click(function(){
