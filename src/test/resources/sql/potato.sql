@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50644
 File Encoding         : 65001
 
-Date: 2020-01-02 15:37:36
+Date: 2020-01-02 15:44:26
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -495,7 +495,7 @@ INSERT INTO `t_music` VALUES ('39', '恋爱的犀牛', '0', null, 'http://148.70
 INSERT INTO `t_music` VALUES ('40', '云烟成雨', '0', null, 'http://148.70.237.248:8888/upload/yycy.mp3', '房东的猫', '2019-12-31 21:04:52', '2019-12-31 21:04:52', '1', '1', null);
 INSERT INTO `t_music` VALUES ('41', '知足', '0', 'http://p1.music.126.net/_B1Fn_Z1WxHzqGLzLZDf-w==/109951163263882447.jpg?param=300x300', 'http://148.70.237.248:8888/upload/zz.mp3', '五月天', '2019-12-31 21:09:05', '2020-01-02 15:31:21', '1', '1', 'http://148.70.237.248:8888/upload/zjax.lrc');
 INSERT INTO `t_music` VALUES ('42', '如约而至', '0', null, 'http://148.70.237.248:8888/upload/ryez.mp3', '许嵩', '2019-12-31 21:09:34', '2019-12-31 21:09:34', '1', '1', null);
-INSERT INTO `t_music` VALUES ('43', '可以了', '0', null, 'http://148.70.237.248:8888/upload/kyl.mp3', '陈奕迅', '2019-12-31 21:09:50', '2019-12-31 21:12:32', '1', '1', null);
+INSERT INTO `t_music` VALUES ('43', '宝贝', '0', 'http://148.70.237.248:8888/upload/yunge.jpg', 'http://148.70.237.248:8888/upload/baobei.m4a', '云哥', '2019-12-31 21:09:50', '2020-01-02 15:43:48', '1', '1', null);
 INSERT INTO `t_music` VALUES ('44', '年少有为', '0', null, 'http://148.70.237.248:8888/upload/nsyw.mp3', '李荣浩', '2019-12-31 21:14:31', '2019-12-31 21:14:31', '1', '1', null);
 INSERT INTO `t_music` VALUES ('45', '杰迷', '0', null, 'http://148.70.237.248:8888/upload/jm.mp3', '诌念慈', '2019-12-31 21:15:01', '2019-12-31 21:15:01', '1', '1', null);
 
