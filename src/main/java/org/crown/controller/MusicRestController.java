@@ -7,6 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.crown.common.annotations.Resources;
 import org.crown.enums.AuthTypeEnum;
@@ -21,7 +22,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -38,6 +42,7 @@ import java.util.Map;
 @RestController
 @RequestMapping(value = "/music" , produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 @Validated
+@Slf4j
 public class MusicRestController extends SuperController {
 
     @Autowired
@@ -153,6 +158,39 @@ public class MusicRestController extends SuperController {
         page.setSize(rows);
         page.setCurrent(curpage);
         return success(musicService.pageMusic(page, musicName, author));
+    }
+
+    @Resources(auth = AuthTypeEnum.OPEN)
+    @ApiOperation(value = "上传音频")
+    @PostMapping("/upload")
+    public ApiResponses<String> upload(@RequestParam("file") MultipartFile file) {
+        if (file.isEmpty()) {
+            return fail("上传失败，请选择文件");
+        }
+        String tempUrl = request.getScheme() + "://" + request.getServerName() + ":"
+                + request.getServerPort();
+        String tempName = file.getOriginalFilename();
+        String suffix = tempName.substring(tempName.lastIndexOf(".") + 1);
+        String fileName = System.currentTimeMillis() + "." + suffix;
+        String os = System.getProperty("os.name");
+        String filePath = "";
+        if (os.toLowerCase().startsWith("win")) {
+            filePath = "E:/testupload/";
+            tempUrl = filePath + fileName;
+        } else {
+            filePath = "/usr/local/apache-tomcat-8.5.42/webapps/upload/";
+            tempUrl = tempUrl+"/upload/"+fileName;
+        }
+        File dest = new File(filePath + fileName);
+        try {
+            file.transferTo(dest);
+            log.info("上传成功");
+
+            return success(tempUrl);
+        } catch (IOException e) {
+            log.error(e.toString(), e);
+            return fail(e.toString());
+        }
     }
 }
 

@@ -29,43 +29,6 @@
         <table class="layui-table" id="music-table" lay-filter="music-table"></table>
     </div>
 </div>
-<!-- 表单弹窗 -->
-<script type="text/html" id="music-model">
-    <form id="music-form" lay-filter="music-form" class="layui-form model-form">
-        <input name="id" type="hidden"/>
-        <div class="layui-form-item">
-            <label class="layui-form-label">音乐名</label>
-            <div class="layui-input-block">
-                <input name="musicName" placeholder="请输入音乐名" type="text" class="layui-input" maxlength="20"
-                       lay-verify="required"/>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">作者</label>
-            <div class="layui-input-block">
-                <input name="author" placeholder="音乐人" type="text" class="layui-input" maxlength="20"
-                       lay-verify="required"/>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">图片链接</label>
-            <div class="layui-input-block">
-                <textarea name="picUrl" placeholder="请录入图片链接" class="layui-textarea" maxlength="1000"></textarea>
-            </div>
-        </div>
-        <div class="layui-form-item">
-            <label class="layui-form-label">歌曲链接</label>
-            <div class="layui-input-block">
-                <textarea name="musicUrl" placeholder="请录入歌曲链接" class="layui-textarea" maxlength="1000"></textarea>
-            </div>
-        </div>
-        <div class="layui-form-item model-form-footer">
-            <button class="layui-btn layui-btn-primary close" type="button">取消</button>
-            <button class="layui-btn" lay-filter="music-form-submit" lay-submit>保存</button>
-        </div>
-    </form>
-</script>
-
 <!-- 表格操作列 -->
 <script type="text/html" id="music-table-bar">
     <a class="layui-btn layui-btn-radius layui-btn-normal layui-btn-xs" lay-event="play">播放</a>
@@ -145,33 +108,14 @@
                 {align: 'center', toolbar: '#music-table-bar', title: '操作', width: 200}
             ]]
         });
-
+        var renderTable = function () {
+            musicTable.reload();
+        }
         // 添加
         table.on('toolbar(music-table)', function (obj) {
             if (obj.event === 'add') {
                 showEditModel();
             }
-        });
-
-        // 表单提交事件
-        form.on('submit(music-form-submit)', function (data) {
-            layer.load(2);
-            if (data.field.id) {
-                crown.put('/music/' + data.field.id, {data: data.field}, function () {
-                    layer.closeAll('loading');
-                    layer.msg('修改成功', {icon: 1});
-                    musicTable.reload('music-table');
-                    layer.closeAll('page');
-                });
-            } else {
-                crown.post('/music', {data: data.field}, function () {
-                    layer.closeAll('loading');
-                    layer.msg('添加成功', {icon: 1});
-                    musicTable.reload('music-table');
-                    layer.closeAll('page');
-                });
-            }
-            return false;
         });
 
         // 工具条点击事件
@@ -188,24 +132,20 @@
 
         // 显示编辑弹窗
         var showEditModel = function (data) {
-            layer.open({
-                type: 1,
+            if (data) {
+                crown.get('/music/' + data.id, {async: false}, function (data) {
+                    crown.putTempData('music', data.result);
+                });
+            }
+            crown.popupCenter({
                 title: data ? '修改音乐' : '添加音乐',
-                area: '450px',
-                offset: '120px',
-                content: $('#music-model').html(),
-                success: function () {
-                    $('#music-form')[0].reset();
-                    if (data) {
-                        form.val('music-form', data);
-                    }
-                    $('#music-form .close').click(function () {
-                        layer.closeAll('page');
-                    });
+                path: 'components/views/music/form.html',
+                finish: function () {
+                    renderTable();
                 }
             });
         };
-        // 显示编辑弹窗
+        // 显示播放弹窗
         var showPlayModel = function (data) {
             layer.open({
                 type: 1,
@@ -215,20 +155,6 @@
                 success: function () {
                     $("#music_url").attr("src", data.musicUrl);
                     $("#play_now").html(data.musicName + "--" + data.author);
-                }
-            });
-        };
-        // 显示编辑弹窗
-        var showVideoModel = function (data) {
-            layer.open({
-                type: 1,
-                title: '播放视频',
-                area: ['830', '460'],
-                offset: 'auto',
-                content: $('#video-play').html(),
-                success: function () {
-                    // $("#music_url").attr("src",data.musicUrl);
-                    // $("#play_now").html(data.musicName+"--"+data.author);
                 }
             });
         };
@@ -249,10 +175,6 @@
         $('#music-btn-search').click(function () {
             musicTable.reload({where: crown.getSearchForm()});
         });
-        // 搜索按钮点击事件
-        $('#test-video').click(function () {
-            showVideoModel();
-        });
 
         // 修改状态
         form.on('switch(music-tpl-status)', function (obj) {
@@ -264,5 +186,4 @@
                 });
         });
     });
-
 </script>

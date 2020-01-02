@@ -57,13 +57,14 @@
             , done: function (res) {
                 //如果上传成功
                 if (res.status == 200) {
-                    $("#parentPicUrl").empty();
-                    var urlTarget = '<input name="picUrl" id="picUrl" ' +
-                        'type="text" class="layui-input" maxlength="100" readonly="true"\n' +
-                        'value="' + res.result + '" lay-verify="required"/> ';
-                    $('#parentPicUrl').append(urlTarget)
-                    //.attr("value",res.result);
-                    //  console.log($('#picUrl').attr("value"));
+                    // $("#parentPicUrl").empty();
+                    // var urlTarget = '<input name="picUrl" id="picUrl" ' +
+                    //     'type="text" class="layui-input" maxlength="100" readonly="true"\n' +
+                    //     'value="' + res.result + '" lay-verify="required"/> ';
+                    // $('#parentPicUrl').append(urlTarget)
+                    // //.attr("value",res.result);
+                    // //  console.log($('#picUrl').attr("value"));
+                    $('input[name="picUrl"]').prop("value",res.result);
                     return layer.msg('上传成功');
                 } else {
                     return layer.msg('上传失败请重试！');
