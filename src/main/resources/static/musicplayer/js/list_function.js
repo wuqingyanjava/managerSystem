@@ -391,11 +391,11 @@ function musicInfo(index) {
     var currentObject = $("#main-list .list-item").eq(index); //获取点击的对象
     var title = currentObject.find(".music-name-cult").text();
     var url = currentObject.data("url");
-    var lrc = currentObject.data("lrc");
+    var lrc = currentObject.data("lrc"); // <br><span class="info-title">时长：</span> ${currentObject.find(".music-album").text()}
     var tempStr = `<span class="info-title">歌曲：</span> ${title}
 				    <br><span class="info-title">歌手：</span> ${currentObject.find(".auth-name").text()}
-				    <br><span class="info-title">时长：</span> ${currentObject.find(".music-album").text()}`;
-    
+				    `;
+
     tempStr += `<br><span class="info-title">链接：</span>
     		<span class="info-btn" id="info-songs" data-text="${url}">歌曲&nbsp;&nbsp;</span>
     		<span class="info-btn" id="info-lrcs" data-text="${lrc}">歌词</span><br>
