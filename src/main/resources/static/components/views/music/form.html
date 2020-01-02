@@ -23,7 +23,14 @@
     <div class="layui-form-item">
         <label class="layui-form-label">歌曲地址</label>
         <div class="layui-input-block">
-            <textarea name="musicUrl" placeholder="请录入歌曲链接" class="layui-textarea" maxlength="500"></textarea>
+            <input name="musicUrl"  type="text" class="layui-input" maxlength="500"
+            />
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label"></label>
+        <div class="layui-upload">
+            <button type="button" class="layui-btn" id="uploadlrc">上传歌词</button>
         </div>
     </div>
     <div class="layui-form-item">
@@ -34,7 +41,14 @@
         </div>
     </div>
     <div class="layui-form-item">
-        <label class="layui-form-label">图片地址</label>
+        <label class="layui-form-label"></label>
+        <div class="layui-upload">
+            <button type="button" class="layui-btn" id="uploadImg">上传封面</button>
+            <img id="upload-img" style="width: 92px;height: 92px;margin: 0 10px 10px 0;border:0">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">封面地址</label>
         <div class="layui-input-block">
             <input name="picUrl" id="picUrl" placeholder="请录入图片链接" type="text" class="layui-input" maxlength="500"
                    />
@@ -56,6 +70,7 @@
             crown.fromVal('music-form', music);
         }
         var upload = layui.upload;
+        //上传音乐
         upload.render({
             elem: '#uploadmusic'
             ,url: '/music/upload'
@@ -68,6 +83,42 @@
                     return layer.msg('上传成功');
                 }
             }
+        });
+        //上传歌词
+        upload.render({
+            elem: '#uploadlrc'
+            ,url: '/music/uploadLrc'
+            ,accept: 'file' //普通文件
+            ,done: function(res){
+                //如果上传成功
+                if (res.status == 200) {
+                    $('input[name="lrc"]').prop("value",res.result);
+                    return layer.msg('上传成功');
+                } else {
+                    return layer.msg('上传失败请重试！');
+                }
+            }
+        });
+        //普通图片上传
+        var uploadInst = upload.render({
+            elem: '#uploadImg'
+            , url: '/music/uploadImg'
+            , before: function (obj) {
+                //预读本地文件示例，不支持ie8
+                obj.preview(function (index, file, result) {
+                    $('#upload-img').attr('src', result); //图片链接（base64）
+                });
+            }
+            , done: function (res) {
+                //如果上传成功
+                if (res.status == 200) {
+                    $('input[name="picUrl"]').prop("value",res.result);
+                    return layer.msg('上传成功');
+                } else {
+                    return layer.msg('上传失败请重试！');
+                }
+            }
+
         });
         // 表单提交事件
         form.on('submit(music-form-submit)', function (data) {

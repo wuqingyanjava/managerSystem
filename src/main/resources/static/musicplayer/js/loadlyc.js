@@ -12,13 +12,14 @@ function lyricTip(str) {
 // 歌曲加载完后的回调函数
 function lyricCallback(url) {
     console.log("lyricCallback");
-
+    if(url == null || url == " " || url == undefined || url == "undefined"){
+        lyricTip('爱音乐，爱在西元前');
+        return false;
+    }
     $.ajax({  //异步请求获取歌词
         url:url,
         type:"get",
         success:function(data){
-
-            console.log(data);
             if(data == '暂无歌词') {
                 lyricTip('爱音乐，爱在西元前');
                 return false;

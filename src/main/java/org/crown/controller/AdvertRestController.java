@@ -137,16 +137,18 @@ public class AdvertRestController extends SuperController {
         String os = System.getProperty("os.name");
         String filePath = "";
         if (os.toLowerCase().startsWith("win")) {
-            filePath = "D:/ideaspace/Crown/src/main/resources/static/assets/upload/";
+            filePath = "E:/testupload/";
+            tempUrl = filePath + fileName;
         } else {
-            filePath = "/usr/local/apache-tomcat-8.5.42/webapps/crown/WEB-INF/classes/static/assets/upload/";
+            filePath = "/usr/local/apache-tomcat-8.5.42/webapps/upload/advertImg/";
+            tempUrl = tempUrl+"/upload/"+fileName;
         }
         File dest = new File(filePath + fileName);
         try {
             file.transferTo(dest);
             log.info("上传成功");
 
-            return success(tempUrl + "/assets/upload/" + fileName);
+            return success(tempUrl);
         } catch (IOException e) {
             log.error(e.toString(), e);
             return fail(e.toString());

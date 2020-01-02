@@ -193,5 +193,69 @@ public class MusicRestController extends SuperController {
             return fail(e.toString());
         }
     }
+    @Resources(auth = AuthTypeEnum.OPEN)
+    @ApiOperation(value = "上传音乐封面图片")
+    @PostMapping("/uploadImg")
+    public ApiResponses<String> uploadImg(@RequestParam("file") MultipartFile file) {
+        if (file.isEmpty()) {
+            return fail("上传失败，请选择文件");
+        }
+        String tempUrl = request.getScheme() + "://" + request.getServerName() + ":"
+                + request.getServerPort();
+        String tempName = file.getOriginalFilename();
+        String suffix = tempName.substring(tempName.lastIndexOf(".") + 1);
+        String fileName = System.currentTimeMillis() + "." + suffix;
+        String os = System.getProperty("os.name");
+        String filePath = "";
+        if (os.toLowerCase().startsWith("win")) {
+            filePath = "E:/testupload/";
+            tempUrl = filePath + fileName;
+        } else {
+            filePath = "/usr/local/apache-tomcat-8.5.42/webapps/upload/musicImg/";
+            tempUrl = tempUrl+"/upload/"+fileName;
+        }
+        File dest = new File(filePath + fileName);
+        try {
+            file.transferTo(dest);
+            log.info("上传成功");
+
+            return success(tempUrl);
+        } catch (IOException e) {
+            log.error(e.toString(), e);
+            return fail(e.toString());
+        }
+    }
+    @Resources(auth = AuthTypeEnum.OPEN)
+    @ApiOperation(value = "上传歌词")
+    @PostMapping("/uploadLrc")
+    public ApiResponses<String> uploadLrc(@RequestParam("file") MultipartFile file) {
+        if (file.isEmpty()) {
+            return fail("上传失败，请选择文件");
+        }
+        String tempUrl = request.getScheme() + "://" + request.getServerName() + ":"
+                + request.getServerPort();
+        String tempName = file.getOriginalFilename();
+        String suffix = tempName.substring(tempName.lastIndexOf(".") + 1);
+        String fileName = System.currentTimeMillis() + "." + suffix;
+        String os = System.getProperty("os.name");
+        String filePath = "";
+        if (os.toLowerCase().startsWith("win")) {
+            filePath = "E:/testupload/";
+            tempUrl = filePath + fileName;
+        } else {
+            filePath = "/usr/local/apache-tomcat-8.5.42/webapps/upload/lrc/";
+            tempUrl = tempUrl+"/upload/"+fileName;
+        }
+        File dest = new File(filePath + fileName);
+        try {
+            file.transferTo(dest);
+            log.info("上传成功");
+
+            return success(tempUrl);
+        } catch (IOException e) {
+            log.error(e.toString(), e);
+            return fail(e.toString());
+        }
+    }
 }
 
