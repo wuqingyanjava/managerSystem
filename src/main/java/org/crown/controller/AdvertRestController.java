@@ -141,7 +141,7 @@ public class AdvertRestController extends SuperController {
             tempUrl = filePath + fileName;
         } else {
             filePath = "/usr/local/apache-tomcat-8.5.42/webapps/upload/advertImg/";
-            tempUrl = tempUrl+"/upload/"+fileName;
+            tempUrl = tempUrl+"/upload/advertImg/"+fileName;
         }
         File dest = new File(filePath + fileName);
         try {
