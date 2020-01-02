@@ -212,7 +212,7 @@ public class MusicRestController extends SuperController {
             tempUrl = filePath + fileName;
         } else {
             filePath = "/usr/local/apache-tomcat-8.5.42/webapps/upload/musicImg/";
-            tempUrl = tempUrl+"/upload/"+fileName;
+            tempUrl = tempUrl+"/upload/musicImg/"+fileName;
         }
         File dest = new File(filePath + fileName);
         try {
@@ -244,7 +244,7 @@ public class MusicRestController extends SuperController {
             tempUrl = filePath + fileName;
         } else {
             filePath = "/usr/local/apache-tomcat-8.5.42/webapps/upload/lrc/";
-            tempUrl = tempUrl+"/upload/"+fileName;
+            tempUrl = tempUrl+"/upload/lrc/"+fileName;
         }
         File dest = new File(filePath + fileName);
         try {
