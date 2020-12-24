@@ -1,5 +1,7 @@
 logging:
   config: classpath:log4j2.xml
+prop:
+  upload-folder: E:/crownupload
 mybatis-plus:
   mapper-locations: classpath:mapper/*Mapper.xml
   global-config:
@@ -33,7 +35,7 @@ spring:
   liquibase:
     enabled: false
   datasource:
-    url: jdbc:p6spy:mysql://148.70.237.248:3306/potato?characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false
+    url: jdbc:p6spy:mysql://127.0.0.1:3306/potato?characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false
     username: root
     password: 123456
     type: com.zaxxer.hikari.HikariDataSource
@@ -67,3 +69,7 @@ spring:
     multipart:
       max-file-size: 20MB
       max-request-size: 20MB
+  thymeleaf:
+    cache: false
+  resources:
+    static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,file:${prop.upload-folder}

@@ -177,13 +177,13 @@ public class MusicRestController extends SuperController {
         String os = System.getProperty("os.name");
         String filePath = "";
         if (os.toLowerCase().startsWith("win")) {
-            filePath = "E:/testupload/";
-            tempUrl = filePath + fileName;
+            filePath = "D:/ideaspace/Crown/src/main/resources/static/assets/upload/music/";
+            tempUrl = tempUrl + "/assets/upload/music/" + fileName;
         } else {
             filePath = "/usr/local/apache-tomcat-8.5.42/webapps/upload/";
             tempUrl = tempUrl+"/upload/"+fileName;
         }
-        File dest = new File(filePath + fileName);
+        File dest = new File(filePath+fileName);
         try {
             file.transferTo(dest);
             log.info("上传成功");
@@ -208,8 +208,8 @@ public class MusicRestController extends SuperController {
         String os = System.getProperty("os.name");
         String filePath = "";
         if (os.toLowerCase().startsWith("win")) {
-            filePath = "E:/testupload/";
-            tempUrl = filePath + fileName;
+            filePath = "D:/ideaspace/Crown/src/main/resources/static/assets/upload/photo/";
+            tempUrl = tempUrl + "/assets/upload/photo/" + fileName;
         } else {
             filePath = "/usr/local/apache-tomcat-8.5.42/webapps/upload/musicImg/";
             tempUrl = tempUrl+"/upload/musicImg/"+fileName;
@@ -240,8 +240,8 @@ public class MusicRestController extends SuperController {
         String os = System.getProperty("os.name");
         String filePath = "";
         if (os.toLowerCase().startsWith("win")) {
-            filePath = "E:/testupload/";
-            tempUrl = filePath + fileName;
+            filePath = "D:/ideaspace/Crown/src/main/resources/static/assets/upload/music/";
+            tempUrl = tempUrl + "/assets/upload/music/" + fileName;
         } else {
             filePath = "/usr/local/apache-tomcat-8.5.42/webapps/upload/lrc/";
             tempUrl = tempUrl+"/upload/lrc/"+fileName;

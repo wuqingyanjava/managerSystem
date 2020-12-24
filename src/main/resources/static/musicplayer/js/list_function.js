@@ -260,7 +260,7 @@ function indexSong(){
 	$.ajax({
 		url: '/music/wxAppmusic',
 		type: 'GET',curpage: 1,
-		data: {"curpage":1,"rows":50},
+		data: {"curpage":1,"rows":100},
 		success:function(data){
 			console.log(data);
 			var NECsongs = data.result.records; //是个数组对象，存放多个json数据
@@ -308,7 +308,7 @@ function searchSong(keywords){
 	$.ajax({
 		url: '/music/wxAppmusic',
 		type: 'GET',curpage: 1,
-		data: {"curpage":1,"rows":50,"musicName":keywords},
+		data: {"curpage":1,"rows":100,"musicName":keywords},
 		success:function(data){
 			var NECsongs = data.result.records; //是个数组对象，存放多个json数据
 			// var length = NECsongs.length;
