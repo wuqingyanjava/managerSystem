@@ -137,8 +137,8 @@ public class AdvertRestController extends SuperController {
         String os = System.getProperty("os.name");
         String filePath = "";
         if (os.toLowerCase().startsWith("win")) {
-            filePath = "E:/testupload/";
-            tempUrl = filePath + fileName;
+            filePath = "D:/ideaspace/Crown/src/main/resources/static/assets/upload/photo/";
+            tempUrl = tempUrl + "/assets/upload/photo/" + fileName;
         } else {
             filePath = "/usr/local/apache-tomcat-8.5.42/webapps/upload/advertImg/";
             tempUrl = tempUrl+"/upload/advertImg/"+fileName;
